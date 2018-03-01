@@ -1,0 +1,176 @@
+<apex:component controller="VDODemoController">
+ 
+    <!-- Cart Summary -->
+    <script type="text/ng-template" id="vlcCartSummary.html">
+        <div class="cart-summary">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="icon icon-v-cart-line"></span>
+                    <h3 class="panel-title">{{bpTree.propSetMap.persistentComponent.label}}</h3>
+                    <div class="box"></div>
+                </div>
+                <div class="panel-body">
+                    <section>
+                        <h3>{!$Label.vlocity_cmt__OmniYourSelections}</h3>
+                        <div class="item row" ng-repeat="i in bpTree.response.vlcPersistentComponent[bpTree.pcId][bpTree.pcItemsKey] | filterMultiple:{provisioningStatus:['New','Pending']}">
+                            <div class="col-md-4 col-sm-4">
+                                <label class="item-name">{{i.itemSObject.PricebookEntry.Product2.Name}}</label>
+                            </div>
+                            <div class="quantity col-md-2 col-sm-2">
+                                <span>x</span>
+                                <input type="number" disabled="true" name="quantity" step="1" ng-model="i.itemSObject.Quantity"/>
+                            </div>
+                            <div class="field col-md-3 col-sm-3">
+                                <label class="field-label">Monthly</label>
+                                <p>
+                                    <span class="price old-price color-black" ng-show="i.itemSObject[nsPrefix + 'RecurringCharge__c'] > i.itemSObject[nsPrefix + 'RecurringTotal__c']">
+                                        {{i.itemSObject[nsPrefix + 'RecurringCharge__c'] | currency:'{!$Setup.VDO_Settings__c.Currency_Symbol__c}' | numFormatFilter }}
+                                    </span>
+                                <span class="price color-black" ng-class="{'new-price':i.itemSObject[nsPrefix + 'RecurringCharge__c'] > i.itemSObject[nsPrefix + 'RecurringTotal__c']}">
+                                {{i.itemSObject[nsPrefix + 'RecurringTotal__c'] | currency:'{!$Setup.VDO_Settings__c.Currency_Symbol__c}' | numFormatFilter }}
+                                </span>
+                            </p>
+                        </div>
+                        <div class="field col-md-3 col-sm-3">
+                            <label class="field-label">One Time</label>
+                            <p>
+                                <span class="price old-price color-black" ng-show="i.itemSObject[nsPrefix + 'OneTimeCharge__c'] > i.itemSObject[nsPrefix + 'OneTimeTotal__c']">
+                                    {{i.itemSObject[nsPrefix + 'OneTimeCharge__c'] | currency:'{!$Setup.VDO_Settings__c.Currency_Symbol__c}' | numFormatFilter }}
+                                </span>
+                                <span class="price color-black" ng-class="{'new-price':i.itemSObject[nsPrefix + 'OneTimeCharge__c'] > i.itemSObject[nsPrefix + 'OneTimeTotal__c']}">
+                                {{i.itemSObject[nsPrefix + 'OneTimeTotal__c'] | currency:'{!$Setup.VDO_Settings__c.Currency_Symbol__c}' | numFormatFilter }}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            <section>
+                <div class="totals row">
+                    <h4 class="col-md-6 col-sm-6"></h4>
+                    <div class="cost col-md-3 col-sm-3">
+                        <label class="totals-title">Monthly</label>
+                        <h4 class="">{{bpTree.response.vlcPersistentComponent[bpTree.pcId].RecurringSum | currency:'{!$Setup.VDO_Settings__c.Currency_Symbol__c}' | numFormatFilter }}</h4>
+                    </div>
+                    <div class="cost col-md-3 col-sm-3">
+                        <label class="totals-title">One Time</label>
+                        <h4 class="">{{bpTree.response.vlcPersistentComponent[bpTree.pcId].OneTimeSum | currency:'{!$Setup.VDO_Settings__c.Currency_Symbol__c}' | numFormatFilter }}</h4>
+                    </div>
+                </div>
+            </section>
+            </div>
+            </div>
+        </div>
+    </script>
+    
+    <script type="text/ng-template" id="vlcVCart.html">
+        <div class="horizontal-cart" ng-init="showCart = false;setJSDataPreprocessor(vlcPC, baseCtrl.createCartHierarchy)">
+            <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="head-item cart-toggle" ng-click="showCart = !showCart;">
+                        <span class="cart-icon icon-v-cart-line"></span>
+                        <h3 class="panel-title">{{vlcPC.label}}</h3>
+                        <span class="toggle-icon" ng-class="{'icon-v-up-caret':showCart, 'icon-v-down-caret': !showCart}"></span>
+                    </div>
+                    <div class="head-item" style="flex:1;">
+                        <label>{!$Label.vlocity_cmt__OmniOneTime}</label>
+                        <h4>{{bpTree.response.vlcPersistentComponent[bpTree.pcId[vlcPC.pcIndex]].OneTimeSum | currency:'{!$Setup.VDO_Settings__c.Currency_Symbol__c}' | numFormatFilter }}</h4>
+                    </div>
+                    <div class="head-item" style="flex:1;">
+                        <label>{!$Label.vlocity_cmt__OmniMonthly}</label>
+                        <h4>{{bpTree.response.vlcPersistentComponent[bpTree.pcId[vlcPC.pcIndex]].RecurringSum | currency:'{!$Setup.VDO_Settings__c.Currency_Symbol__c}' | numFormatFilter }}</h4>
+                    </div>
+                    <!--
+                    <div class="head-item padding0" style="flex:1; display:flex; padding: 0;">
+                        <button class="btn btn-primary">Continue</button>
+                    </div>
+                    -->
+                    </div>
+                    <div class="panel-body" ng-show="showCart">
+                    <section class="hcart-section">
+                        <h3>{{vlcPC.label}}</h3>
+                        <div class="topcartitems" ng-repeat="i in bpTree.response.vlcPersistentComponent[bpTree.pcId[vlcPC.pcIndex]][bpTree.pcItemsKey[vlcPC.pcIndex]] | filterMultiple:{provisioningStatus:['New','Pending']}" ng-include="'vlcTopCartHierarchy.html'"></div>
+                    </section>
+                    <section class="hcart-section">
+                        <h3></h3>
+                        <div class="topcartitems" ng-repeat="i in bpTree.response.vlcPersistentComponent[bpTree.pcId[vlcPC.pcIndex]][bpTree.pcItemsKey[vlcPC.pcIndex]] | filterMultiple:{provisioningStatus:['Active','Inactive']}" ng-include="'vlcTopCartHierarchy.html'"></div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </script>
+
+        <script type="text/ng-template" id="vlcHCart.html">
+            <div class="horizontal-cart hide-md-screen" ng-init="showCart = false;setJSDataPreprocessor(vlcPC, baseCtrl.createCartHierarchy)">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="head-item cart-toggle" ng-click="showCart = !showCart;">
+                            <span class="cart-icon icon-v-cart-line"></span>
+                            <h3 class="panel-title">{{::vlcPC.label}}</h3>
+                            <span class="toggle-icon" ng-class="{'icon-v-up-caret':showCart, 'icon-v-down-caret': !showCart}"></span>
+                        </div>
+                        <div class="head-item">
+                            <label>{{::OmniOneTime}}</label>
+                            <h4>{{bpTree.response.vlcPersistentComponent[bpTree.pcId[vlcPC.pcIndex]].OneTimeSum | currency:'{!$Setup.VDO_Settings__c.Currency_Symbol__c}' | numFormatFilter }} &nbsp;</h4>
+                        </div>
+                        <div class="head-item">
+                            <label>{{::OmniMonthly}}</label>
+                            <h4>{{bpTree.response.vlcPersistentComponent[bpTree.pcId[vlcPC.pcIndex]].RecurringSum | currency:'{!$Setup.VDO_Settings__c.Currency_Symbol__c}' | numFormatFilter }} &nbsp;</h4>
+                        </div>
+                        <!--
+                        <div class="head-item padding0">
+                            <button class="btn btn-primary">Continue</button>
+                        </div>
+                        -->
+                    </div>
+                    <div class="panel-body" ng-show="showCart">
+                        <section class="hcart-section">
+                            <h3>{{::vlcPC.label}}</h3>
+                            <div class="topcartitems" ng-repeat="i in bpTree.response.vlcPersistentComponent[bpTree.pcId[vlcPC.pcIndex]][bpTree.pcItemsKey[vlcPC.pcIndex]] | filterMultiple:{provisioningStatus:['New','Pending','Changed']}" ng-include="'vlcTopCartHierarchy.html'"></div>
+                        </section>
+                        <section class="hcart-section">
+                            <h3>{{::OmniCurrentSetup}}</h3>
+                            <div class="topcartitems" ng-repeat="i in bpTree.response.vlcPersistentComponent[bpTree.pcId[vlcPC.pcIndex]][bpTree.pcItemsKey[vlcPC.pcIndex]] | filterMultiple:{provisioningStatus:['Active','Inactive']}" ng-include="'vlcTopCartHierarchy.html'"></div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+ 
+            <!-- VERTICAL MINICART-->
+            <div class="cart">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{::vlcPC.label}}</h3>
+                    </div>
+ 
+                    <div class="panel-body vlc-ver-mini-panel-body">
+                        <div class="item row" ng-repeat="i in bpTree.response.vlcPersistentComponent[bpTree.pcId[vlcPC.pcIndex]][bpTree.pcItemsKey[vlcPC.pcIndex]] | filterMultiple:{provisioningStatus:['New','Pending','Changed']}"  ng-include="'vlcCartHierarchy.html'"></div>
+                    </div>
+ 
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{::OmniCurrentSetup}}</h3>
+                    </div>
+ 
+                    <div class="panel-body vlc-ver-mini-panel-body">
+                        <div class="item row" ng-repeat="i in bpTree.response.vlcPersistentComponent[bpTree.pcId[vlcPC.pcIndex]][bpTree.pcItemsKey[vlcPC.pcIndex]] | filterMultiple:{provisioningStatus:['Active','Inactive']}" ng-include="'vlcCartHierarchy.html'"></div>
+                    </div>
+ 
+                    <div class="panel-body border-top">
+                        <div class="totals row">
+                            <h4 class="totals-title col-md-7">{{::OmniOneTime}} </h4>
+                            <h4 class="col-md-5 cost pull-right">
+                                {{bpTree.response.vlcPersistentComponent[bpTree.pcId[vlcPC.pcIndex]].OneTimeSum | currency:'{!$Setup.VDO_Settings__c.Currency_Symbol__c}' | numFormatFilter }}
+                            </h4>
+                        </div>
+                        <div class="totals row">
+                            <h4 class="totals-title col-md-7">{{::OmniMonthly}} </h4>
+                            <h4 class="col-md-5 cost pull-right">
+                                {{bpTree.response.vlcPersistentComponent[bpTree.pcId[vlcPC.pcIndex]].RecurringSum | currency:'{!$Setup.VDO_Settings__c.Currency_Symbol__c}' | numFormatFilter }}
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+    
+    
+</apex:component>

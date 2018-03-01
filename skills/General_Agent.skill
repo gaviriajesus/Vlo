@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Skill xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignments>
+        <profiles>
+            <profile>admin</profile>
+            <profile>standardaul</profile>
+            <profile>analytics cloud integration user</profile>
+            <profile>analytics cloud security user</profile>
+            <profile>chatter only user</profile>
+            <profile>content only user</profile>
+            <profile>force.com - one app user</profile>
+            <profile>knowledge only user</profile>
+            <profile>standard</profile>
+            <profile>readonly</profile>
+            <profile>solutionmanager</profile>
+            <profile>marketingprofile</profile>
+            <profile>contractmanager</profile>
+            <profile>siteforce only user</profile>
+            <profile>work.com only user</profile>
+        </profiles>
+    </assignments>
+    <label>General Agent</label>
+</Skill>

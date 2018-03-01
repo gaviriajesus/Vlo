@@ -1,0 +1,4 @@
+<design:component label="VDO OmniScript">
+    <design:attribute name="height" label="Height" default="1000px" description="Specify height; in pixels append px, for precent append %"/>
+    <design:attribute name="width" label="Width" default="100%" description="Specify width; in pixels append px, for precent append %"/>
+</design:component>

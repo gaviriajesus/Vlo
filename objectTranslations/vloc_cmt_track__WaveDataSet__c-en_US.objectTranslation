@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Agent Manager --></label>
+        <name>vloc_cmt_track__AgentManager__c</name>
+    </fields>
+    <fields>
+        <label><!-- Call Handling Time -2 --></label>
+        <name>vloc_cmt_track__CallHandlingTime2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Call Handling Time --></label>
+        <name>vloc_cmt_track__CallHandlingTime__c</name>
+    </fields>
+    <fields>
+        <label><!-- Care Agent Experience with this type of --></label>
+        <name>vloc_cmt_track__CareAgentExpTrans__c</name>
+    </fields>
+    <fields>
+        <label><!-- Care Agent Expereince --></label>
+        <name>vloc_cmt_track__CareAgentExperience__c</name>
+    </fields>
+    <fields>
+        <label><!-- Care Agent --></label>
+        <name>vloc_cmt_track__CareAgent__c</name>
+    </fields>
+    <fields>
+        <label><!-- Churn interaction --></label>
+        <name>vloc_cmt_track__ChurnInteraction__c</name>
+        <picklistValues>
+            <masterLabel>N</masterLabel>
+            <translation><!-- N --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y</masterLabel>
+            <translation><!-- Y --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Churn Reason --></label>
+        <name>vloc_cmt_track__ChurnReason__c</name>
+        <picklistValues>
+            <masterLabel>Competitor Offer</masterLabel>
+            <translation><!-- Competitor Offer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Move</masterLabel>
+            <translation><!-- Move --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Price</masterLabel>
+            <translation><!-- Price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Service</masterLabel>
+            <translation><!-- Service --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Churn Save Rate --></label>
+        <name>vloc_cmt_track__ChurnSaveRate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Churn Save --></label>
+        <name>vloc_cmt_track__ChurnSave__c</name>
+        <picklistValues>
+            <masterLabel>N</masterLabel>
+            <translation><!-- N --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N/A</masterLabel>
+            <translation><!-- N/A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y</masterLabel>
+            <translation><!-- Y --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Churn Score --></label>
+        <name>vloc_cmt_track__ChurnScore__c</name>
+    </fields>
+    <fields>
+        <label><!-- Console Action Log Name --></label>
+        <name>vloc_cmt_track__ConsoleActionLogName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact Center --></label>
+        <name>vloc_cmt_track__ContactCenter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer NPS --></label>
+        <name>vloc_cmt_track__CustomerNPS__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Region --></label>
+        <name>vloc_cmt_track__CustomerRegion__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Sub-Region --></label>
+        <name>vloc_cmt_track__CustomerSubRegion__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date --></label>
+        <name>vloc_cmt_track__Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Day of Week --></label>
+        <name>vloc_cmt_track__DayofWeek__c</name>
+        <picklistValues>
+            <masterLabel>Friday</masterLabel>
+            <translation><!-- Friday --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Monday</masterLabel>
+            <translation><!-- Monday --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Saturday</masterLabel>
+            <translation><!-- Saturday --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sunday</masterLabel>
+            <translation><!-- Sunday --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Thursday</masterLabel>
+            <translation><!-- Thursday --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tuesday</masterLabel>
+            <translation><!-- Tuesday --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wednesday</masterLabel>
+            <translation><!-- Wednesday --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- First Call Resolution Rate --></label>
+        <name>vloc_cmt_track__FirstCallResolutionRate__c</name>
+    </fields>
+    <fields>
+        <label><!-- First Call Resolution --></label>
+        <name>vloc_cmt_track__FirstCallResolution__c</name>
+        <picklistValues>
+            <masterLabel>N</masterLabel>
+            <translation><!-- N --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N/A</masterLabel>
+            <translation><!-- N/A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y</masterLabel>
+            <translation><!-- Y --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Interaction end Time --></label>
+        <name>vloc_cmt_track__InteractionEndTime__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interaction End --></label>
+        <name>vloc_cmt_track__InteractionEnd__c</name>
+        <picklistValues>
+            <masterLabel>N</masterLabel>
+            <translation><!-- N --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y</masterLabel>
+            <translation><!-- Y --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Interaction start time --></label>
+        <name>vloc_cmt_track__InteractionStartTime__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interaction Start --></label>
+        <name>vloc_cmt_track__InteractionStart__c</name>
+        <picklistValues>
+            <masterLabel>N</masterLabel>
+            <translation><!-- N --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y</masterLabel>
+            <translation><!-- Y --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Interaction Time to Step --></label>
+        <name>vloc_cmt_track__InteractionTime__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interaction Type --></label>
+        <name>vloc_cmt_track__InteractionType__c</name>
+        <picklistValues>
+            <masterLabel>Billing</masterLabel>
+            <translation><!-- Billing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Churn</masterLabel>
+            <translation><!-- Churn --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Trouble</masterLabel>
+            <translation><!-- Trouble --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Upsell</masterLabel>
+            <translation><!-- Upsell --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- ObjID --></label>
+        <name>vloc_cmt_track__ObjectId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object Type --></label>
+        <name>vloc_cmt_track__ObjectType__c</name>
+    </fields>
+    <fields>
+        <label><!-- OmniScriptRecord --></label>
+        <name>vloc_cmt_track__OmniScriptRecord__c</name>
+    </fields>
+    <fields>
+        <label><!-- OmniScript --></label>
+        <name>vloc_cmt_track__OmniScript__c</name>
+        <picklistValues>
+            <masterLabel>Broadband Upsell</masterLabel>
+            <translation><!-- Broadband Upsell --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Change Payment Method</masterLabel>
+            <translation><!-- Change Payment Method --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Churn Prevention</masterLabel>
+            <translation><!-- Churn Prevention --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Convert Abandoned Cart</masterLabel>
+            <translation><!-- Convert Abandoned Cart --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Customer Cancel</masterLabel>
+            <translation><!-- Customer Cancel --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Past Due Bill</masterLabel>
+            <translation><!-- Past Due Bill --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Promotion Upsell</masterLabel>
+            <translation><!-- Promotion Upsell --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Re Activate Service</masterLabel>
+            <translation><!-- Re Activate Service --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Trouble - Reception</masterLabel>
+            <translation><!-- Trouble - Reception --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Trouble - Remote</masterLabel>
+            <translation><!-- Trouble - Remote --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Trouble - STB</masterLabel>
+            <translation><!-- Trouble - STB --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Product --></label>
+        <name>vloc_cmt_track__Product__c</name>
+    </fields>
+    <fields>
+        <label><!-- Promotion --></label>
+        <name>vloc_cmt_track__Promotion__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record Link --></label>
+        <name>vloc_cmt_track__RecordLink__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record --></label>
+        <name>vloc_cmt_track__Record__c</name>
+    </fields>
+    <fields>
+        <label><!-- Script Mode --></label>
+        <name>vloc_cmt_track__ScriptMode__c</name>
+        <picklistValues>
+            <masterLabel>A</masterLabel>
+            <translation><!-- A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B</masterLabel>
+            <translation><!-- B --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Step Event --></label>
+        <name>vloc_cmt_track__StepEvent__c</name>
+        <picklistValues>
+            <masterLabel>End Call</masterLabel>
+            <translation><!-- End Call --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Step Time --></label>
+        <name>vloc_cmt_track__StepTime__c</name>
+    </fields>
+    <fields>
+        <label><!-- Step Type --></label>
+        <name>vloc_cmt_track__StepType__c</name>
+        <picklistValues>
+            <masterLabel>Capture Payment</masterLabel>
+            <translation><!-- Capture Payment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Close Activity</masterLabel>
+            <translation><!-- Close Activity --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Close SR</masterLabel>
+            <translation><!-- Close SR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Customer Assessment</masterLabel>
+            <translation><!-- Customer Assessment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New Activity</masterLabel>
+            <translation><!-- New Activity --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New Order</masterLabel>
+            <translation><!-- New Order --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New SR</masterLabel>
+            <translation><!-- New SR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Review Offer</masterLabel>
+            <translation><!-- Review Offer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Review Order</masterLabel>
+            <translation><!-- Review Order --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Review SR</masterLabel>
+            <translation><!-- Review SR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Review T&amp;C</masterLabel>
+            <translation><!-- Review T&amp;C --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Start Call</masterLabel>
+            <translation><!-- Start Call --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Switch Tab</masterLabel>
+            <translation><!-- Switch Tab --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Update Activity</masterLabel>
+            <translation><!-- Update Activity --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Update Profile</masterLabel>
+            <translation><!-- Update Profile --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Update SR</masterLabel>
+            <translation><!-- Update SR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Validate Customer</masterLabel>
+            <translation><!-- Validate Customer --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Step --></label>
+        <name>vloc_cmt_track__Step__c</name>
+    </fields>
+    <fields>
+        <label><!-- TabID --></label>
+        <name>vloc_cmt_track__TabId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tab Name --></label>
+        <name>vloc_cmt_track__TabName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Time on Hold --></label>
+        <name>vloc_cmt_track__TimeOnHold__c</name>
+    </fields>
+    <fields>
+        <label><!-- Time --></label>
+        <name>vloc_cmt_track__Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Trouble Interaction --></label>
+        <name>vloc_cmt_track__TroubleInteraction__c</name>
+        <picklistValues>
+            <masterLabel>N</masterLabel>
+            <translation><!-- N --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y</masterLabel>
+            <translation><!-- Y --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>vloc_cmt_track__Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Upsell $ --></label>
+        <name>vloc_cmt_track__UpsellDollar__c</name>
+    </fields>
+    <fields>
+        <label><!-- Upsell Interaction --></label>
+        <name>vloc_cmt_track__UpsellInteraction__c</name>
+        <picklistValues>
+            <masterLabel>N</masterLabel>
+            <translation><!-- N --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y</masterLabel>
+            <translation><!-- Y --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Upsell Success Rate --></label>
+        <name>vloc_cmt_track__UpsellSuccessRate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Upsell Success --></label>
+        <name>vloc_cmt_track__UpsellSuccess__c</name>
+        <picklistValues>
+            <masterLabel>N</masterLabel>
+            <translation><!-- N --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N/A</masterLabel>
+            <translation><!-- N/A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y</masterLabel>
+            <translation><!-- Y --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- UserID --></label>
+        <name>vloc_cmt_track__UserId__c</name>
+    </fields>
+    <fields>
+        <label><!-- UserName --></label>
+        <name>vloc_cmt_track__UserName__c</name>
+    </fields>
+    <fields>
+        <label><!-- User Yrs Exp --></label>
+        <name>vloc_cmt_track__UserYrsExp__c</name>
+    </fields>
+</CustomObjectTranslation>

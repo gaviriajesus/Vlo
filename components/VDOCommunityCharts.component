@@ -1,0 +1,46 @@
+<apex:component controller="VDODemoController">
+    <style>
+        .buffer iframe {
+            position:relative;
+            top:-112px;
+            width:100%;
+            left:-5px;
+        }
+        .container{
+            overflow:hidden;
+            float: left;
+            width: 100%;
+        }
+        body.hasMotif.homeTab.net-withGlobalHeader.sfdcBody.brandQuaternaryBgr{
+            margin:0px !important;
+        }
+        .waveAsset {
+            width: 100%;
+            height: 1405px;
+        }
+    </style>
+    <div class="sectionBuffer">
+        <div class="sectionTitle">Total Billing and Usage</div>
+        <apex:outputPanel layout="none" rendered="{!accountKey == 'demoaccount1'}">
+            <div class="container">
+                <div class="buffer">
+                    <wave:dashboard developerName="Statement_Information_Community_Dashboard" showTitle="false" height="1560px" openLinksInNewWindow="true" filter="{'Statements': {'vlocity_cmt__StatementId__c.vlocity_cmt__AccountId__c': ['{!demoaccount1.id}']}}" /> 
+                </div>
+            </div>
+        </apex:outputPanel>
+        <apex:outputPanel layout="none" rendered="{!accountKey == 'demoaccount2'}">
+            <div class="container">
+                <div class="buffer">
+                    <wave:dashboard developerName="Statement_Information_Community_Dashboard" showTitle="false" height="1560px" openLinksInNewWindow="true" filter="{'Statements': {'vlocity_cmt__StatementId__c.vlocity_cmt__AccountId__c': ['{!demoaccount2.id}']}}" /> 
+                </div>
+            </div>
+        </apex:outputPanel>
+        <apex:outputPanel layout="none" rendered="{!accountKey == 'demoaccount3'}">
+            <div class="container">
+                <div class="buffer">
+                    <wave:dashboard developerName="Statement_Information_Community_Dashboard" showTitle="false" height="1560px" openLinksInNewWindow="true" filter="{'Statements': {'vlocity_cmt__StatementId__c.vlocity_cmt__AccountId__c': ['{!demoaccount3.id}']}}" /> 
+                </div>
+            </div>
+        </apex:outputPanel>            
+    </div>
+</apex:component>

@@ -1,0 +1,1049 @@
+<apex:component controller="VDODemoController">
+ 
+    <!-- Small Grid Config -->
+    <script  type="text/ng-template" id="vdoSmallGridConfig.html">
+        <style>
+            .smallgrid{
+                width:100%;
+                display:table
+            }
+            .smallgrid .gridcontainer{
+                width:16.6%;
+                height:auto;
+                float:left;
+                position:relative;
+            }
+            .smallgrid .img-container{
+                width:100%;
+                height:auto;
+                background-size:100% 100%;
+            }
+            .smallgrid .gridhover{
+                display:none;
+                position:absolute;
+                top:0px;
+                left:0px;
+                background: rgba(0,0,0,0.8);
+                color:#ffffff;
+                cursor:pointer;
+                padding:10px;
+                box-sizing:border-box;
+                z-index:10;
+                width:100%;
+            }
+            .gridcontainer:hover .gridhover{
+                display:block;
+            }
+            .smallgrid .action button{
+                width:100%;
+                margin:10px 0px;
+            }
+            .smallgrid h3{
+                font-weight:bold;
+                margin-top:10px;
+            }
+            .smallgrid .title{
+                padding: 15px 2px 20px 2px;
+                margin: 0;
+                text-align: center;
+                font-size: 12px;
+                height: 75px;
+            }
+        </style>
+        <br/>
+        <div class="smallgrid">
+            <div ng-repeat="p in control.vlcSI[control.itemsKey] | orderBy:'Name'">
+                <div class="gridcontainer"  ng-class="{'selected': p.added}">
+                    <img class="img-container" src="{{p.Image}}"/>
+                    <h3 class="title">{{p.Name}}</h3>
+                    <div class="gridhover">
+                        <div class="product-info padding0">
+                            <h3 class="title">{{p.Name}}</h3>
+                            <p class="description">
+                                 {{p.Description}}
+                            </p>
+                        </div>
+                        <div class="flex" id="vlocity-price">
+                            <div style="flex: 1;">
+                                <span class="col-xs-6 col-sm-6 padding0">
+                                    <h6>One Time</h6>
+                                    <h2>{{p.OneTimeCost}}</h2>
+                                 </span>
+                            </div>
+                            <div style="flex: 1;">
+                                <span class="col-xs-6 col-sm-6 padding0">
+                                    <h6>Monthly</h6>
+                                    <h2>{{p.MonthlyCost}}</h2>
+                                 </span>
+                            </div>
+                        </div>
+                        <div class="action" ng-init=" p.isConfigurable == true ? operation = 'configureProd' : operation = 'Add' ">
+                            <button class="btn btn-primary ng-scope" ng-if="!p.added" ng-click="configureItem(bpTree.response, control, this, p, operation, baseCtrl.customHandleSelectedItem, baseCtrl.customIsConfigurable)">
+                                Add To Cart
+                            </button>
+                            <button class="btn btn-success ng-scope" ng-if="p.added"  ng-click="buttonClick(bpTree.response, control, this, p, 'Remove', baseCtrl.customHandleSelectedItem)">
+                                <span class="icon icon-v-check"></span>
+                            </button>
+                       </div>
+                    </div>
+               </div>
+           </div>
+        </div>
+    </script>
+
+    <!-- Small Grid Add -->
+    <script  type="text/ng-template" id="vdoSmallGridAdd.html">
+        <style>
+            .smallgrid{
+                width:100%;
+                display:table
+            }
+            .smallgrid .gridcontainer{
+                width:16.6%;
+                height:auto;
+                float:left;
+                position:relative;
+            }
+            .smallgrid .img-container{
+                width:100%;
+                height:auto;
+                background-size:100% 100%;
+            }
+            .smallgrid .gridhover{
+                display:none;
+                position:absolute;
+                top:0px;
+                left:0px;
+                background: rgba(0,0,0,0.8);
+                color:#ffffff;
+                cursor:pointer;
+                padding:10px;
+                box-sizing:border-box;
+                z-index:10;
+                width:100%;
+            }
+            .gridcontainer:hover .gridhover{
+                display:block;
+            }
+            .smallgrid .action button{
+                width:100%;
+                margin:10px 0px;
+            }
+            .smallgrid h3{
+                font-weight:bold;
+                margin-top:10px;
+            }
+            .smallgrid .title{
+                padding: 15px 2px 20px 2px;
+                margin: 0;
+                text-align: center;
+                font-size: 12px;
+                height: 75px;
+            }
+        </style>
+        <br/>
+        <div class="smallgrid">
+            <div ng-repeat="p in control.vlcSI[control.itemsKey] | orderBy:'Name'">
+                <div class="gridcontainer"  ng-class="{'selected': p.added}">
+                    <img class="img-container" src="{{p.Image}}"/>
+                    <h3 class="title">{{p.Name}}</h3>
+                    <div class="gridhover">
+                        <div class="product-info padding0">
+                            <h3 class="title">{{p.Name}}</h3>
+                            <p class="description">
+                                 {{p.Description}}
+                            </p>
+                        </div>
+                        <div class="flex" id="vlocity-price">
+                            <div style="flex: 1;">
+                                <span class="col-xs-6 col-sm-6 padding0">
+                                    <h6>One Time</h6>
+                                    <h2>{{p.OneTimeCost}}</h2>
+                                 </span>
+                            </div>
+                            <div style="flex: 1;">
+                                <span class="col-xs-6 col-sm-6 padding0">
+                                    <h6>Monthly</h6>
+                                    <h2>{{p.MonthlyCost}}</h2>
+                                 </span>
+                            </div>
+                        </div>
+                        <div class="action">
+                            <button class="btn btn-primary ng-scope" ng-if="!p.added" ng-click="buttonClick(bpTree.response, control, this, p, 'Add', baseCtrl.customHandleSelectedItem)">
+                                Add To Cart
+                            </button>
+                            <button class="btn btn-success ng-scope" ng-if="p.added"  ng-click="buttonClick(bpTree.response, control, this, p, 'Remove', baseCtrl.customHandleSelectedItem)">
+                                <span class="icon icon-v-check"></span>
+                            </button>
+                       </div>
+                    </div>
+               </div>
+           </div>
+        </div>
+    </script>
+
+    <!-- Medium Grid One Time Config -->
+    <script type="text/ng-template" id="vdoMediumGridOneTimeConfig.html">
+        <style>
+            .vlocity .mediumgrid .row{
+                background:transparent;
+            }
+            .vlocity .mediumgrid {
+                width: 25%;
+                float: left;
+                padding: 20px;
+                border: 0px;
+                opacity:1;
+            }
+            .vlocity .mediumgrid .result-box .product-info .title {
+                padding: 15px 0 20px 0;
+                margin: 0;
+                text-align: center;
+                font-size: 12px;
+                height:50px;
+            }
+            .vlocity .mediumgrid .result-box .product-info .description{
+                height:80px;
+            }
+            .vlocity .mediumgrid .result-box .img-container, .vlocity .mediumgrid .result-box .img-container img{
+                width:100%;
+                height:auto;
+                position:relative;
+                z-index:1;
+            }
+            .vlocity .mediumgrid .selected{
+                border:0px;
+                opacity:1;
+            }
+            .vlocity .mediumgrid .btn-success *{
+                top:0px;
+            }
+            .vlocity .mediumgrid .result-box .img-container, .vlocity .mediumgrid .result-box .product-info, .vlocity .mediumgrid #vlocity-price, .vlocity .mediumgrid #vlocity-price .item-actions{
+                position:initial;
+            }
+            .vlocity .mediumgrid #vlocity-price, .vlocity .mediumgrid .btn{
+                width:100%;
+            }
+            .vlocity .mediumgrid span.col-xs-6.col-sm-6.padding0 {
+                position: absolute;
+                top: -5px;
+                right: 10px;
+                width: 76px;
+                background: {!$Setup.VDO_Settings__c.Colour2__c};
+                height: 76px;
+                padding: 25px 0px;
+                text-align: center;
+                border-radius: 38px;
+                color: #fff;
+                opacity:0.65;
+                z-index:1;
+            }
+            .vlocity .mediumgrid h2, .vlocity .mediumgrid h6{
+                color:#FFF;
+                font-size:12px
+            }
+        </style>
+        <br/>
+        <div class="selecteableItem mediumgrid" ng-repeat="p in control.vlcSI[control.itemsKey] | orderBy:'Name'">
+            <div class="row result-box " ng-class="{'selected':p.added}">
+                <div class="img-container padding0">
+                    <img ng-if="p.Image" src="{{p.Image}}"/>
+                </div>
+
+                <div class="product-info padding0" >
+                    <h3 class="title">{{p.Name}}</h3>
+                    <p class="description">
+                       {{p.Description}}
+                    </p>
+                </div>
+
+                 <div class="flex" id="vlocity-price">
+                    <div style="flex: 1;">
+                        <span class="col-xs-6 col-sm-6 padding0">
+                            <h6>One Time</h6>
+                            <h2>{{p.OneTimeCost}}</h2>
+                        </span>
+                    </div>
+                    <div class="action" ng-init=" p.isConfigurable == true ? operation = 'configureProd' : operation = 'Add' ">
+                        <button class="btn btn-primary ng-scope" ng-if="!p.added" ng-click="configureItem(bpTree.response, control, this, p, operation, baseCtrl.customHandleSelectedItem, baseCtrl.customIsConfigurable)">
+                            {!$Label.vlocity_cmt__AddToCart}
+                        </button>
+                        <button class="btn btn-success col-md-12" ng-if="p.added" ng-click="buttonClick(bpTree.response, control, this, p, 'Remove', baseCtrl.customHandleSelectedItem)">
+                            <span class="icon icon-v-check"></span>
+                        </button>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </script>
+
+    <!-- Medium Grid One Time Add -->
+    <script type="text/ng-template" id="vdoMediumGridOneTimeAdd.html">
+        <style>
+            .vlocity .mediumgrid .row{
+                background:transparent;
+            }
+            .vlocity .mediumgrid {
+                width: 25%;
+                float: left;
+                padding: 20px;
+                border: 0px;
+                opacity:1;
+            }
+            .vlocity .mediumgrid .result-box .product-info .title {
+                padding: 15px 0 20px 0;
+                margin: 0;
+                text-align: center;
+                font-size: 12px;
+                height:50px;
+            }
+            .vlocity .mediumgrid .result-box .product-info .description{
+                height:80px;
+            }
+            .vlocity .mediumgrid .result-box .img-container, .vlocity .mediumgrid .result-box .img-container img{
+                width:100%;
+                height:auto;
+                position:relative;
+                z-index:1;
+            }
+            .vlocity .mediumgrid .selected{
+                border:0px;
+                opacity:1;
+            }
+            .vlocity .mediumgrid .btn-success *{
+                top:0px;
+            }
+            .vlocity .mediumgrid .result-box .img-container, .vlocity .mediumgrid .result-box .product-info, .vlocity .mediumgrid #vlocity-price, .vlocity .mediumgrid #vlocity-price .item-actions{
+                position:initial;
+            }
+            .vlocity .mediumgrid #vlocity-price, .vlocity .mediumgrid .btn{
+                width:100%;
+            }
+            .vlocity .mediumgrid span.col-xs-6.col-sm-6.padding0 {
+                position: absolute;
+                top: -5px;
+                right: 10px;
+                width: 76px;
+                background: {!$Setup.VDO_Settings__c.Colour2__c};
+                height: 76px;
+                padding: 25px 0px;
+                text-align: center;
+                border-radius: 38px;
+                color: #fff;
+                opacity:1;
+                z-index:1;
+            }
+            .vlocity .mediumgrid h2, .vlocity .mediumgrid h6{
+                color:#FFF;
+                font-size:12px
+            }
+        </style>
+        <br/>
+        <div class="selecteableItem mediumgrid" ng-repeat="p in control.vlcSI[control.itemsKey] | orderBy:'Name'">
+            <div class="row result-box " ng-class="{'selected':p.added}">
+                <div class="img-container padding0">
+                    <img ng-if="p.Image" src="{{p.Image}}"/>
+                </div>
+
+                <div class="product-info padding0" >
+                    <h3 class="title">{{p.Name}}</h3>
+                    <p class="description">
+                       {{p.Description}}
+                    </p>
+                </div>
+
+                 <div class="flex" id="vlocity-price">
+                    <div style="flex: 1;">
+                        <span class="col-xs-6 col-sm-6 padding0">
+                            <h6>One Time</h6>
+                            <h2>{{p.OneTimeCost}}</h2>
+                        </span>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-primary col-md-12" ng-if="!p.added" ng-click="buttonClick(bpTree.response, control, this, p, 'Add', baseCtrl.customHandleSelectedItem)">
+                            {!$Label.vlocity_cmt__AddToCart}
+                        </button>
+                        <button class="btn btn-success col-md-12" ng-if="p.added" ng-click="buttonClick(bpTree.response, control, this, p, 'Remove', baseCtrl.customHandleSelectedItem)">
+                            <span class="icon icon-v-check"></span>
+                        </button>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </script>
+
+    <!-- Medium Grid Monthly Config -->
+    <script type="text/ng-template" id="vdoMediumGridMonthlyConfig.html">
+        <style>
+            .vlocity .mediumgrid .row{
+                background:transparent;
+            }
+            .vlocity .mediumgrid {
+                width: 25%;
+                float: left;
+                padding: 20px;
+                border: 0px;
+                opacity:1;
+            }
+            .vlocity .mediumgrid .result-box .product-info .title {
+                padding: 15px 0 20px 0;
+                margin: 0;
+                text-align: center;
+                font-size: 12px;
+                height:50px;
+            }
+            .vlocity .mediumgrid .result-box .product-info .description{
+                height:80px;
+            }
+            .vlocity .mediumgrid .result-box .img-container, .vlocity .mediumgrid .result-box .img-container img{
+                width:100%;
+                height:auto;
+                position:relative;
+                z-index:1;
+            }
+            .vlocity .mediumgrid .selected{
+                border:0px;
+                opacity:1;
+            }
+            .vlocity .mediumgrid .btn-success *{
+                top:0px;
+            }
+            .vlocity .mediumgrid .result-box .img-container, .vlocity .mediumgrid .result-box .product-info, .vlocity .mediumgrid #vlocity-price, .vlocity .mediumgrid #vlocity-price .item-actions{
+                position:initial;
+            }
+            .vlocity .mediumgrid #vlocity-price, .vlocity .mediumgrid .btn{
+                width:100%;
+            }
+            .vlocity .mediumgrid span.col-xs-6.col-sm-6.padding0 {
+                position: absolute;
+                top: -5px;
+                right: 10px;
+                width: 76px;
+                background: {!$Setup.VDO_Settings__c.Colour2__c};
+                height: 76px;
+                padding: 25px 0px;
+                text-align: center;
+                border-radius: 38px;
+                color: #fff;
+                opacity:1;
+                z-index:1;
+            }
+            .vlocity .mediumgrid h2, .vlocity .mediumgrid h6{
+                color:#FFF;
+                font-size:12px
+            }
+        </style>
+        <br/>
+        <div class="selecteableItem mediumgrid" ng-repeat="p in control.vlcSI[control.itemsKey] | orderBy:'Name'">
+            <div class="row result-box " ng-class="{'selected':p.added}">
+                <div class="img-container padding0">
+                    <img ng-if="p.Image" src="{{p.Image}}"/>
+                </div>
+
+                <div class="product-info padding0" >
+                    <h3 class="title">{{p.Name}}</h3>
+                    <p class="description">
+                       {{p.Description}}
+                    </p>
+                </div>
+
+                 <div class="flex" id="vlocity-price">
+                    <div style="flex: 1;">
+                        <span class="col-xs-6 col-sm-6 padding0">
+                            <h6>Monthly</h6>
+                            <h2>{{p.MonthlyCost}}</h2>
+                        </span>
+                    </div>
+                    <div class="action" ng-init=" p.isConfigurable == true ? operation = 'configureProd' : operation = 'Add' ">
+                        <button class="btn btn-primary ng-scope" ng-if="!p.added" ng-click="configureItem(bpTree.response, control, this, p, operation, baseCtrl.customHandleSelectedItem, baseCtrl.customIsConfigurable)">
+                            {!$Label.vlocity_cmt__AddToCart}
+                        </button>
+                        <button class="btn btn-success col-md-12" ng-if="p.added" ng-click="buttonClick(bpTree.response, control, this, p, 'Remove', baseCtrl.customHandleSelectedItem)">
+                            <span class="icon icon-v-check"></span>
+                        </button>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </script>
+
+    <!-- Medium Grid Monthly Add -->
+    <script type="text/ng-template" id="vdoMediumGridMonthlyAdd.html">
+        <style>
+            .vlocity .mediumgrid .row{
+                background:transparent;
+            }
+            .vlocity .mediumgrid {
+                width: 25%;
+                float: left;
+                padding: 20px;
+                border: 0px;
+                opacity:1;
+            }
+            .vlocity .mediumgrid .result-box .product-info .title {
+                padding: 15px 0 20px 0;
+                margin: 0;
+                text-align: center;
+                font-size: 12px;
+                height:50px;
+            }
+            .vlocity .mediumgrid .result-box .product-info .description{
+                height:80px;
+            }
+            .vlocity .mediumgrid .result-box .img-container, .vlocity .mediumgrid .result-box .img-container img{
+                width:100%;
+                height:auto;
+                position:relative;
+                z-index:1;
+            }
+            .vlocity .mediumgrid .selected{
+                border:0px;
+                opacity:1;
+            }
+            .vlocity .mediumgrid .btn-success *{
+                top:0px;
+            }
+            .vlocity .mediumgrid .result-box .img-container, .vlocity .mediumgrid .result-box .product-info, .vlocity .mediumgrid #vlocity-price, .vlocity .mediumgrid #vlocity-price .item-actions{
+                position:initial;
+            }
+            .vlocity .mediumgrid #vlocity-price, .vlocity .mediumgrid .btn{
+                width:100%;
+            }
+            .vlocity .mediumgrid span.col-xs-6.col-sm-6.padding0 {
+                position: absolute;
+                top: -5px;
+                right: 10px;
+                width: 76px;
+                background: {!$Setup.VDO_Settings__c.Colour2__c};
+                height: 76px;
+                padding: 25px 0px;
+                text-align: center;
+                border-radius: 38px;
+                color: #fff;
+                opacity:0.65;
+                z-index:1;
+            }
+            .vlocity .mediumgrid h2, .vlocity .mediumgrid h6{
+                color:#FFF;
+                font-size:12px
+            }
+        </style>
+        <br/>
+        <div class="selecteableItem mediumgrid" ng-repeat="p in control.vlcSI[control.itemsKey] | orderBy:'Name'">
+            <div class="row result-box " ng-class="{'selected':p.added}">
+                <div class="img-container padding0">
+                    <img ng-if="p.Image" src="{{p.Image}}"/>
+                </div>
+
+                <div class="product-info padding0" >
+                    <h3 class="title">{{p.Name}}</h3>
+                    <p class="description">
+                       {{p.Description}}
+                    </p>
+                </div>
+
+                 <div class="flex" id="vlocity-price">
+                    <div style="flex: 1;">
+                        <span class="col-xs-6 col-sm-6 padding0">
+                            <h6>Monthly</h6>
+                            <h2>{{p.MonthlyCost}}</h2>
+                        </span>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-primary col-md-12" ng-if="!p.added" ng-click="buttonClick(bpTree.response, control, this, p, 'Add', baseCtrl.customHandleSelectedItem)">
+                            {!$Label.vlocity_cmt__AddToCart}
+                        </button>
+                        <button class="btn btn-success col-md-12" ng-if="p.added" ng-click="buttonClick(bpTree.response, control, this, p, 'Remove', baseCtrl.customHandleSelectedItem)">
+                            <span class="icon icon-v-check"></span>
+                        </button>
+                    </div>
+                </div>
+           </div>
+        </div>
+    </script>
+
+    <!-- Large Grid -->
+    <script  type="text/ng-template" id="vdoLargeGridAdd.html">
+        <style>
+            .largegrid{
+                width:50%;
+                margin:auto;
+            }
+            .largegrid .largegridcontainer{
+                width:100%;
+                height:auto;
+                float:left;
+                position:relative;
+                opacity:1;
+                padding: 2px;
+                box-sizing: border-box;
+            }
+            .largegrid .img-container{
+                height:auto;
+                background-size:100% 100%;
+                display:block;
+                width:50%;
+                float:left;
+            }
+            .largegrid .largegriddetails{
+                background: {!$Setup.VDO_Settings__c.Colour3__c};
+                color: {!$Setup.VDO_Settings__c.Colour1__c};
+                padding:10px;
+                box-sizing:border-box;
+                z-index:10;
+                width:50%;
+                display:table;
+                float:left;
+            }
+            .largegridcontainer:hover{
+                display:block;
+                opacity:1;
+            }
+            .largegrid .action button{
+                width:100%;
+                margin:10px 0px;
+            }
+            .largegrid h3{
+                font-weight:bold;
+                margin-top:10px;
+                text-align:center;
+                height:48px;
+            }
+            .largegrid p.description {
+                height: 100px;
+                overflow: hidden;
+                text-align:center;
+            }
+            .largegrid #vlocity-price{
+                text-align:center;
+            }
+            .largegriddetails:before {
+                content: ' ';
+                border-bottom: 40px solid transparent;
+                border-right: 40px solid {!$Setup.VDO_Settings__c.Colour3__c};
+                border-top: 40px solid transparent;
+                width: 0px;
+                display: block;
+                position: absolute;
+                top: 0px;
+                left: 50%;
+                margin-left: -40px;
+            }
+        </style>
+        <br/>
+        <div class="largegrid">
+            <div ng-repeat="p in control.vlcSI[control.itemsKey] | orderBy:'-Name'">
+                <div class="largegridcontainer"  ng-class="{'selected': p.added}">
+                    <img class="img-container" src="{{p.Image}}"/>
+                    <div class="largegriddetails">
+                        <div class="product-info padding0">
+                            <h3 class="title">{{p.Name}}</h3>
+                            <p class="description">
+                                 {{p.Description}}
+                            </p>
+                        </div>
+                        <div class="flex" id="vlocity-price">
+                            <div style="flex: 1;">
+                                <span class="col-xs-6 col-sm-6 padding0">
+                                    <h6>One Time</h6>
+                                    <h2>{{p.OneTimeCost}}</h2>
+                                 </span>
+                            </div>
+                            <div style="flex: 1;">
+                                <span class="col-xs-6 col-sm-6 padding0">
+                                    <h6>Monthly</h6>
+                                    <h2>{{p.MonthlyCost}}</h2>
+                                 </span>
+                            </div>
+                        </div>
+                        <div class="action" ng-init=" p.isConfigurable == true ? operation = 'configureProd' : operation = 'Add' ">
+                            <button class="btn btn-primary col-md-12" ng-if="!p.added" ng-click="buttonClick(bpTree.response, control, this, p, 'Add', baseCtrl.customHandleSelectedItem)">
+                                {!$Label.vlocity_cmt__AddToCart}
+                            </button>
+                            <button class="btn btn-success ng-scope" ng-if="p.added"  ng-click="buttonClick(bpTree.response, control, this, p, 'Remove', baseCtrl.customHandleSelectedItem)">
+                                <span class="icon icon-v-check"></span>
+                            </button>
+                       </div>
+                    </div>
+               </div>
+           </div>
+        </div>
+    </script>
+       
+    <!-- Showcase 3 Config -->
+    <script  type="text/ng-template" id="vdoShowcase3Config.html">
+        <style>
+            .showcase3{
+                width:100%;
+                margin:auto;
+            }
+            .showcase3 .showcasecontainer{
+                width:33.3%;
+                height:auto;
+                float:left;
+                position:relative;
+                opacity:1;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+            .showcase3 .img-container{
+                width:100%;
+                height:auto;
+                background-size:100% 100%;
+            }
+            .showcase3 .showcasedetails{
+                background: #ECECEC;
+                padding:10px;
+                box-sizing:border-box;
+                z-index:10;
+                width:100%;
+                display:table;
+            }
+            .showcasecontainer:hover{
+                display:block;
+                opacity:1;
+            }
+            .showcase3 .action button{
+                width:100%;
+                margin:10px 0px 0px 0px;
+            }
+            .showcase3 h3{
+                font-weight:bold;
+                margin-top:10px;
+                text-align:center;
+                height:48px;
+            }
+            .showcase3 p.description {
+                height: 100px;
+                overflow: hidden;
+                text-align:center;
+            }
+            .showcase3 #vlocity-price{
+                text-align:center;
+            }
+        </style>
+        <br/>
+        <div class="showcase3">
+            <div ng-repeat="p in control.vlcSI[control.itemsKey] | orderBy:'-Name'">
+                <div class="showcasecontainer"  ng-class="{'selected': p.added}">
+                    <img class="img-container" src="{{p.Image}}"/>
+                    <div class="showcasedetails">
+                        <div class="product-info padding0">
+                            <h3 class="title">{{p.Name}}</h3>
+                            <p class="description">
+                                 {{p.Description}}
+                            </p>
+                        </div>
+                        <div class="flex" id="vlocity-price">
+                            <div style="flex: 1;">
+                                <span class="col-xs-6 col-sm-6 padding0">
+                                    <h6>One Time</h6>
+                                    <h2>{{p.OneTimeCost}}</h2>
+                                 </span>
+                            </div>
+                            <div style="flex: 1;">
+                                <span class="col-xs-6 col-sm-6 padding0">
+                                    <h6>Monthly</h6>
+                                    <h2>{{p.MonthlyCost}}</h2>
+                                 </span>
+                            </div>
+                        </div>
+                        <div class="action" ng-init=" p.isConfigurable == true ? operation = 'configureProd' : operation = 'Add' ">
+                            <button class="btn btn-primary col-md-12" ng-if="!p.added" ng-click="buttonClick(bpTree.response, control, this, p, 'Add', baseCtrl.customHandleSelectedItem)">
+                                {!$Label.vlocity_cmt__AddToCart}
+                            </button>
+                            <button class="btn btn-success ng-scope" ng-if="p.added"  ng-click="buttonClick(bpTree.response, control, this, p, 'Remove', baseCtrl.customHandleSelectedItem)">
+                                <span class="icon icon-v-check"></span>
+                            </button>
+                       </div>
+                    </div>
+               </div>
+           </div>
+        </div>
+    </script>
+    
+    <!-- Showcase 4 Config -->
+    <script  type="text/ng-template" id="vdoShowcase4Config.html">
+        <style>
+            .showcase4{
+                width:100%;
+                margin:auto;
+            }
+            .showcase4 .showcasecontainer{
+                width:25%;
+                height:auto;
+                float:left;
+                position:relative;
+                opacity:1;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+            .showcase4 .img-container{
+                width:100%;
+                height:auto;
+                background-size:100% 100%;
+            }
+            .showcase4 .showcasedetails{
+                background: #ECECEC;
+                padding:10px;
+                box-sizing:border-box;
+                z-index:10;
+                width:100%;
+                display:table;
+            }
+            .showcasecontainer:hover{
+                display:block;
+                opacity:1;
+            }
+            .showcase4 .action button{
+                width:100%;
+                margin:10px 0px 0px 0px;
+            }
+            .showcase4 h3{
+                font-weight:bold;
+                margin-top:10px;
+                text-align:center;
+                height:48px;
+                overflow: hidden;
+            }
+            .showcase4 p.description {
+                height: 100px;
+                overflow: hidden;
+                text-align:center;
+            }
+            .showcase4 #vlocity-price{
+                text-align:center;
+            }
+        </style>
+        <br/>
+        <div class="showcase4">
+            <div ng-repeat="p in control.vlcSI[control.itemsKey] | orderBy:'-Name'">
+                <div class="showcasecontainer"  ng-class="{'selected': p.added}">
+                    <img class="img-container" src="{{p.Image}}"/>
+                    <div class="showcasedetails">
+                        <div class="product-info padding0">
+                            <h3 class="title">{{p.Name}}</h3>
+                            <p class="description">
+                                 {{p.Description}}
+                            </p>
+                        </div>
+                        <div class="flex" id="vlocity-price">
+                            <div style="flex: 1;">
+                                <span class="col-xs-6 col-sm-6 padding0">
+                                    <h6>One Time</h6>
+                                    <h2>{{p.OneTimeCost}}</h2>
+                                 </span>
+                            </div>
+                            <div style="flex: 1;">
+                                <span class="col-xs-6 col-sm-6 padding0">
+                                    <h6>Monthly</h6>
+                                    <h2>{{p.MonthlyCost}}</h2>
+                                 </span>
+                            </div>
+                        </div>
+                        <div class="action" ng-init=" p.isConfigurable == true ? operation = 'configureProd' : operation = 'Add' ">
+                            <button class="btn btn-primary col-md-12" ng-if="!p.added" ng-click="buttonClick(bpTree.response, control, this, p, 'Add', baseCtrl.customHandleSelectedItem)">
+                                {!$Label.vlocity_cmt__AddToCart}
+                            </button>
+                            <button class="btn btn-success ng-scope" ng-if="p.added"  ng-click="buttonClick(bpTree.response, control, this, p, 'Remove', baseCtrl.customHandleSelectedItem)">
+                                <span class="icon icon-v-check"></span>
+                            </button>
+                       </div>
+                    </div>
+               </div>
+           </div>
+        </div>
+    </script>    
+
+    <!-- Showcase 5 Config -->
+    <script  type="text/ng-template" id="vdoShowcase5Config.html">
+        <style>
+            .showcase5{
+                width:100%;
+                margin:auto;
+            }
+            .showcase5 .showcasecontainer{
+                width:20%;
+                height:auto;
+                float:left;
+                position:relative;
+                opacity:1;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+            .showcase5 .img-container{
+                width:100%;
+                height:auto;
+                background-size:100% 100%;
+            }
+            .showcase5 .showcasedetails{
+                background: #ECECEC;
+                padding:10px;
+                box-sizing:border-box;
+                z-index:10;
+                width:100%;
+                display:table;
+            }
+            .showcasecontainer:hover{
+                display:block;
+                opacity:1;
+            }
+            .showcase5 .action button{
+                width:100%;
+                margin:10px 0px 0px 0px;
+            }
+            .showcase5 h3{
+                font-weight:bold;
+                margin-top:10px;
+                text-align:center;
+                height:48px;
+            }
+            .showcase5 p.description {
+                height: 100px;
+                overflow: hidden;
+                text-align:center;
+            }
+            .showcase5 #vlocity-price{
+                text-align:center;
+            }
+        </style>
+        <br/>
+        <div class="showcase5">
+            <div ng-repeat="p in control.vlcSI[control.itemsKey] | orderBy:'-Name'">
+                <div class="showcasecontainer"  ng-class="{'selected': p.added}">
+                    <img class="img-container" src="{{p.Image}}"/>
+                    <div class="showcasedetails">
+                        <div class="product-info padding0">
+                            <h3 class="title">{{p.Name}}</h3>
+                            <p class="description">
+                                 {{p.Description}}
+                            </p>
+                        </div>
+                        <div class="flex" id="vlocity-price">
+                            <div style="flex: 1;">
+                                <span class="col-xs-6 col-sm-6 padding0">
+                                    <h6>One Time</h6>
+                                    <h2>{{p.OneTimeCost}}</h2>
+                                 </span>
+                            </div>
+                            <div style="flex: 1;">
+                                <span class="col-xs-6 col-sm-6 padding0">
+                                    <h6>Monthly</h6>
+                                    <h2>{{p.MonthlyCost}}</h2>
+                                 </span>
+                            </div>
+                        </div>
+                        <div class="action" ng-init=" p.isConfigurable == true ? operation = 'configureProd' : operation = 'Add' ">
+                            <button class="btn btn-primary col-md-12" ng-if="!p.added" ng-click="buttonClick(bpTree.response, control, this, p, 'Add', baseCtrl.customHandleSelectedItem)">
+                                {!$Label.vlocity_cmt__AddToCart}
+                            </button>
+                            <button class="btn btn-success ng-scope" ng-if="p.added"  ng-click="buttonClick(bpTree.response, control, this, p, 'Remove', baseCtrl.customHandleSelectedItem)">
+                                <span class="icon icon-v-check"></span>
+                            </button>
+                       </div>
+                    </div>
+               </div>
+           </div>
+        </div>
+    </script> 
+
+    <!-- Large Grid -->
+    <script  type="text/ng-template" id="vdoLargeGridConfig.html">
+        <style>
+            .largegrid{
+                width:60%;
+                margin:auto;
+            }
+            .largegrid .largegridcontainer{
+                width:100%;
+                height:auto;
+                float:left;
+                position:relative;
+                opacity:1;
+                padding: 2px;
+                box-sizing: border-box;
+                max-width: 760px;
+            }
+            .largegrid .img-container{
+                height:auto;
+                background-size:100% 100%;
+                display:block;
+                width:50%;
+                float:left;
+                max-width: 380px;
+                border-radius: 5px;
+            }
+            .largegrid .largegriddetails{
+                background: {!$Setup.VDO_Settings__c.Colour3__c};
+                color: {!$Setup.VDO_Settings__c.Colour1__c};
+                padding:10px;
+                box-sizing:border-box;
+                z-index:10;
+                width:50%;
+                display:table;
+                float:left;
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
+            .largegridcontainer:hover{
+                display:block;
+                opacity:1;
+            }
+            .largegrid .action button{
+                width:100%;
+                margin:10px 0px;
+            }
+            .largegrid h3{
+                font-weight:bold;
+                margin-top:10px;
+                text-align:center;
+                height:48px;
+            }
+            .largegrid p.description {
+                height: 180px;
+                overflow: hidden;
+                text-align:center;
+            }
+            .largegrid #vlocity-price{
+                text-align:center;
+            }
+            .largegriddetails:before {
+                content: ' ';
+                border-bottom: 40px solid transparent;
+                border-right: 40px solid {!$Setup.VDO_Settings__c.Colour3__c};
+                border-top: 40px solid transparent;
+                width: 0px;
+                display: block;
+                position: absolute;
+                top: 0px;
+                left: 50%;
+                margin-left: -40px;
+            }
+        </style>
+        <br/>
+        <div class="largegrid">
+            <div ng-repeat="p in control.vlcSI[control.itemsKey] | orderBy:'-Name'">
+                <div class="largegridcontainer"  ng-class="{'selected': p.added}">
+                    <img class="img-container" src="{{p.Image}}"/>
+                    <div class="largegriddetails">
+                        <div class="product-info padding0">
+                            <h3 class="title">{{p.Name}}</h3>
+                            <p class="description">
+                                 {{p.Description}}
+                            </p>
+                        </div>
+                        <div class="imagebutton action" ng-init=" p.isConfigurable == true ? operation = 'configureProd' : operation = 'Add' ">
+                            <button class="btn btn-primary ng-scope" ng-if="!p.added" ng-click="configureItem(bpTree.response, control, this, p, operation, baseCtrl.customHandleSelectedItem, baseCtrl.customIsConfigurable)">
+                                Configure
+                            </button>
+                            <button class="btn btn-success ng-scope" ng-if="p.added"  ng-click="buttonClick(bpTree.response, control, this, p, 'Remove', baseCtrl.customHandleSelectedItem)">
+                                <span class="icon icon-v-check"></span>
+                            </button>
+                       </div>
+                    </div>
+               </div>
+           </div>
+        </div>
+    </script>    
+       
+</apex:component>

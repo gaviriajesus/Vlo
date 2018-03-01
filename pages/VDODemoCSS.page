@@ -1,0 +1,1195 @@
+<apex:page cache="false" showHeader="false" contentType="text/css">
+    /*Lightning OmniScript CSS*/
+        .via-slds section.slds-page-header.vlc-slds-page--header:after, .via-slds .vlc-slds-right--panel:after{
+            background: linear-gradient(141deg,{!$Setup.VDO_Settings__c.Colour1__c},{!$Setup.VDO_Settings__c.Colour4__c} 51%,{!$Setup.VDO_Settings__c.Colour4__c} 75%) !important;
+        }
+        .via-slds .vlc-slds-wizard:before{
+            background: linear-gradient(-141deg,{!$Setup.VDO_Settings__c.Colour1__c},{!$Setup.VDO_Settings__c.Colour4__c} 51%,{!$Setup.VDO_Settings__c.Colour4__c} 75%) !important;        
+        }
+        .via-slds .list-group.vertical-steps .list-group-item.active::before{
+            background:{!$Setup.VDO_Settings__c.Colour4__c} !important;
+        }
+        .via-slds .vlc-slds-remote-action--button .vlc-control-wrapper .slds-box:hover{
+            background:{!$Setup.VDO_Settings__c.Colour2__c} !important;
+        }
+        .via-slds .vlc-slds-select-control.ng-dirty.ng-valid .slds-select_container, .via-slds .vlc-control-wrapper input.ng-pristine.ng-valid:focus, .via-slds .vlc-control-wrapper input.ng-pristine.ng-invalid:focus, .via-slds .vlc-control-wrapper textarea.ng-pristine.ng-valid:focus, .via-slds .vlc-control-wrapper textarea.ng-pristine.ng-invalid:focus, .via-slds input[type="text"].ng-dirty.ng-valid, .via-slds input[type="email"].ng-dirty.ng-valid, .via-slds input[type="password"].ng-dirty.ng-valid, .via-slds input[type="url"].ng-dirty.ng-valid, .via-slds input[type="tel"].ng-dirty.ng-valid, .via-slds textarea.ng-dirty.ng-valid{
+            border-color:{!$Setup.VDO_Settings__c.Colour4__c} !important;
+        }
+        .vlocity .btn-primary{
+            background:{!$Setup.VDO_Settings__c.Colour1__c} !important;
+            border-color:{!$Setup.VDO_Settings__c.Colour1__c} !important;
+            color: #fff !important;
+        }
+        span.icon.icon-v-check {
+            color: #fff !important;
+        }
+        .via-slds .clicked > .vlc-slds-expand{
+            background:{!$Setup.VDO_Settings__c.Colour4__c} !important;
+        }
+        .datepicker--day-name{
+            color:{!$Setup.VDO_Settings__c.Colour4__c} !important;
+        }
+        .via-slds .via-slds-auto_save_for_later{
+            display:none !important;
+        }
+        .vlocity .mediumgrid{
+            position:relative;
+        }
+        .vlocity .mediumgrid .result-box .product-info .title{
+            font-weight:bold;
+        }
+        .vlocity .mediumgrid span.col-xs-6.col-sm-6.padding0{
+            background: rgba(6, 28, 63, 0.9) !important;
+        }
+        .vlocity .mediumgrid .result-box .product-info .description, .smallgrid .gridhover .description{
+            font-size:12px !important;
+            height: 110px !important;
+            overflow:hidden;
+            margin-bottom:10px;
+        }
+        .showcase4 p.description{
+            font-size:12px !important;
+            height: 110px !important;
+            margin-bottom:10px !important;
+        }
+        .showcase4 h6, .showcase3 h6, .smallgrid h6{
+            font-size:10px !important;
+        }
+        .showcase4 h2, .showcase3 h2, .smallgrid h2{
+            font-size:12px !important;
+        }
+        .vlocity .showcase4 .col-xs-6, .vlocity .showcase3 .col-xs-6, .vlocity .smallgrid .col-xs-6{
+            padding:0px;
+        }
+        .showcase4 h3, .showcase3 h3, .smallgrid h3{
+            margin-bottom:10px !important;
+        }
+        .prodconf-name.ng-binding, .prodconf-name{
+            width: 60%;
+            display: inline-block;
+        }
+        .prodconf-qty.ng-binding{
+            width:38%;
+            display: inline-block;
+        }
+        .prodconf-qty, .p-add.p-add-omni{
+            width:34%;
+            display: inline-block;
+        }
+        .p-add.p-add-omni{
+            width:5%;
+            float:right;
+        }
+        .p-add.p-add-omni span.toggle-icon.icon-v-down-caret, .p-add.p-add-omni span.toggle-icon.icon-v-up-caret{
+            line-height:15px !important;
+        }
+        .p-add.p-add-omni .head-item.cart-toggle{
+            color:rgb(22, 50, 92) !important;
+        }
+        
+        .prodconf-qty input{
+            height:26px !important;
+        }
+        .slds-modal__content.slds-p-around--medium {
+            padding: 0px;
+        }
+        .slds-modal__header {
+            background: rgb(22, 50, 92) !important;
+            font-size: 18px;
+            color: #fff !important;
+            border: 0px !important;
+        }
+        .prodconf-products-hd {
+            padding: 20px;
+            background: #f4f6f9 !important;
+            color: rgb(22, 50, 92) !important;
+            font-size: 14px;
+        }
+        .product-details {
+            padding: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .catagory-attr-fields, .catagory-attr-fields .vlc-form-group, .catagory-attr-fields .vlc-form-group label, .catagory-attr-fields .vlc-form-group label input, .catagory-attr-fields .vlc-form-group div input, .catagory-attr-fields .vlc-form-group div{
+            width:100%;
+        }
+        .catagory-attr-fields .row{
+            margin-left:0px !important;
+            margin-right:0px !important;
+        }
+        .modal-prod-content .panel-body.panel-body-omni {
+            background: #f4f6f9 !important;
+        }
+        .modal-footer.modal-prod-footer {
+            border-radius: 0px;
+            border: 0px;
+        }
+        .attr .vlc-radion-prod-omni, .vlc-radion-prod-omni label, .catagory-attr-fields .col-md-14 {
+            width:100%;
+        }
+        .vlc-radion-prod-omni input{
+            -webkit-appearance: radio !important;
+        }
+        .vlc-form-group{
+            display:block !important;
+        }
+        .vlc-slds-item--quantity input {
+            margin-bottom: 5px;
+        }   
+        ul.typeahead {
+            width: 100% !important;
+        }
+        .via-slds .slds-spinner_container {
+            background-color: rgba(255,255,255,0.75) !important; 
+        }       
+        .vlocity .modal-backdrop {
+            background: #fff !important;
+        }                           
+    
+    /*Lightning Community CSS*/
+        .forceCommunityOmniBox .no-assigned-image .default-bg-overlay{
+            background: {!$Setup.VDO_Settings__c.Colour4__c};
+            opacity: 0.8;
+        }
+        .forceCommunityNavigationMenu{
+            background:{!$Setup.VDO_Settings__c.Colour2__c} !important;
+            border:0px !important;
+        }
+        .siteforceNapiliBody .cBrandingLogo{
+            background-image: url('{!URLFOR($Resource.VDOCommunityResources,'images/communitylogo.png')}');
+        }
+        button.slds-button.slds-button--neutral.flatButton.uiButton, .embeddedServiceSidebarExtendedHeader, .embeddedServiceSidebarHeader{
+            background: {!$Setup.VDO_Settings__c.Colour4__c} !important;
+        }
+        @media (max-width: 1100px) {
+            .welcomeSection, .accountPic{
+                display: none !important;
+            }
+            .profilePic{
+                margin:auto !important;
+                margin-top:25px !important;
+            }
+            .profileBackground{
+                width:100% !important;
+                height:250px !important;
+                margin-bottom: 50px !important;
+                background-image: url('{!URLFOR($Resource.VDOCommunityResources,'images/profilebackgroundwide.png')}') !important;
+            }
+        }
+
+    /*Page positioning and size CSS*/
+        html .brandQuaternaryBgr{
+            margin:0px !important;
+            padding:0px !important;
+        }
+        html, html body.sfdcBody{
+            background:#fff !important;
+        }
+        html, body, td{
+            font-family: "Salesforce Sans", Arial, sans-serif !important;
+        }
+        .bodyDiv{
+            background:transparent;
+        }
+        div#communityheader:after {
+            content: ' ';
+            position: absolute;
+            width: 100%;
+            left: 0px;
+            top: 136px;
+            height: 400px;
+            background: {!$Setup.VDO_Settings__c.Colour1__c};
+        }
+        div#page {
+            margin: 0px;
+            padding: 0px;
+        }
+        .globalHeaderBar {
+          margin:0px;
+        }
+        .ideaPageLayoutWithProfileSidebar > tbody > tr > td{
+            display: block;
+            width: 750px;
+            overflow: hidden;
+        }
+        #communitywrapper{
+            width:1250px;
+            display:block;    
+            margin:auto; 
+            margin-top:10px;
+            position:relative;
+        }
+        #contentWrapper{
+          background: #f2f2f2;
+        }
+        #communitysidebar{
+            width:230px;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            padding:10px;
+        }
+        #communitybody{
+            width:1000px;
+            min-height:2500px;
+            margin-left: 250px;
+            right: 0px;
+            position: relative;
+            display: table;
+        }
+        #communityheader{
+            width:100%;
+            height:100px;
+            background-color:{!$Setup.VDO_Settings__c.Colour7__c};
+            display:block;
+        }
+        #communityheadertop{
+            width:1230px;
+            margin:auto;
+            height:100px;
+        }
+        #communitylogo{   
+          width: 216px;
+          height: 55px;
+          float: left;
+          background: url('{!URLFOR($Resource.VDOCommunityResources,'images/communitylogo.png')}') no-repeat;
+          background-size: auto 100%;
+          margin-top: 20px;
+        }
+        #communityheaderbot{
+            width:100%;
+            height:30px;
+            margin-top:20px;
+        }
+        #communityfooter{   
+            width: 100%;
+            height: 230px;
+            margin: auto;
+            background-color: #383838;
+            background-image: url('{!URLFOR($Resource.VDOCommunityResources,'images/communityfooter.jpg')}');
+            background-repeat: no-repeat;
+            background-size: 1230px;
+            background-position: 50% 50%;
+            margin-top:20px;                           
+        }
+        .zen-bodyZen.brdPalette.brandPrimaryBrd, .bodyDiv.brdPalette.brandPrimaryBrd{
+            box-shadow:none;
+            border-top: 0px;
+            border-radius: 5px;
+        }
+        #bodyTable{
+            padding-bottom:0px;
+        }
+
+    /*Search box CSS*/
+        #communitysearch{
+            width: 200px;
+            float: right;
+            height: 30px;
+            padding: 40px 0px;
+            padding-top:35px;
+            z-index:1;
+            position:relative;
+        }
+        #communitysearch .searchTextbox{
+            border-radius: 5px;
+            border: 0px;
+            padding: 10px;
+            height: 10px;
+            float:left;
+            display:block;
+            width: 145px;
+            background-color: #eee;
+        }
+        #communitysearch .searchTextbox:focus{
+            outline-width: 0;
+        }
+        #communitysearch #searchButton{
+           display:none;
+        }
+        #communitysearch #searchButtonDiv{
+            float:right;
+            width:30px;
+            height:30px;
+            border-radius:5px;
+            color:#FFF;
+            background-color:{!$Setup.VDO_Settings__c.Colour1__c};
+            cursor:pointer;  
+            font-size: 20px;
+            text-align: center;
+        }
+        div#searchButtonDiv:before {
+            top: 6px;
+            position: relative;
+            left: 1px;
+        }
+        #communitysearch #searchButtonDiv:hover{
+            background-color:{!$Setup.VDO_Settings__c.Colour3__c};
+            color:{!$Setup.VDO_Settings__c.Colour1__c};
+        }
+        #sidebarDiv {
+            border-top-left-radius: 5px;
+        }
+        
+    /*Tabs CSS*/
+        .zen #tabContainer{
+            background: none !important;
+            position: absolute;
+            top: -70px;
+            height: 30px;
+            box-shadow: none;
+            margin: 0px;
+            min-width: 980px;
+            left: 2px;
+        }
+        .zen .zen-tabMenu>li {
+            height: 30px;
+            min-width: 50px;
+            /*background: {!$Setup.VDO_Settings__c.Colour3__c};*/
+            background:none;
+            margin: 0px 10px;
+            text-align: center;
+            line-height: 30px;
+            padding:0px;
+            border:0px;
+            border-radius: 5px;
+        }
+        .zen .zen-tabMenu>li:first-child{
+            margin-left:0px
+        }
+        .zen .zen-tabMenu .zen-active{
+            background:none;
+            box-shadow:none;
+            border-radius: 5px;
+            margin-right: 10px;
+            background: none !important;
+        }
+        .zen .zen-tabMenu a{
+            display: block;
+            padding: 0px 10px;
+            text-align: center;
+            color: #aaa !important;
+            /* text-transform: uppercase; */
+            font-weight: normal;
+            font-size: 15px;
+            padding-left: 0px;
+            padding-right: 0px;
+            min-width: 100px;
+            text-align: center;
+        }
+        .zen .zen-tabMenu a:hover{
+            color: {!$Setup.VDO_Settings__c.Colour1__c} !important;
+            text-decoration: none;
+        }
+        #tabBar {
+            margin: 0px;
+            margin-top: -10px;
+        }
+        .zen .zen-tabMenu{
+            padding:0px;
+        }
+        .zen .zen-tabMenu .zen-active>a {
+            color: {!$Setup.VDO_Settings__c.Colour1__c} !important;
+            text-decoration: none;
+            font-weight: bold;
+            padding-bottom: 31px;
+            border-bottom: 5px solid {!$Setup.VDO_Settings__c.Colour1__c};
+        }
+        
+    /*Content CSS*/
+        #bodyDiv{
+            margin:auto;
+            float:none;
+            display:block;
+        }
+
+    /*Home page CSS*/
+        .welcomeImage, .welcomeSection{
+            width:100%;
+            border-radius: 2px;
+        }
+        .welcomeImage{
+            background-color:{!$Setup.VDO_Settings__c.Colour4__c};
+        }
+        .welcomeTitle {
+            position: absolute;
+            font-size: 55px;
+            color: #FFF;
+            width: 500px;
+            top: 50px;
+            text-align: right;
+            margin-left: 400px;
+        }
+        .welcomeTitle span{
+            display:block;
+            font-size:24px;
+            margin-top:20px;
+        }
+        .pageWidget{
+            width:50%;
+            float:left;
+            box-sizing: border-box;     
+        }
+        .pageSection{
+            margin-top:0px;
+        }
+        .pageWidget:nth-child(odd){
+            padding-left: 10px;
+            padding-right: 0px;
+        }
+        .pageWidget p{
+            padding: 55px 20px 0px 20px;
+            line-height: 20px;
+            margin: 0px;
+        }
+        .pageWidget:hover{
+            cursor:pointer;
+        }
+        .pageWidget:hover .widgetTitle{
+            background:{!$Setup.VDO_Settings__c.Colour3__c};
+            color:{!$Setup.VDO_Settings__c.Colour1__c};
+        }
+        .pageWidget p:first-letter{
+            font-size:500%;
+        }
+        .widgetContent{
+            background: #fff;
+            border-radius: 0px;
+            min-height: 200px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .widgetTitle{
+            color: #383838;
+            height: 50px;
+            font-size: 14px;
+            line-height: 50px;
+            text-transform: uppercase;
+            padding: 0px 3px 0px 20px;
+            background: #fff;
+            letter-spacing: 2px;
+        }
+        .userPhoto{
+            width:100px;
+            height:100px;
+            border-radius:50%;
+            margin-right:10px;
+            float:left;
+            position: relative;
+            z-index: 1;
+            box-sizing: border-box;
+            background-size:cover;
+            background-position:center center;
+        }
+        .widgetContent table{
+            width:100%;
+        }
+        .widgetRow{
+            width:100%;
+        }
+        .widgetLabel, .widgetData{
+            font-size:12px;
+        }
+        .widgetLabel{
+            
+        }
+        .zen .zen-page{
+            background: #FFF !important;
+        }
+        .widgetTitle span{
+            float: right;
+            height: 24px;
+            width: 24px;
+            margin-top: 14px;
+            margin-right: 14px;
+            font-size: 24px;
+            color:{!$Setup.VDO_Settings__c.Colour1__c};
+        }
+        #speechIcon{
+            width:20px;
+            height:20px;
+            margin-right:2px;
+            margin-top:5px;
+        }
+        .ideaContent, .ideaBody, .ideaFooter{
+            width: 100% !important;
+        }
+        #tabBar {
+            margin: 0px;
+            margin-top: -5px !important;
+        }
+        #producttitle{
+            width: 100%;
+            height: 30px;
+            color: #fff;
+            font-size: 14px;
+            padding: 10px;
+            padding-left: 10px;
+            box-sizing: border-box;
+            background: {!$Setup.VDO_Settings__c.Colour2__c};
+            float: left;
+            margin-top: 20px;
+            line-height: 10px;
+            text-transform: uppercase;
+        }
+        
+        .promo{
+            border: 0;
+            display: block;
+            float: left;
+            margin-right: 10px;
+            margin-top:18px;
+            cursor:pointer;
+        }
+        .pageWidget {
+            padding-right: 10px;
+        }
+        .productoverview{
+            width:230px;
+            float:left;
+            margin-bottom:10px;
+        }
+        .productname{
+            font-size:11px;
+            color:#333;
+            min-width:100px;
+            border-top:1px solid #dedede;
+            padding:10px;
+            text-align:center;
+            line-height: 20px;
+            text-transform:uppercase;
+            letter-spacing: 1px;
+        }
+        .productoverview img{
+            height:200px;
+            display: block;
+            margin:auto;
+            margin-bottom:20px;
+            margin-top:20px;
+        }
+        .productoverview:nth-child(4n){
+            margin-right:0px;
+        }
+        .productoverview:hover .productname{
+            background: {!$Setup.VDO_Settings__c.Colour3__c};
+            cursor:pointer;
+            color: {!$Setup.VDO_Settings__c.Colour1__c};
+        }
+        .productoverview:hover{
+            cursor:pointer;
+        }
+        
+    /*Profile CSS*/
+        .profileSection > div {
+            position: relative;
+            top: 0px;
+            min-width: 230px;
+        }
+        .profileBackground{
+            width:230px;
+            height:360px;
+            background: url('{!URLFOR($Resource.VDOCommunityResources,'images/profilebackground.png')}');
+            background-color:{!$Setup.VDO_Settings__c.Colour4__c};
+            background-size: cover;
+            margin-bottom: 20px;
+            position: relative;
+            z-index:1;
+            cursor:pointer;
+            box-sizing: border-box;
+            float:left;
+            margin-right:20px;
+            border-radius:2px;
+        }
+        .profilePic {
+            width: 100px;
+            height: 100px;
+            margin-left:60px;
+            margin-top: 60px;
+            border: solid 5px rgba(255,255,255,0.1);
+            border-radius:50%;
+        }
+        .profileBackground .profileName, .profileBackground .profileInfo{
+            color:#fff;
+            text-align:center;
+            line-height:20px;
+            position:relative;
+            top:40px;      
+            z-index: -1;
+            opacity:0.8;
+        }
+        .profileInfo {
+            margin-top: 5px !important;
+        }
+        .profileName{
+            font-size:25px;
+        }
+        .vlocity .action-container [class^="icon-"]:before, .vlocity .action-container [class*=" icon-"]:before {
+            color: {!$Setup.VDO_Settings__c.Colour1__c};
+        }
+        .vlocity .action-container .action-item:hover {
+            background-color: {!$Setup.VDO_Settings__c.Colour3__c} !important;
+        }
+        .vlocity .action-container .action-item:hover span.action-label {
+            color: {!$Setup.VDO_Settings__c.Colour1__c};
+        }
+        .vlocity .console-account-info .acct-links{
+            display:none;
+        }
+        .acct-info tr{
+            float:left;
+        }
+        .accountDetails{
+            width:25%;
+            background:#f2f2f2;
+            padding-bottom:20px;
+            margin-bottom:20px;
+            box-sizing:border-box;
+            float:left;
+        }
+        .accountLabel {
+            margin-left: 10px;
+            text-transform: uppercase;
+            padding-top: 10px;
+            line-height: 25px;
+            color: #aaa;
+            letter-spacing: 1px;
+            position:relative;
+        }
+        .accountData {
+            color: #333;
+            margin-left: 10px;
+        }
+        .accountLabel:before{
+            content:'\e84b';
+            font-family:'fontello';
+            position:absolute;
+            right:5px;
+            top:13px;
+            font-size:18px;
+            cursor:pointer;
+        }
+        .action-container.action-vertical, .vlocity .action-container.action-vertical .action-item{
+            width:230px;
+        }
+        .accountPic img{
+            width:45px;
+            height:45px;
+            filter: grayscale(100%);
+            -webkit-filter: grayscale(100%);
+            border: solid 5px rgba(255,255,255,0.1);
+        }
+        .accountPic {
+            width: 45px;
+            height: 45px;
+            float: left;
+            margin-left: 24px;
+            margin-top: 30px;
+            position:relative;
+        }
+        .accountPic:before{
+            content: ' ';
+            width: 5px;
+            height: 75px;
+            background: rgba(255,255,255,0.2);
+            display: block;
+            position: absolute;
+            top: -75px;
+            left: 19px;
+        }
+        .accountPic:hover img{
+            cursor:pointer;
+            filter: none;
+            -webkit-filter: none;
+        }
+        .accountPic .accountName{
+            width:230px;
+            height:75px;
+            padding:20px 5px;
+            box-sizing:border-box;
+            background:{!$Setup.VDO_Settings__c.Colour2__c};
+            color:rgba(255,255,255, 0.8);
+            line-height:35px;
+            font-size:12px;
+            text-align:center;
+            position: absolute;
+            display:none;
+        }
+        .accountPic:hover .accountName{
+            display:block;
+        }
+        #accountPic1 .accountName{      
+            left: -24px;
+            top: 85px;
+        }
+        #accountPic2 .accountName{      
+            left: -93px;
+            top: 70px;
+        }
+        #accountPic3 .accountName{      
+            left: -162px;
+            top: 85px;
+        }
+        #accountPic1:before{
+            transform:rotate(45deg);
+            top: -60px;
+            left: 60px;
+            z-index: -1;
+        }
+        #accountPic2{
+            top:15px;
+        }
+        #accountPic3:before{
+            transform:rotate(-45deg);
+            top: -60px;
+            left: -20px;
+            z-index: -1;
+        }
+        .accountSelected img{
+            filter: none;
+            -webkit-filter: none;;
+        }
+        .profileSection .sectionTitle{
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+    /*Chart CSS*/
+        img.chartimage {
+            position: absolute;
+            z-index: 1;
+            height: 100px;
+            top: 90px;
+            left: 115px;
+        }
+        .small .circle-info, .circle-info-half {
+            color: #999;
+            font-size: 10px;
+        }
+        img.smallchartimage {
+            position: absolute;
+            z-index: 1;
+            height: 50px;
+            top: 35px;
+            left: 50px;
+        }
+        .usageChart{
+            float:left;
+            cursor:pointer;
+            margin-bottom:20px;   
+        }
+        .usageChart:hover > .usageUpgrade, .usageChart:hover > .usageSupport, .usageChart:hover > .usageDispute{
+            display:block;
+        }
+        .sectionTitle{
+            font-size: 20px;
+            width: 100%;
+            line-height: 30px;
+            margin: 10px 0px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #aaa;
+        }
+        .usageUpgrade, .usageSupport, .usageDispute{
+            border-radius:40px;
+            background:{!$Setup.VDO_Settings__c.Colour3__c};
+            width:40px;
+            height:40px;
+            position: absolute;
+            color:{!$Setup.VDO_Settings__c.Colour1__c};
+            z-index:5;
+            display:none;
+            font-size: 25px;
+        }
+        .usageUpgrade{
+            left: 275px;
+            top: 216px;        
+        }
+        .usageDispute{
+            left: 245px;
+            top: 253px;        
+        }
+        .usageSupport{
+            left: 205px;
+            top: 280px;        
+        }
+        .usageUpgrade:hover, .usageSupport:hover, .usageDispute:hover{
+            background:{!$Setup.VDO_Settings__c.Colour2__c};
+            color:#fff;
+        }
+        .usageUpgrade:before {
+            position: relative;
+            left: 3px;
+            top: 10px;
+        }
+        .usageSupport:before {
+            position: relative;
+            left: 3px;
+            top: 10px;
+        }
+        .usageDispute:before {
+            position: relative;
+            left: 3px;
+            top: 10px;
+        }     
+          
+    /* Resume Scripts CSS */
+        .resumeScript .resumeScriptHeader, .scriptRow{
+            float:left;
+            width:100%;
+            height:40px;
+            background:#fff;
+        }
+        .resumeScript .scriptRow:first-child{
+            background:{!$Setup.VDO_Settings__c.Colour3__c};
+        }
+        .resumeScript .scriptData{
+            float:left;
+            box-sizing:border-box;
+            padding: 5px 10px;
+            line-height: 30px;
+            overflow: hidden;
+            height: 40px; 
+            font-size: 12px;
+            font-family: "Salesforce Sans",Arial,sans-serif;
+            color:#16325c;
+        }
+        .resumeScript .scriptRow:hover{
+            cursor:pointer;
+            background:{!$Setup.VDO_Settings__c.Colour3__c};
+        }
+        .resumeScript .scriptData{
+            width:50%;
+            padding-left:20px;
+        }
+        .padder .sectionTitle{
+            margin-top:0px;
+            margin-bottom:20px;
+        }
+        .padder .circle-info, .resumeScript .circle-info-half {
+            font-size: 10px;
+        }
+        .padder{
+            padding:15px;
+        }   
+        .resumeScript .sectionTitle{
+            color:#16325c;
+            background-color: #f4f6f9;
+            padding-left:12px;
+            box-sizing:border-box;
+            margin:0px;
+            padding-top:12px;
+            padding-bottom:12px;
+            font-size:18px;
+            border-bottom: 1px solid #d8dde6;
+            border-top: 1px solid #d8dde6;
+            text-transform:none;
+            font-weight:300;
+            font-family: "Salesforce Sans",Arial,sans-serif;
+            font-size:20px;
+        }
+        .resumeScriptHeader .scriptData{
+            color:#16325c;
+            background-color: #f4f6f9;
+            font-size:12px;
+            padding-top:12px;
+            padding-bottom:12px;
+            padding-left:20px;
+            box-sizing:border-box;
+            line-height:16px;
+            font-family: "Salesforce Sans",Arial,sans-serif;
+        }  
+         
+    /* Slider CSS */
+        .slick-next {
+            right: 10px;
+        }
+        .slick-prev {
+            left: 10px;
+            z-index:2;
+        }
+        .slick-dots{
+            bottom:-60px !important;
+        }
+        .slick-slider{
+            margin-bottom:25px !important;
+        }
+        
+    /* Cards CSS */
+        .vlocity section.console-card.open:hover, .vlocity section.console-card.open:hover, section.console-card.active:hover, section.console-card.active:hover .card-top, li.vlc-list-card-row section:hover{
+            background: {!$Setup.VDO_Settings__c.Colour3__c} !important;
+        }
+        .vlocity .account-card .card-info .actions-wrapper ul.actions li i, .vlocity section.console-card .card-info ul.actions a i.icon, .vlocity section.console-card.open a.add-policy i.icon, .vlocity section.console-card.open a.add-policy span, .vlocity section.console-flyout.flyout .card-info ul.actions a i.icon, .vlc-list-card > div{
+            color:{!$Setup.VDO_Settings__c.Colour1__c} !important;
+        }
+        .vlocity .account-card .card-info ul.actions a:hover i.icon, .vlocity section.console-card .card-info ul.actions a:hover i.icon, .vlocity section.console-card .card-info ul.actions a:hover span, .vlocity section.console-card.open a.add-policy:hover i.icon, .vlocity section.console-card.open a.add-policy:hover span{
+            color:{!$Setup.VDO_Settings__c.Colour2__c} !important;
+        }
+        .vlocity section.console-card.open .offer-banner{
+            background:{!$Setup.VDO_Settings__c.Colour1__c} !important;
+        }
+        .vlocity section.console-card.open:hover .offer-banner{
+            background:{!$Setup.VDO_Settings__c.Colour2__c} !important;
+        }
+        .vlocity section.console-card.open:hover a.add-policy i.icon, .vlocity section.console-card.open:hover a.add-policy span{
+            color:{!$Setup.VDO_Settings__c.Colour2__c} !important;
+        }
+        .vlocity section.wide-card.open .offer-banner{
+            background: {!$Setup.VDO_Settings__c.Colour1__c} !important;
+        }
+        .vlocity section.wide-card.open:hover .offer-banner{
+            background: {!$Setup.VDO_Settings__c.Colour2__c} !important;
+        }
+        .vlocity .spacer {
+            background-color: {!$Setup.VDO_Settings__c.Colour2__c} !important;
+        }
+        .vlocity .spacer:hover, .vlocity .spacer i::before, .vlocity .console-account-info .acct-links a, .vlocity .profile-box .social i:hover{
+            color: {!$Setup.VDO_Settings__c.Colour1__c} !important;
+        }
+        ul.vlocity_cmtProfileAppliedAttributesEditList li{
+            color: #FFFFFF !important;
+        }
+        ul.vlocity_cmtProfileAppliedAttributesEditList li{
+            color: {!$Setup.VDO_Settings__c.Colour1__c} !important;
+        }
+        ul.vlocity_cmtProfileOnOffAttributeList li{
+            background-color: {!$Setup.VDO_Settings__c.Colour8__c} !important;
+            border-radius: 2px;
+        }
+        .vlocity_cmtProfileSquareSliderAttribute.slider-attribute ul li, .three-state-button.toggle-off, .three-state-button.toggle-neutral {
+            border-radius: 2px;
+        }
+        .back-button, ul.vlocity_cmtProfileOnOffAttributeList li, ul.vlocity_cmtProfileAppliedAttributesEditList li{
+            cursor:pointer;
+        }
+        .three-state-button.toggle-on, .slider-attribute ul li.turned-off{
+            background-color: {!$Setup.VDO_Settings__c.Colour9__c} !important;
+            background-image: none !important;
+            border-radius: 2px;
+        }
+        .slider-attribute ul li.turned-on{
+            background-color: {!$Setup.VDO_Settings__c.Colour8__c} !important;
+            background-image: none !important;
+        }
+        .vlocity_cmtProfileTextCommentAttribute.text-comment-attribute input {
+            padding: 5px;
+        }
+        .three-state-button.toggle-on li:nth-child(3){
+            background-image:url('{!URLFOR($Resource.VDOInternalResources,'images/profilecheck.png')}') !important;
+            background-color: {!$Setup.VDO_Settings__c.Colour8__c} !important;
+        }
+        .vlocity_cmtProfileTextCommentAttributeCategoryView, .vlocity_cmtProfileOnOffAttributeCategoryView, .vlocity_cmtProfileThreeStateAttributeCategoryView,.vlocity_cmtProfileSliderAttributeCategoryView{
+            border-top:0px !important;
+            border-bottom:solid 1px #ccc !important;
+            border-right:0px !important;
+            margin-top:5px;
+            margin-bottom:5px;
+            padding-bottom:10px;
+        }
+        .card-top .warning, .card-top .warning .icon, .vlc-list-card-row .warning, i.icon.warning:before{
+            color:{!$Setup.VDO_Settings__c.Colour6__c} !important;
+        }
+        .card-top .good{
+            color:{!$Setup.VDO_Settings__c.Colour1__c} !important;
+        }
+        .vlocity .cards-container form button.btn.btn-primary{
+            background:{!$Setup.VDO_Settings__c.Colour4__c} !important;
+            border-color:{!$Setup.VDO_Settings__c.Colour4__c} !important;
+        }
+        
+        
+    /* Omniscript CSS */
+        html body .bPageBlock.brandSecondaryBrd {
+            display: none;
+        }
+        .vlocity .steps-chart span.active, .vlocity label.step-label.ng-binding.active, .vlocity .panel-oui > .panel-heading > .icon:before{
+            color: {!$Setup.VDO_Settings__c.Colour1__c} !important;
+        }
+        .vlocity .btn-success{
+            background:{!$Setup.VDO_Settings__c.Colour4__c} !important;
+            border-color:{!$Setup.VDO_Settings__c.Colour4__c} !important;
+        }
+        .vlocity .btn-primary, .vlocity .modal-prod-footer .btn-modal{
+            background:{!$Setup.VDO_Settings__c.Colour1__c};
+            border-color:{!$Setup.VDO_Settings__c.Colour1__c};
+        }
+        .vlocity .btn-primary:hover{
+            background:{!$Setup.VDO_Settings__c.Colour3__c};
+            border-color:{!$Setup.VDO_Settings__c.Colour3__c};
+            color:{!$Setup.VDO_Settings__c.Colour1__c};
+            outline: none !important;
+        }
+        .vlocity .btn-primary:active, .vlocity .btn-primary:focus{
+            outline: none !important;
+            background:{!$Setup.VDO_Settings__c.Colour1__c};
+            border-color:{!$Setup.VDO_Settings__c.Colour1__c};
+        }
+        .vlocity .select-label::after{
+            color:{!$Setup.VDO_Settings__c.Colour1__c} !important;
+            display:none;
+        }
+        .vlocity .has-feedback .form-control:focus{
+            border-color:{!$Setup.VDO_Settings__c.Colour1__c};
+        }
+        .vlocity .btn-default:hover{
+            border-color:#FFF;
+        }
+        .vlocity .vlc-previous .btn-default{
+            background:#efefef !important;
+            border:#efefef !important;
+            color:{!$Setup.VDO_Settings__c.Colour1__c} !important;
+            outline: none !important;
+        }
+        .vlocity .btn-link:hover{
+            color:{!$Setup.VDO_Settings__c.Colour3__c} !important;
+        }
+        .btn-default{
+            color:{!$Setup.VDO_Settings__c.Colour1__c} !important;
+        }
+        .vlocity .btn-link, .vlocity .panel-oui>.panel-heading>.icon{
+            color:{!$Setup.VDO_Settings__c.Colour1__c};
+        }
+        .vlocity .panel-oui {
+            border-color: {!$Setup.VDO_Settings__c.Colour1__c} !important;
+        }
+        .vlocity .small-list .btn-success, .vlocity .selecteableItem .btn-success{
+            border-color:{!$Setup.VDO_Settings__c.Colour2__c};
+            background:{!$Setup.VDO_Settings__c.Colour2__c};
+        }
+        .vlocity .small-list .selected{
+            border-color:#efefef;
+        }
+        .vlocity .horizontal-cart .panel-default>.panel-heading .cart-toggle .toggle-icon{
+            color:{!$Setup.VDO_Settings__c.Colour1__c};
+        }
+        .vlocity .selecteableItem .selected{
+            border-color:{!$Setup.VDO_Settings__c.Colour2__c};
+        }
+        .vlocity .dropdown-menu{
+            min-width:300px;
+        } 
+        .vlocity .action-container [class^="icon-"]:before, .vlocity .action-container [class*=" icon-"]:before, .vlocity .action-container .action-item:hover span.action-label{
+            color:{!$Setup.VDO_Settings__c.Colour1__c} !important;
+        }
+        .vlocity .panel-oui .field-label {
+            color: {!$Setup.VDO_Settings__c.Colour1__c};
+        }
+        .vlocity .modal-header.modal-header-prodconfig, .vlocity .modal-header{
+            background: {!$Setup.VDO_Settings__c.Colour2__c} !important;
+            border-bottom: 2px solid {!$Setup.VDO_Settings__c.Colour1__c} !important;
+            border-radius: 0px !important;
+        }
+        .vlocity a{
+            color: {!$Setup.VDO_Settings__c.Colour1__c} !important;
+        }
+        .vlocity a:hover{
+            text-decoration:none !important;
+            color: {!$Setup.VDO_Settings__c.Colour4__c} !important;
+        }
+        .vlocity .modal-header h3 {
+            color: #fff;
+        }
+        
+        .vlocity .dropdown-menu li{
+            width:100% !important;
+        }
+        ul.typeahead.dropdown-menu.ng-scope.am-fade.bottom-left {
+            list-style: none !important;
+        }
+        
+    /* Image Upload Widget */    
+        .fileUpload{
+            position: relative;
+            overflow: hidden;
+            width:100%;
+            height:50px;
+            margin:auto;
+            background:{!$Setup.VDO_Settings__c.Colour5__c};
+            font-size: 12px;
+            text-transform:uppercase;
+            color: #FFF;
+            padding:10px;
+            box-sizing:border-box;
+            border-radius:3px;
+            font-weight: 600;
+            line-height:30px;
+        }
+        input.upload{
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            cursor: pointer;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            width:100%;
+            height:50px;
+            border-radius:100px;
+        }
+        #Picture > label, #Signature > label {
+            display: none;
+        }
+        
+    /* Fonts */
+        @font-face {
+            font-family: "Salesforce Sans";
+            src: url("/resource/VDOInternalResources/fonts/SalesforceSans-Light.woff2") format("woff2"), url("../resource/VDOInternalResources/fonts/SalesforceSans-Light.woff") format("woff");
+            font-weight: 300;
+        }
+        
+        @font-face {
+            font-family: "Salesforce Sans";
+            src: url("/resource/VDOInternalResources/fonts/SalesforceSans-LightItalic.woff2") format("woff2"), url("../resource/VDOInternalResources/fonts/SalesforceSans-LightItalic.woff") format("woff");
+            font-style: italic;
+            font-weight: 300;
+        }
+        
+        @font-face {
+            font-family: "Salesforce Sans";
+            src: url("/resource/VDOInternalResources/fonts/SalesforceSans-Regular.woff2") format("woff2"), url("../resource/VDOInternalResources/fonts/SalesforceSans-Regular.woff") format("woff");
+            font-weight: 400;
+        }
+        
+        @font-face {
+            font-family: "Salesforce Sans";
+            src: url("/resource/VDOInternalResources/fonts/SalesforceSans-Italic.woff2") format("woff2"), url("../resource/VDOInternalResources/fonts/SalesforceSans-Italic.woff") format("woff");
+            font-style: italic;
+            font-weight: 400;
+        }
+        
+        @font-face {
+            font-family: "Salesforce Sans";
+            src: url("/resource/VDOInternalResources/fonts/SalesforceSans-Bold.woff2") format("woff2"), url("../resource/VDOInternalResources/fonts/SalesforceSans-Bold.woff") format("woff");
+            font-weight: 700;
+        }
+        
+        @font-face {
+            font-family: "Salesforce Sans";
+            src: url("/resource/VDOInternalResources/fonts/SalesforceSans-BoldItalic.woff2") format("woff2"), url("../resource/VDOInternalResources/fonts/SalesforceSans-BoldItalic.woff") format("woff");
+            font-style: italic;
+            font-weight: 700;
+        }
+        
+        
+        /*Business Community*/
+        .vdo-header{
+            background: {!$Setup.VDO_Settings__c.Colour2__c};
+        }
+        .vdo-alert-number{
+            background: {!$Setup.VDO_Settings__c.Colour4__c};
+        }
+        .vdo-card-name, .vdo-card-name a, .vdo-card-name a:hover, .vdo-alert-highlight, .vdo-ban-details-field-label, .vdo-ban-details-header > h2, .via-slds .vdo-ban-details .vdo-ban-tabs .vdo-ban-tabs-link.slds-tabs--default__link {
+            color: {!$Setup.VDO_Settings__c.Colour4__c} !important;
+        }
+        .vdo-ban-lines .slds-icon, .via-slds .vdo-consumer-layout .slds-tabs--scoped__link svg{
+            fill: {!$Setup.VDO_Settings__c.Colour4__c} !important;  
+        }  
+        .vdo-primary-button, .via-slds .vdo-ban-lines .vdo-ban-lines-header, .via-slds .vdo-ban-lines .vdo-ban-lines-header, .vdo-ban-lines-search, .vdo-ban-lines-searchbar, input.slds-input.vdo-ban-lines-search::-webkit-input-placeholder,.via-slds .vdo-consumer-upsell .vdo-upsell-offers li .vdo-upsell-price{
+            color: {!$Setup.VDO_Settings__c.Colour1__c} !important;
+        } 
+        .vdo-ban-tabs.slds-active .vdo-ban-tabs-link.slds-tabs--default__link{
+            border-bottom:4px solid {!$Setup.VDO_Settings__c.Colour4__c} !important;
+        }
+        
+        
+</apex:page>

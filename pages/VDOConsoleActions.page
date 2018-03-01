@@ -1,0 +1,100 @@
+<apex:page standardController="Account" showHeader="false" extensions="VDODemoController" title="Communications Console Application - {!$Organization.Name} - {!$User.Username}">
+    <html xmlns:ng="http://angularjs.org" ng-app="myApp" class="ng-cloak"  style="height:100%">
+        <head>
+            <link rel="stylesheet" href="{!URLFOR($Resource.vlocity_cmt__vlocity_assets, '/css/vlocity.css')}"/>
+            <apex:includeScript value="/support/console/34.0/integration.js"/>
+            <apex:stylesheet value="{!URLFOR($Resource.vlocity_icons, '/css/vlocity-icons.css')}"/>
+            <link href="{!LEFT($Site.CurrentSiteUrl, LEN($Site.CurrentSiteUrl)-1)}/apex/VDODemoCSS" rel="stylesheet" type="text/css"></link>        
+            <script type="text/javascript">
+                var myApp = angular.module('myApp',['forceng','consoleCards']);
+            
+                myApp.controller('myCtrl', ['$scope','force', function($scope, force) {
+                    $scope.init = function () {
+                        if(sforce.console.isInConsole()) {
+                            console.info('inside console');
+                        } else {
+                            console.info('outside console');
+                        }
+            
+                        var listener = function (result) {
+                            console.log('Message received from event: ' + result.message);
+                        };
+                        //Add a listener for the 'SampleEvent' event type
+                        sforce.console.addEventListener('SampleEvent', listener);
+                    };
+            
+                    $scope.init();
+            
+                    $scope.openTab = function() {
+                        sforce.console.setSidebarVisible(false);
+                    };
+            
+                }]);
+            </script>
+            <style>
+                .vlocity .action-container [class^="icon-"]:before, .vlocity .action-container [class*=" icon-"]:before, .vlocity .action-container .action-item:hover span.action-label{
+                    color:{!$Setup.VDO_Settings__c.Colour1__c} !important;
+                }
+                .vlocity .action-container .action-item:hover {
+                    background-color: {!$Setup.VDO_Settings__c.Colour3__c} !important;
+                }
+            </style>
+            <script type="text/javascript">
+                 window.onload = function() {
+                    openSubtabs();
+                };
+        
+                var openSubtab = function openSubtab(result) {
+                    var primaryTabId = result.id;
+                    if('{!Account.RecordType.Name}' == 'Consumer'){
+                        //Cards Home Page
+                        sforce.console.openSubtab(primaryTabId , '/apex/VDOCards?vid=demoaccount1&layout=vdo-asset-layout-hierarchy&Id={!demoAccount1.id}', false, 
+                            '{!demoAccount1.Name}', null, null, '{!demoAccount1.Name}');
+                        //Cards Home Page
+                        sforce.console.openSubtab(primaryTabId , '/apex/VDOCards?vid=demoaccount2&layout=vdo-asset-layout-grid&Id={!demoAccount2.id}', true, 
+                            '{!demoAccount2.Name}', null, null, '{!demoAccount2.Name}');
+                        //Cards Home Page
+                        sforce.console.openSubtab(primaryTabId , '/apex/VDOCards?vid=demoaccount3&layout=vdo-asset-layout-hierarchy&Id={!demoAccount3.id}', false, 
+                            '{!demoAccount3.Name}', null, null, '{!demoAccount3.Name}');
+                    }else if('{!Account.RecordType.Name}' == 'Business'){
+                        //Cards Home Page
+                        sforce.console.openSubtab(primaryTabId , '/apex/VDOCards?id={!Account.Id}&layout=vdo-business-console-home-layout', true, 
+                            '{!Account.Name}', null, null, '{!Account.Name}');
+                    }
+          
+                };
+                
+                function openSubtabs() { 
+                    sforce.console.getEnclosingPrimaryTabId(openSubtab);
+                }
+                
+                //Stop page refreshes
+                var eventHandler = function eventHandler(result) {};
+                sforce.console.onEnclosingTabRefresh(eventHandler);
+            </script>
+        </head>
+        
+        <body>
+
+            <vlocity_cmt:CardLayoutComponent layout="vdo-console-actions" modules="myApp"/>
+
+
+            <script type="text/javascript">
+                var myApp = angular.module('myApp',['forceng','consoleCards']);
+            </script>
+            
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+                
+                ga('create', 'UA-78170710-1', 'auto');
+                ga('send', 'pageview');
+            </script> 
+
+        </body>
+    </html>
+        
+         
+</apex:page>

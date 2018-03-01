@@ -1,0 +1,4 @@
+<design:component label="Vlocity Lightning Profiler">
+	<design:attribute name="entityId" label="Context Id" description="Context Object Id" />
+	<design:attribute name="renderUsingColorCodes" label="Use Category Color Codes" description="Categories can be color coded. Check this box to use these color codes when rendering the tags." />
+</design:component>

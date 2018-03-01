@@ -1,0 +1,2 @@
+<apex:page standardController="Account" extensions="VDODemoController" action="{!newB2BOrder}" showHeader="false">
+</apex:page>

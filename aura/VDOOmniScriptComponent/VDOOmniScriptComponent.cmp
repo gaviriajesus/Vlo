@@ -1,0 +1,108 @@
+<aura:component implements="force:hasRecordId,forceCommunity:availableForAllPageTypes" controller="vlocity_cmt.ActionDisplayController" access='GLOBAL'>
+    <aura:attribute name="height" type="String" access='global'/> 
+    <aura:attribute name="width" type="String" access='global'/>
+    <aura:attribute name="src" type="String" /> 
+    <aura:attribute name="hostURL" type="String" />
+    <aura:attribute name="apexPage" type="String" />
+    <aura:attribute name="isOmniScriptValid" type="Boolean" default="true" /> 
+    <aura:attribute name="isPreview" type="Boolean" default="false" />
+    <link href="{! '/resource/' +  v.nsPrefix + 'vlocity_assets/css/vlocity.css'}" rel="stylesheet"/> 
+    <ltng:require styles="{! '/resource/' +  v.nsPrefix + 'vlocity_assets/css/vlocity.css'}"/> 
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <style>
+        .forceIconDeprecated[data-icon]:before {
+            font-family: "forceIconFont" !important;
+            font-weight: normal !important;
+            font-variant: normal !important;
+            text-transform: none !important;
+        }
+        .selfServiceIcon[data-icon]:before {
+            font-family: 'MSSIcons' !important; 
+        }
+        .back-btn{
+            display: inline-block;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #838383;
+            padding: 0; 
+            transform: translateY(-50%);
+            position: absolute;
+            top: 50%;
+            left: -10px;
+
+        }
+       .back-btn:hover{
+            color: #008ab3;
+        } 
+        .back-btn:focus{
+            outline:none;
+        } 
+        .slds-col .ui-widget, .slds-col--padded .ui-widget, .cb-drop-container .ui-widget{
+            margin-top: 0;
+        }
+        .omni-script.tool-bar{
+            height: 42px;
+            position: relative;
+        }
+        .icon-v-menu2{
+            transform: rotate(90deg);
+            display: inline-block;
+            font-size: 36px;
+        } 
+        .omni-script.preview-block{
+            background: #EDEDED;
+            position: inherit;
+        }
+        .panel-heading{
+            padding: 10px 10px;
+            height: 24px;
+            margin: 0;
+            background-color: white; 
+            position: inherit;
+            color: #059DD3;
+            margin-top:10px;
+            line-height: 1;
+            font-family: "Salesforce Sans", Arial, sans-serif;
+            text-transform: uppercase;
+            padding-left: 0;
+        }
+        .omni-script.preview-block p{
+            display: block;
+            margin-top: 0;
+            color: white;
+            position: absolute;
+            width: 100%
+            top: 47%;
+            bottom: 50%;
+            right: 36%;
+            font-size: 32px;
+            left: 42%;
+            font-family: "Salesforce Sans", Arial, sans-serif;
+        }
+    </style>
+   
+    <aura:if isTrue="{!v.isPreview}">
+        <div class="panel-heading">
+                <h5 class="pull-left">Your OmniScript Will Appear Here At Runtime</h5>
+        </div>
+        <div class="omni-script preview-block" style="{!'height:' + v.height + ';width:' + v.width}">
+            <p>{!v.height} X {!v.width}</p>
+        </div>
+    <aura:set attribute="else">  
+        <div class="omni-script tool-bar">
+        </div>
+        <aura:if isTrue="{!v.isOmniScriptValid}"> 
+            <div class="omni-script" id="frame">
+                <iframe id="omniScript" aura:id="omniScript" src='{!v.hostURL + v.src}' width='{!v.width}' height='{!v.height}' frameBorder="0px" scrolling="yes" markerUnits="strokeWidth"/>
+            </div>
+         </aura:if>
+         <aura:if isTrue="{!v.isOmniScriptValid == false}"> 
+            <ui:message title="Loading Error" severity="error" closable="false">
+            OmniScript Page Does Not Exist
+            </ui:message>
+         </aura:if>
+     </aura:set>  
+    </aura:if>
+    </aura:component>

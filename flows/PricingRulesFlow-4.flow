@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Opportunity_Pricing_Initialisation</name>
+        <label>Opportunity Pricing Initialisation</label>
+        <locationX>151</locationX>
+        <locationY>309</locationY>
+        <actionName>vlocity_cmt__CustomAction</actionName>
+        <actionType>apex</actionType>
+        <inputParameters>
+            <name>className</name>
+            <value>
+                <stringValue>PricingInitialization</stringValue>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>Order_Pricing_Initialization</name>
+        <label>Order Pricing Initialization</label>
+        <locationX>344</locationX>
+        <locationY>309</locationY>
+        <actionName>vlocity_cmt__CustomAction</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Set_Non_Discount_Child_Items_To_Zero</targetReference>
+        </connector>
+        <inputParameters>
+            <name>className</name>
+            <value>
+                <stringValue>PricingInitialization</stringValue>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>Quote_Pricing_Initialization</name>
+        <label>Quote Pricing Initialization</label>
+        <locationX>531</locationX>
+        <locationY>303</locationY>
+        <actionName>vlocity_cmt__CustomAction</actionName>
+        <actionType>apex</actionType>
+        <inputParameters>
+            <name>className</name>
+            <value>
+                <stringValue>PricingInitialization</stringValue>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>Set_Non_Discount_Child_Items_To_Zero</name>
+        <label>Set Non-Discount Child Items To Zero</label>
+        <locationX>341</locationX>
+        <locationY>448</locationY>
+        <actionName>vlocity_cmt__RuleAction</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Volume_Based_Discount_Pricing_Rule</targetReference>
+        </connector>
+        <inputParameters>
+            <name>ruleName</name>
+            <value>
+                <stringValue>Set Non-Discount Child Items To Zero</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>ruleType</name>
+            <value>
+                <stringValue>Pricing</stringValue>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <name>Volume_Based_Discount_Pricing_Rule</name>
+        <label>Volume Based Discount Pricing Rule</label>
+        <locationX>341</locationX>
+        <locationY>588</locationY>
+        <actionName>vlocity_cmt__RuleAction</actionName>
+        <actionType>apex</actionType>
+        <inputParameters>
+            <name>ruleName</name>
+            <value>
+                <stringValue>Volume Based Discount Pricing Rule</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>ruleType</name>
+            <value>
+                <stringValue>Pricing</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>doCommit</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <decisions>
+        <name>checkParentType</name>
+        <label>check parent type</label>
+        <locationX>346</locationX>
+        <locationY>120</locationY>
+        <defaultConnectorLabel>[Default Outcome]</defaultConnectorLabel>
+        <rules>
+            <name>IsOpportunity</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>parentType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Opportunity</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Opportunity_Pricing_Initialisation</targetReference>
+            </connector>
+            <label>Is Opportunity</label>
+        </rules>
+        <rules>
+            <name>IsOrder</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>parentType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Order</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Order_Pricing_Initialization</targetReference>
+            </connector>
+            <label>Is Order</label>
+        </rules>
+        <rules>
+            <name>IsQuote</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>parentType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Quote</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Quote_Pricing_Initialization</targetReference>
+            </connector>
+            <label>Is Quote</label>
+        </rules>
+    </decisions>
+    <interviewLabel>Pricing Rules Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Pricing Rules Flow</label>
+    <processType>AutoLaunchedFlow</processType>
+    <startElementReference>checkParentType</startElementReference>
+    <variables>
+        <name>parentType</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

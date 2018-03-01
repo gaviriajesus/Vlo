@@ -1,0 +1,459 @@
+<apex:page sidebar="false" cache="false" controller="VDODemoController" title="Communications Business Shop - {!$Organization.Name} - {!$User.Username}">
+    <head>
+        <apex:stylesheet value="{!URLFOR($Resource.vlocity_icons, '/css/vlocity-icons.css')}"/>
+        <style>
+            #communitysidebar{
+                display:none;
+            }
+            #communitybody{
+                width:100% !important;
+                margin-left:0px !important;
+                top: -5px;
+            }
+            #communitywrapper{
+                margin-top:0px !important;
+                width:100% !important;
+            }
+            body #AppBodyHeader {
+                margin: auto;
+                width: 1230px;
+                position:relative;
+            }
+            .zen #tabContainer{
+                top: -60px !important;
+                left: 242px !important;
+                min-width:800px !important;
+            }
+            .noSidebarCell, .sidebarCell .fixed{
+                padding: 0px;
+            }
+            .vlocity .panel-oui>.panel-heading, .vlocity .panel-oui>.panel-body{
+                background:transparent !important;
+            }
+            .vlocity .panel{
+                box-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+            }
+            .horizontal-cart.hide-md-screen.ng-scope {
+                display: block;
+                position: fixed;
+                bottom: 0px;
+                z-index: 11;
+                width:1230px;
+                border-bottom:50px solid {!$Setup.VDO_Settings__c.Colour2__c};
+                -webkit-transition: opacity 2s ease-in-out;
+                -moz-transition: opacity 2s ease-in-out;
+                transition: opacity 2s ease-in-out;
+                opacity:0.1;
+            }
+            .horizontal-cart.hide-md-screen.ng-scope:hover {
+                opacity:1;
+            }
+            .vlocity .horizontal-cart .panel-default > .panel-heading{
+                height:60px !important;
+            }
+            .vlocity .horizontal-cart .panel-default > .panel-heading .head-item label {
+                margin-top: 5px !important;
+            }
+            .vlocity .horizontal-cart .panel-default {
+                background: {!$Setup.VDO_Settings__c.Colour2__c} !important;
+            }
+            .v-col-md-4.vlc-sidebar-instruction{
+                height:20px;
+            }
+            .vlocity div.panel-oui {
+                border: 0px !important;
+            }
+            .vlc-omni-step:nth-child(1) > div > .icon:before {
+                content: "\e878";
+                font-size:40px;
+                opacity: 0.9;
+            }
+            .vlc-omni-step:nth-child(2) > div > .icon:before {
+                content: "\e865";
+                font-size:40px;
+                opacity: 0.9;
+            }
+            .vlc-omni-step:nth-child(3) > div > .icon:before {
+                content: "\e887";
+                font-size:40px;
+                opacity: 0.9;
+            }
+            .vlc-omni-step:nth-child(4) > div > .icon:before {
+                content: "\e809";
+                font-size:40px;
+                opacity: 0.9;
+            }
+            .vlc-omni-step:nth-child(5) > div > .icon:before {
+                content: "\e82a";
+                font-size:40px;
+                opacity: 0.9;
+            }
+            .vlc-omni-step:nth-child(6) > div > .icon:before {
+                content: "\e885";
+                font-size:40px;
+                opacity: 0.9;
+            }
+            .vlc-omni-step:nth-child(7) > div > .icon:before {
+                content: "\e817";
+                font-size:40px;
+                opacity: 0.9;
+            }
+            .vlocity .error-field{
+                margin-top:10px;
+            }
+            .vlocity .has-feedback .form-control {
+                padding-right: 35px;
+                background-color: #f5f5f5;
+                background-image: none;
+                border-radius: 0px;
+                height: 50px;
+                font-weight: bold;
+                padding-left: 20px;
+            }
+            .vlocity .form-control:focus {
+                border-color: {!$Setup.VDO_Settings__c.Colour1__c};
+                background: {!$Setup.VDO_Settings__c.Colour3__c};
+            }
+            .vlocity .select-label:after {
+                right: 15px;
+                top: 18px;
+            }
+            .vlocity .panel-oui .field-label {
+                margin-bottom: 20px !important;
+                margin-top: 15px;
+                letter-spacing: 2px;
+                color: {!$Setup.VDO_Settings__c.Colour1__c};
+                font-weight: bold;
+                font-size: 14px;
+            }
+            label.select-label{
+                margin-bottom:0px !important;
+            }
+            .vlocity .panel-oui>.panel-heading>.panel-title>span {
+                font-size: 20px;
+                line-height: 30px;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                color: #333 !important;
+            }
+            .steps-container {
+                position: relative !important;
+                left: 60px !important;
+                top: -170px !important;
+            }
+            .v-col-md-4.vlc-sidebar-instruction{
+                background:transparent !important;
+            }
+            .vlocity .steps-chart div.hr, label.step-label.ng-binding.active, label.step-label.ng-binding.inactive, label.step-label.ng-binding, .vlocity .steps-chart .vlc-omni-step label{
+                display: none !important;
+            }
+            .topbanner .title{
+                color:#FFF;
+                font-size:55px;
+                width:100%;
+                text-align:center;
+                margin-bottom:20px;
+                margin-top:170px;
+                text-transform:uppercase;
+            }
+            .topbanner .section{
+                color:#FFF;
+                font-size:35px;
+                width:100%;
+                text-align:center;
+                line-height: 50px;
+            }
+            label.step-label.ng-binding.inactive, .vlocity .steps-chart span.inactive, .vlocity .steps-chart .vlc-omni-step label, .vlocity .steps-chart span.icon {
+                color: #fff !important;
+            }
+            .wide.topbanner:before {
+                content: ' ';
+                border-left: 60px solid transparent;
+                border-right: 60px solid transparent;
+                border-top: 60px solid #efefef;
+                position: absolute;
+                left: 50%;
+                margin-left: -60px;
+            }
+            .wide.shopbanner:after {
+                content: ' ';
+                border-left: 60px solid transparent;
+                border-right: 60px solid transparent;
+                border-top: 60px solid {!$Setup.VDO_Settings__c.Colour1__c};
+                position: absolute;
+                left: 50%;
+                margin-left: -60px;
+            }
+            div#communityheader::after{
+                display:none !important;
+            }
+            .shopselection{
+                padding-bottom:60px;
+                padding-top:40px;
+            }
+            .selectiontitle{
+                font-size: 28px;
+                width: 65%;
+                float: left;
+                color: #797979;
+                margin-top: 100px;
+                text-transform:uppercase;
+            }
+            .selectiontitletext{
+                font-size: 22px;
+                font-stretch: normal;
+                margin-top: 30px;
+                text-transform:none;
+                line-height: 35px;
+            }
+            .selectiontitleimage{
+                display:block;
+                width:35%;
+                float:left;
+            }
+            .selection{
+                width:383px;
+                margin-right:40px;
+                background:#ffffff;
+                height:300px;
+                float:left;
+                position:relative;
+                display:table;
+                padding-bottom: 20px;
+                margin-bottom:40px;
+            }
+            .selection:nth-child(3n+2){
+                margin-right:0px;
+            }
+            .selectionheader{
+                height:50px;
+                text-align:center;
+                text-transform:uppercase;
+                background:#CCCCCC;
+                color:#797979;
+                font-size:16px;
+                line-height:50px;
+                font-weight:bold;
+            }
+            .selectionimage{
+                padding:0px 40px
+            }
+            .selectionimage img{
+                width:100%;
+            }
+            .selectiontext{
+                padding: 0px 40px 40px 40px;
+                font-size:14px;
+                line-height: 25px;
+            }
+            .selectionbutton{
+                width:303px;
+                margin:auto;
+                position:relative;
+                bottom:20px;
+                color:#FFF;
+                background:{!$Setup.VDO_Settings__c.Colour1__c};
+                display:block;
+                height:50px;
+                text-transform:uppercase;
+                text-decoration:none !important;
+                font-size: 16px;
+                text-align: center;
+                line-height: 50px;
+            }
+            .selectionbutton:hover{
+                background:{!$Setup.VDO_Settings__c.Colour3__c};
+                color:{!$Setup.VDO_Settings__c.Colour1__c};
+            }
+            .vlocity .vlc-next{
+                position:fixed !important;
+                bottom:10px;
+                left:50%;
+                top:initial !important;
+                margin-left:395px;
+                z-index:12;
+                width:225px !important;
+            }
+            .vlocity .vlc-previous{
+                position:fixed !important;
+                bottom:10px;
+                left:50%;
+                top:initial !important;
+                margin-left:-620px;
+                z-index:12;
+                width:225px !important;
+            }
+            .vlocity .btn-primary, .vlocity .btn-default{
+                border-radius:0px;
+                text-transform:uppercase;
+            }
+            .scriptHeader{
+                display:none;
+            }
+            .vlc-cancel, .vlc-sfl{
+                display: none;
+            }
+            .shopbanner > div{
+                padding:0px !important;
+            }
+            .bundletitle{
+                width:100%;
+                font-size: 28px;
+                float: left;
+                color: #797979;
+                margin-top: 40px;
+                text-transform:uppercase;
+            }
+            .bundletext{
+                width:66%;
+                color: #797979;
+                margin: 20px 0px 40px 0px;
+                font-size: 22px;
+                text-transform:none;
+                text-align:center;
+                margin:auto;
+                line-height: 35px;
+            }
+            .bundletitle a{
+                position:initial;
+                margin-top:70px;
+                margin-bottom:40px;
+            }
+            .horizontal-cart.hide-md-screen.vlc-knowledge-pc.ng-scope {
+                bottom: 110px !important;
+                z-index:9 !important;
+                border-bottom:0px !important;
+            }
+            span.vlc-knowledge-icon.icon-v-document2-line.pull-left:before {
+                color: #fff;
+            }
+            .vlocity .horizontal-cart.vlc-knowledge-pc .panel-default > .panel-heading .head-item h3 {
+                top: 3px;
+                color: #fff;
+            }
+            .vlocity .vlc-knowledge-pc .vlc-knowledge-summary label {
+                font-size: 12px;
+                color: #fff !important;
+                font-weight: normal;
+                margin-bottom: 8px;
+            }
+            span > .mainomniscript{
+                display:none;
+            }
+        </style>
+    </head>
+
+    <!-- Welcome Image -->
+    <c:VDOCommunityWide backgroundColour="{!$Setup.VDO_Settings__c.Colour1__c}" height="430px" width="1230px" classname="shopbanner">
+        <img src="{!URLFOR($Resource.VDOCommunityResources,'images/businessshopbanner.png')}"/>
+    </c:VDOCommunityWide>
+    
+    <!-- Omniscript Selection -->
+    <c:VDOCommunityWide backgroundColour="#efefef" width="1230px" classname="shopselection" height="650px">
+        <div class="selectiontitle">
+            Business Products
+            <div class="selectiontitletext">
+                Our wide range of products gives your business the flexibility, reliability and security it needs to succeed.
+            </div>
+        </div>
+        <div class="selectiontitleimage">
+            <img src="{!URLFOR($Resource.VDOCommunityResources,'images/businesslogo.png')}"/>
+        </div>
+        <div class="selection">
+            <div class="selectionheader">
+                Mobile
+            </div> 
+           <div class="selectionimage">
+               <img src="{!URLFOR($Resource.VDOCommunityResources,'images/businessshopmobile.png')}"/>
+           </div>
+           <div class="selectiontext">
+               Is your business always on the move? Make sure to stay connected with our range of local and roaming plans.
+           </div>
+           <a href="#/OmniScriptType/VDO/OmniScriptSubType/Business Order Mobile/OmniScriptLang/English/ContextId/{!demoAccount3.id}/PrefillDataRaptorBundle//false/true" class="selectionbutton" id="b2bmobile">
+               Order Now
+           </a>
+       </div>
+       <div class="selection">
+            <div class="selectionheader">
+                Internet
+            </div> 
+           <div class="selectionimage">
+               <img src="{!URLFOR($Resource.VDOCommunityResources,'images/businessshopinternet.png')}"/>
+           </div>
+           <div class="selectiontext">
+               Your customers are there, why aren't you? With our range of network infrastructure and fibre options, you'll never be left behind.
+           </div>
+           <a href="#/OmniScriptType/VDO/OmniScriptSubType/Business Order Internet/OmniScriptLang/English/ContextId/{!demoAccount3.id}/PrefillDataRaptorBundle//false/true" class="selectionbutton" id="b2binternet">
+               Order Now
+           </a>
+        </div>
+        <div class="selection">
+            <div class="selectionheader">
+                Phone
+            </div> 
+           <div class="selectionimage">
+               <img src="{!URLFOR($Resource.VDOCommunityResources,'images/businessshopphone.png')}"/>
+           </div>
+           <div class="selectiontext">
+               The backbone of every business. Our generous call plans make it a breeze to keep your business connected.
+           </div>
+           <a href="#/OmniScriptType/VDO/OmniScriptSubType/Business Order Landline/OmniScriptLang/English/ContextId/{!demoAccount3.id}/PrefillDataRaptorBundle//false/true" class="selectionbutton" id="b2blandline">
+               Order Now
+           </a>
+        </div>
+        <div class="bundletitle">
+            <div class="bundletext">
+                Having trouble making your mind up? Our selection of bundles gives you the flexibility to buy all or some of our products at one discounted cost.
+            </div>  
+            <a href="#/OmniScriptType/VDO/OmniScriptSubType/Business Order Bundle/OmniScriptLang/English/ContextId/{!demoAccount3.id}/PrefillDataRaptorBundle//false/true" class="selectionbutton" id="b2bbundle">Browse Bundles</a>
+        </div> 
+    </c:VDOCommunityWide>
+    
+    <!-- Omniscript Heading -->
+    <c:VDOCommunityWide backgroundImageURL="{!URLFOR($Resource.VDOCommunityResources,'images/businessshopmobileheader.jpg')}" backgroundColour="#383838" height="490px" width="1230px" classname="topbanner">
+        <div class="title">
+            Business Mobile
+        </div>
+        <div class="section">
+            Stay connected.<br/>
+            Tariffs that make sense for your business.
+        </div>
+    </c:VDOCommunityWide>
+    
+    <!-- Omniscript -->
+    <c:VDOCommunityWide backgroundColour="#fff" width="1230px" height="800px" classname="mainomniscript">
+        <c:VDOEcommerceOmniscript />   
+    </c:VDOCommunityWide>
+
+    <!-- Scripts -->
+    <c:VDOCommunityScripts />
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            $('.selectionbutton').click(function(event){
+                $('.mainomniscript').css('display', 'table');
+                if(event.target.id == 'b2bmobile'){
+                    $('.topbanner .title').html('Business Mobile');
+                    $('.topbanner .section').html('Stay connected.<br/>Tariffs that make sense for your business.');
+                    $('.topbanner').css('background-image', 'url(\'{!URLFOR($Resource.VDOCommunityResources,"images/businessshopmobileheader.jpg")}\')');
+                }
+                if(event.target.id == 'b2binternet'){
+                    $('.topbanner .title').html('Business Internet');
+                    $('.topbanner .section').html('Speed Matters.<br/>Get to customers first with our internet packages.');
+                    $('.topbanner').css('background-image', 'url(\'{!URLFOR($Resource.VDOCommunityResources,"images/businessshopinternetheader.jpg")}\')');
+                }
+                if(event.target.id == 'b2blandline'){
+                    $('.topbanner .title').html('Business Landline');
+                    $('.topbanner .section').html('Communicate effectively.<br/>Never miss a call with our business plans.');
+                    $('.topbanner').css('background-image', 'url(\'{!URLFOR($Resource.VDOCommunityResources,"images/businessshoplandlineheader.jpg")}\')');
+                }
+                if(event.target.id == 'b2bbundle'){
+                    $('.topbanner .title').html('Everything Business');
+                    $('.topbanner .section').html('Work Smarter.<br/>Utilize our full range of products.');
+                    $('.topbanner').css('background-image', 'url(\'{!URLFOR($Resource.VDOCommunityResources,"images/businessshopbundleheader.jpg")}\')');
+                }
+                $('html, body').animate({scrollTop: $(".topbanner").offset().top}, 2000)
+            });
+        });
+    </script>
+
+</apex:page>

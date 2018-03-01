@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>User Time Record</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>User Time Records</value>
+    </caseValues>
+    <fields>
+        <label><!-- In Time --></label>
+        <name>In_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Out Time --></label>
+        <name>Out_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Slot --></label>
+        <name>Slot__c</name>
+    </fields>
+    <fields>
+        <label><!-- Task --></label>
+        <name>Task__c</name>
+    </fields>
+    <fields>
+        <label><!-- UserId --></label>
+        <name>UserId__c</name>
+    </fields>
+    <fields>
+        <label><!-- User Name --></label>
+        <name>User_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- User --></label>
+        <name>User__c</name>
+        <relationshipLabel><!-- User Time Records --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

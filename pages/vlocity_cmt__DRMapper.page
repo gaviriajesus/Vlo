@@ -1,0 +1,621 @@
+<apex:page showHeader="true" sidebar="false"
+           standardStylesheets="false"
+           docType="html-5.0" applyBodyTag="false" 
+           standardController="vlocity_cmt__DRBundle__c"
+           tabStyle="DRMapper__tab"
+           extensions="vlocity_cmt.DRMapperController">
+  <head>
+    <apex:includeScript value="{!URLFOR($Resource.vlocity_cmt__vlocity_assets, '/javascripts/vlocity.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.vlocity_cmt__ZeroClipboard, '/ZeroClipboard.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.vlocity_cmt__vlocity_assets, '/bower_components/ngdraggable/ngDraggable.js')}"/>
+    <apex:includeScript value="{!$Resource.vlocity_cmt__VlocityPdf}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.vlocity_cmt__vlocity_assets, '/css/vlocity.css')}"/>
+    <apex:stylesheet value="{!$Resource.vlocity_cmt__DRMapperCss}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.vlocity_cmt__slds, '/assets/styles/salesforce-lightning-design-system-vf.min.css')}"/>
+    <apex:includeScript value="{!$Resource.vlocity_cmt__SldsAngular}"/>
+    <apex:includeScript value="{!$Resource.vlocity_cmt__DRMapper}"/>
+    <apex:includeScript value="{!URLFOR($Resource.vlocity_cmt__vlocity_assets, '/bower_components/ForceTK/forcetk.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.vlocity_cmt__vlocity_assets, '/bower_components/clipboard/dist/clipboard.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.vlocity_cmt__vkBeautify, '/vkBeautify-master/vkbeautify.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.vlocity_cmt__vkBeautify, '/vkBeautify-master/main.js')}"/>
+  </head>
+  <body>
+    <div ng-app="drmapper" ng-controller="drmapperController" class="ng-cloak" ng-class="{'shrink-title': collapsePalette}" dir="ltr">
+      <div class="vlocity" style="margin-top: -8px;margin-left: -9px;position: absolute;">
+        <a class="btn btn-link btn-xs" href="{!homeUrl}" target="_self"><i class="icon icon-v-left-caret"></i>Go  Back</a>
+      </div>
+      <apex:sectionHeader title="{{ ::'DRMapperTitle' | localize:'Vlocity DataRaptor' }}" subtitle="{{bundle.Name()}}"/>
+      <div class="vlocity" id="main-body">
+        <div class="container" style="width: 100%; padding: 0">
+          <div class="mask" ng-if="loading" id="loading-mask">
+            <div class="center-block spinner"></div>
+            <h4 class="text-center">{{loadingMessage}}</h4>
+          </div>
+
+          <div class="vlocity" style="margin-top: -30px;right: 26px;position: absolute;">
+            <a class="btn btn-link btn-md" ng-click="showPreview()" style="font-size: 14px"><i class="icon icon-v-play"></i>{{'LaunchDataRaptorWorkbench' | localize:'Launch DataRaptor Workbench'}}</a>
+          </div>
+
+          <div class="xrow" ng-class="{'collapsePalette': collapsePalette}">
+            <div class="left-bar xxcol-md-3">
+              <div class="panel panel-sf">
+                <div class="panel-heading"><span>{{ ::'DRMapperInterface' | localize:'Interface' }}</span>&nbsp;
+                  <button type="button" class="btn btn-default btn-sm collapse-btn" ng-click="toggleCollapsePalette()">
+                    <i class="icon" ng-class="{'icon-v-double-caret-left': !collapsePalette, 'icon-v-double-caret-right': collapsePalette}"></i>
+                  </button>
+                  <i class="icon icon-v-warning-circle-line pull-right"
+                      ng-if="bundle._errors.length > 0 && !loading"
+                      data-type="info"
+                      bs-enabled="true"
+                      data-title="{{_errors[0].message}}"
+                      bs-tooltip="bundle"></i>
+                  <span ng-if="bundle.saving" class="spinner pull-right"></span>
+                </div>
+                <div class="panel-body">
+                  <form action="">
+                    <div class="form-group" ng-class="{'has-error': !isValid('Name')}">
+                      <label for="interfaceName">{{ ::'DRMapperInterfaceName' | localize:'Interface Name' }}
+                        <a ng-click="changeBundleName()" style="cursor: pointer" ng-if="viewModel.lockName && bundle.Id"><i class="icon icon-v-edit-line"
+                          id="change-bundle-name-button"
+                        data-type="info"
+                        bs-enabled="true"
+                        data-title="Changing the name or interface type may break other components where this interface is used. Click here to unlock these fields if you're sure you want to proceed."
+                        bs-tooltip="bundle"></i></a>
+                        <a ng-click="viewModel.lockName = true" style="cursor: pointer" ng-if="!viewModel.lockName && bundle.Id"><i class="icon icon-v-security"
+                          id="lock-bundle-name-button"
+                        data-type="info"
+                        bs-enabled="true"
+                        data-title="We recommend locking the name to prevent name changes breaking other components where this interface is used. Click here to lock the name."
+                        bs-tooltip="bundle"></i></a>
+                      </label>
+                      <!-- input type="text" id="interfaceName" class="form-control" / -->
+                      <input type="text"  class="form-control"
+                             ng-model-options="{ getterSetter: true }"
+                             id="bundle-name-input"
+                             ng-model="bundle.Name" ng-disabled="viewModel.lockName" />
+                        <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-if="!isValid('Name')"></span>
+                    </div>
+                    <div class="form-group"  ng-if="!(bundle.isExtract() && viewModel.activeTab > 0)">
+                      <label for="interfaceType">{{ ::'DRMapperInterfaceType' | localize:'Interface Type' }}</label>
+                      <select name="interfaceType" class="form-control"
+                             ng-disabled="viewModel.lockName"
+                             id="bundle-type-select"
+                             ng-model="bundle.Type__c"
+                             ng-model-options="{ getterSetter: true }"
+                             ng-options="interfaceType.type as interfaceType.label for interfaceType in viewModel.interfaceTypes" />
+                      <label for="inputType">{{ ::'DRMapperInputDataType' | localize:'Input Data Type' }}</label>
+                      <select name="inputType" class="form-control"
+                              ng-disabled="viewModel.lockName"
+                              id="bundle-input-type-select"
+                              ng-model="bundle.InputType__c"
+                              ng-model-options="{ getterSetter: true }"
+                              ng-options="dataType.type as dataType.label for dataType in viewModel.dataTypes(bundle.Type__c(), 'Input')" />
+                      <label for="outputType">{{ ::'DRMapperOutputDataType' | localize:'Ouput Data Type' }}</label>
+                      <select name="outputType" class="form-control"
+                              ng-disabled="viewModel.lockName || bundle.isLoad()"
+                              id="bundle-output-type-select"
+                              ng-model="bundle.OutputType__c"
+                              ng-model-options="{ getterSetter: true }"
+                              ng-options="dataType.type as dataType.label for dataType in viewModel.dataTypes(bundle.Type__c(), 'Output')" />
+                    </div>
+                    <div class="form-group" ng-if="bundle.isLoadObject()" ng-class="{'has-error': !isValid('InterfaceObject__c')}">
+                      <label for="interfaceObject">{{ ::'DRMapperInterfaceObject' | localize:'Interface Object' }}</label>
+                      <select name="interfaceObject" class="form-control"
+                             ng-model="bundle.InterfaceObject__c"
+                             id="bundle-object-select"
+                             ng-disabled="viewModel.lockName"
+                             ng-change="defaultExistsForCurrentInterfaceObject()"
+                             ng-options="object for object in interfaceObjects | orderBy: 'toString()'" />
+                     <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true" ng-if="!isValid('InterfaceObject__c')"></span>
+
+                    </div>
+                    <div class="form-group">
+                      <label for="description">{{ ::'DRMapperDescription' | localize:'Description' }}</label>
+                      <textarea id="description" class="form-control" rows="3" ng-model="bundle.Description__c"></textarea>
+                    </div>
+                    <div class="checkbox" ng-if="bundle.isLoadObject()">
+                      <label>
+                        <input type="checkbox"
+                                id="bundle-is-default-for-interface-checkbox"
+                                ng-model="bundle.IsDefaultForInterface__c"
+                                ng-disabled="defaultExistsForCurrentInterfaceObject()"/>
+                        {{ ::'DRMapperDefaultForInterfaceObject' | localize:'Default For Interface Object' }}
+                      </label>
+                    </div>
+                    <div class="form-group" ng-if="!(bundle.isExtract() && viewModel.activeTab > 0)">
+                      <button class="btn btn-default" ng-click="cloneDRBundle(bundle)"
+                              id="clone-bundle-button" ng-disabled="!bundle.Id">Clone</button>
+                    </div> 
+                  </form>
+                </div>
+                  <div class="panel panel-sidebar" ng-if="(bundle.isLoad() || bundle.isTransform()) && bundle.InputType__c == 'XML'">
+                      <div class="panel-heading">
+                          {{ ::'DRMapperXML' | localize:'XML' }}
+                          <i class="icon pull-right"
+                             ng-class="{'icon-v-right-arrow':!viewModel.showXML, 'icon-v-down-arrow':viewModel.showXML}"
+                             id="toggle-show-xml-button"
+                             ng-click="viewModel.showXML = !viewModel.showXML"></i>
+                      </div>
+                      <div class="panel-body collapse" ng-class="{'in': viewModel.showXML}">
+                          <form>
+                              <div class="form-group"
+                                   ng-class="{ 'has-error has-feedback': !bundle.InputXml__c }">
+                        <textarea class="form-control" placeholder="Paste your input XML here" rows="5"
+                                  ng-model="bundle.InputXml__c"
+                                  id="bundle-input-xml-textarea"
+                                  ng-init="formatXML('InputXml__c')"
+                                  ng-change="formatXML('InputXml__c')"></textarea>
+                                  <span class="icon-v-close-circle form-control-feedback" aria-hidden="true"
+                                        ng-if="!bundle.InputXml__c"></span>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+                <div class="panel panel-sidebar" ng-if="(bundle.isLoad() || bundle.isTransform()) && bundle.InputType__c == 'JSON'">
+                  <div class="panel-heading">
+                    {{ ::'DRMapperJSON' | localize:'JSON' }}
+                    <i class="icon pull-right"
+                        ng-class="{'icon-v-right-arrow':!viewModel.showJSON, 'icon-v-down-arrow':viewModel.showJSON}"
+                        id="toggle-show-json-button"
+                        ng-click="viewModel.showJSON = !viewModel.showJSON"></i>
+                  </div>
+                  <div class="panel-body collapse" ng-class="{'in': viewModel.showJSON}">
+                    <form>
+                      <div class="form-group"
+                            ng-class="{ 'has-error has-feedback': !bundle.InputJson__c }">
+                        <textarea class="form-control" placeholder="Paste your input JSON here" rows="5"
+                                ng-model="bundle.InputJson__c"
+                                id="bundle-input-json-textarea"
+                                  ng-disable="bundle.InputType__c == 'XML'"
+                                ng-change="formatJSON()"></textarea>
+                        <span class="icon-v-close-circle form-control-feedback" aria-hidden="true"
+                              ng-if="!bundle.InputJson__c"></span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+                <div class="panel panel-sidebar" ng-if="!bundle.isTransform() && (!bundle.isExtract() || viewModel.activeTab === 0)">
+                  <div class="panel-heading" ng-if="!bundle.isExtract()">
+                    {{ ::'DRMapperCreationSequence' | localize:'Creation Sequence' }}
+                    <i class="icon pull-right"
+                        ng-class="{'icon-v-right-arrow':!viewModel.showCreationSequence, 'icon-v-down-arrow':viewModel.showCreationSequence}"
+                        id="toggle-show-creation-sequence-button"
+                        ng-click="viewModel.showCreationSequence = !viewModel.showCreationSequence"></i>
+                  </div>
+                  <div class="panel-heading" ng-if="bundle.isExtract()">
+                    {{ ::'DRMapperExtractObjectOrder' | localize:'Extract Object Order' }}
+                    <i class="icon pull-right"
+                        ng-class="{'icon-v-right-arrow':!viewModel.showCreationSequence, 'icon-v-down-arrow':viewModel.showCreationSequence}"
+                        id="toggle-show-creation-sequence-button"
+                        ng-click="viewModel.showCreationSequence = !viewModel.showCreationSequence"></i>
+                  </div>
+                  <div class="panel-body collapse" ng-class="{'in': viewModel.showCreationSequence}">
+                    <form>
+                      <div class="form-group" ng-repeat="creationOrderObject in viewModel.creationOrderObjects | orderBy:'cindex'"
+                           ng-drop="true"
+                           id="creation-order-object-{{index}}"
+                           ng-drop-success="onDropComplete($index, $data, $event)">
+                        <div class="input-group"
+                             ng-drag="true"
+                             ng-drag-data="creationOrderObject">
+                          <span class="input-group-addon grabbable"><i class="icon icon-v-grip"></i>{{creationOrderObject.index()}}</span>
+                          <select class="form-control"
+                              id="creation-order-object-{{index}}-select"
+                              ng-model-options="{getterSetter: true}"
+                             ng-model="creationOrderObject.object"
+                             ng-change="onCreationOrderObjectTypeChange(creationOrderObject, $index)"
+                             ng-options="object as object for object in sobjectTypes | orderBy: 'toString()'"
+                             ng-cancel-drag="ng-cancel-drag"/>
+                          <span class="input-group-btn"
+                                ng-cancel-drag="ng-cancel-drag">
+                            <button class="btn btn-default" type="button"
+                                    id="creation-order-object-{{index}}-delete-button"
+                                    ng-click="deleteCreationOrderObject(creationOrderObject)">
+                              <i class="icon icon-v-trash-line"></i>
+                            </button>
+                          </span>
+                        </div>
+                      </div>
+                    </form>
+                    <a class="btn btn-link" ng-click="addNewCreationOrderObject()"
+                        id="add-new-creation-order-object-button">{{ ::'DRMapperAdd' | localize:'+ Add' }}</a>
+                  </div>
+                </div>
+                <div class="panel panel-sidebar" ng-if="!bundle.isTransform()" >
+                  <div class="panel-heading">
+                    {{ ::'DRMapperOptions' | localize:'Options' }}
+                    <i class="icon pull-right"
+                        id="toggle-show-options-button"
+                        ng-class="{'icon-v-right-arrow':!viewModel.showOptions, 'icon-v-down-arrow':viewModel.showOptions}"
+                        ng-click="viewModel.showOptions = !viewModel.showOptions"></i>
+                  </div>
+                  <div class="panel-body collapse" ng-class="{'in': viewModel.showOptions}">
+                    <form>
+                      <div class="form-group" ng-if="bundle.isLoadObject()">
+                        <label for="batchSize">{{ ::'DRMapperBatchSize' | localize:'Batch Size' }}</label>
+                        <input type="number" class="form-control"
+                               ng-model="bundle.BatchSize__c"
+                               id="bundle-batch-size-input"
+                                min="1" max="2000"/>
+                        <span class="help-block">{{ ::'DRMapperBatchSizeHelp' | localize:'The number of records processed per batch transaction (1-2000)' }}</span>
+                      </div>
+                      <div class="form-group" ng-if="bundle.isLoadObject()">
+                        <label for="processNowThreshold">{{ ::'DRMapperProcessNowThreshold' | localize:'Process Now Threshold' }}</label>
+                        <input type="number" class="form-control"
+                               ng-model="bundle.ProcessNowThreshold__c"
+                               id="bundle-process-now-threshold-input"
+                               min="0" max="199"/>
+                        <span class="help-block">{{ ::'DRMapperProcessNowThresholdHelp' | localize:'Number of records processed immediately (between 0-199)' }}</span>
+                      </div>
+                      <div class="form-group" ng-if="bundle.isLoadObject()">
+                        <label>{{ ::'DRMapperPreprocessorClassName' | localize:'Preprocessor Class Name' }}</label>
+                        <input type="text" class="form-control"
+                                id="bundle-preprocessor-class-name-input"
+                                ng-model="bundle.PreprocessorClassName__c"/>
+                        <span class="help-block">{{ ::'DRMapperPreprocessorClassNameHelp' | localize:'Adapter Apex class that implements the IDRPreprocess Apex interface' }}</span>
+                      </div>
+                    </form>
+                      <div class="checkbox" ng-if="bundle.isLoadObject()">
+                        <label>
+                          <input type="checkbox"
+                                  id="bundle-delete-on-success-checkbox"
+                                  ng-model="bundle.DeleteOnSuccess__c"/>
+                          {{ ::'DRMapperDeleteOnSuccess' | localize:'Delete On Success' }}
+                          <span class="help-block">{{ ::'DRMapperDeleteOnSuccessHelp' | localize:'Delete Interface Object records on success' }}</span>
+                        </label>
+                      </div>
+                      <div class="checkbox" ng-if="bundle.isLoadObject()">
+                        <label>
+                          <input type="checkbox"
+                                id="bundle-is-processing-super-bulk-checkbox"
+                                 ng-model="bundle.IsProcessSuperBulk__c"/>
+                          {{ ::'DRMapperProcessSuperBulk' | localize:'Process Super Bulk' }}
+                          <span class="help-block">{{ ::'DRMapperProcessSuperBulkHelp' | localize:'Use batch Apex for processing. Prevents against exceeding SFDC governor limits for complex Interface Objects' }}</span>
+                        </label>
+                      </div>
+                      <div class="checkbox" ng-if="bundle.isLoad()">
+                        <label>
+                          <input type="checkbox"
+                                id="bundle-ignore-errors-checkbox"
+                                 ng-model="bundle.IgnoreErrors__c"/>
+                          {{ ::'DRMapperIgnoreErrors' | localize:'Ignore Errors' }}
+                        </label>
+                      </div>
+                      <div class="checkbox" ng-if="bundle.isLoad()">
+                        <label>
+                          <input type="checkbox"
+                                id="bundle-ignore-errors-checkbox"
+                                 ng-model="bundle.RollbackOnError__c"/>
+                          {{ ::'DRMapperRollbackOnError' | localize:'Rollback on Error' }}
+                        </label>
+                      </div>
+                      <div class="checkbox" ng-if="bundle.isExtract()">
+                        <label>
+                          <input type="checkbox"
+                                id="bundle-check-field-level-security-checkbox"
+                                 ng-model="bundle.CheckFieldLevelSecurity__c"/>
+                          {{ ::'DRMapperCheckFieldLevelSecurity' | localize:'Check Field Level Security' }}
+                        </label>
+                      </div>
+                      <div class="checkbox" ng-if="bundle.isLoad()">
+                        <label>
+                          <input type="checkbox"
+                                id="bundle-overwrite-use-assignment-rules-checkbox"
+                                 ng-model="bundle.UseAssignmentRules__c"/>
+                          {{ ::'DRMapperUseAssignmentRules' | localize:'Use Assignment Rules' }}
+                        </label>
+                      </div>
+                      <div class="checkbox" ng-if="bundle.isLoad()">
+                        <label>
+                          <input type="checkbox"
+                                id="bundle-overwrite-all-null-values-checkbox"
+                                 ng-model="bundle.OverwriteAllNullValues__c"/>
+                          {{ ::'DRMapperOverwriteAllNullValues' | localize:'Overwrite All Null Values' }}
+                        </label>
+                      </div>
+                  </div>
+                </div>
+                <div class="panel panel-sidebar" ng-if="bundle.isExtract() && (viewModel.activeTab == 1 || viewModel.activeTab == 2)">
+                  <div class="panel-heading">
+                    {{ ::'DRMapperExtractionStepJSON' | localize:'Extraction Step JSON' }}
+                  </div>
+                  <div class="panel-body">
+                    <form>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" 
+                                  id="show-all-phase-one-object-properties-checkbox"
+                                  ng-model="viewModel.showAllPhaseOneObjectProperties"/>
+                          {{ ::'DRMapperShowSObjectFields' | localize:'Show all sObject Fields' }}
+                        </label>
+                      </div>
+                    </form>
+                      <pre id="phase-one-json">{{viewModel.phaseone_json | json:2 }}</pre>
+                  </div>
+                </div>
+                <div class="panel panel-sidebar" ng-if="bundle.InputType__c == 'JSON'">
+                  <div class="panel-heading">
+                    {{ ::'DRMapperHowToTrigger' | localize:'How to trigger this bundle' }}
+                    <i class="icon pull-right"
+                        id="toggle-show-urls-button"
+                        ng-class="{'icon-v-right-arrow':!viewModel.showUrls, 'icon-v-down-arrow':viewModel.showUrls}"
+                        ng-click="viewModel.showUrls = !viewModel.showUrls"></i>
+                  </div>
+                  <div class="panel-body collapse url" ng-class="{'in': viewModel.showUrls}"
+                        ng-if="bundle.isLoadJson() || bundle.isTransform()">
+                    <p>{{ ::'DRMapperHowToTriggerDesc' | localize:'The DataRaptor interface will be run when JSON is POST&quot;ed to this URL' }}:</p>
+                    <code>POST /services/apexrest/{{::'{!namespacePrefix}' | namespaceUrlPrefix}}v2/DataRaptor/</code>
+                    <p>
+                      <button type="button" class="btn btn-link"
+                              ui-zeroclip="clipboardClient"
+                              ng-if="!noFlash"
+                              id="copy-url-to-clipboard-button"
+                              zeroclip-text="/services/apexrest/{{::'{!namespacePrefix}' | namespaceUrlPrefix}}v2/DataRaptor/">
+                        {{ ::'DRMapperCopyURLToClipboard' | localize:'Copy URL to Clipboard' }}<i class="icon icon-v-save-line"></i>
+                      </button>
+                    </p>
+                    <table class="table">
+                      <thead>
+                        <th>{{ ::'DRMapperParamName' | localize:'Param Name' }}</th>
+                        <th>{{ ::'DRMapperIsOptional' | localize:'Is Optional?' }}</th>
+                        <th>{{ ::'DRMapperDescription' | localize:'Description' }}</th>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>bundleName</td>
+                          <td>{{ ::'DRMapperRequired' | localize:'Required' }}</td>
+                          <td>{{ ::'DRMapperBundleNameHelp' | localize:'This should be "{1}"':bundle.Name()}}</td>
+                        </tr>
+                        <tr>
+                          <td>objectList</td>
+                          <td>{{ ::'DRMapperRequired' | localize:'Required' }}</td>
+                          <td>{{ ::'DRMapperObjectListHelp' | localize:'The JSON object data to be processed'}}</td>
+                        </tr>
+                        <tr>
+                          <td>filesMap</td>
+                          <td>{{ ::'DRMapperOptional' | localize:'Optional' }}</td>
+                          <td>{{ ::'DRMapperFilesMapHelp' | localize:'Map of keys to base64 encoded files'}}</td>
+                        </tr>
+                        <tr>
+                          <td>bulkUpload</td>
+                          <td>{{ ::'DRMapperOptional' | localize:'Optional' }}</td>
+                          <td>{{ ::'DRMapperBulkUploadHelp' | localize:'Whether DataRaptor should use Batch Apex (default false)'}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p>{{ ::'DRMapperForExampleJsonText' | localize:'For example the JSON POST&quot;ed may look like'}}: <br/>
+                      <pre>
+{
+   "bundleName" : "{{bundle.Name()}}",
+   "objectList" : {
+        "Agency Information": {
+             "Agency Name": "Vlocity",
+             "Agency Address": "50 Fremont",
+             "Agency City": "San Francisco",
+             "Agency State": "CA",
+             "Agency Zip": "94105",
+        }
+   },
+   "bulkUpload" : false
+}
+                      </pre>
+                    </p>
+                  </div>
+                  <div class="panel-body collapse url" ng-class="{'in': viewModel.showUrls}"
+                          ng-if="bundle.isExtract()">
+                      <p>{{ ::'DRMapperWaysToExtractJsonHelp' | localize:'There are 2 ways to extract data data using DataRaptor, through a passed in Id or URL parameters'}}:</p>
+                      <h4>Id</h4>
+                      <code>GET /services/apexrest/{{::'{!namespacePrefix}' | namespaceUrlPrefix}}v2/DataRaptor/{{bundle.Name() | urlEncode}}/${Id}</code>
+                      <p>
+                        <button type="button" class="btn btn-link"
+                                ui-zeroclip="clipboardClient"
+                                ng-if="!noFlash"
+                                id="copy-url-to-clipboard-button"
+                                zeroclip-text="/services/apexrest/{{::'{!namespacePrefix}' | namespaceUrlPrefix}}v2/DataRaptor/{{bundle.Name() | urlEncode}}/${Id}">
+                          {{ ::'DRMapperCopyURLToClipboard' | localize:'Copy URL to Clipboard' }}<i class="icon icon-v-save-line"></i>
+                        </button>
+                      </p>
+                      <table class="table">
+                        <thead>
+                          <th>{{ ::'DRMapperParamName' | localize:'Param Name' }}</th>
+                          <th>{{ ::'DRMapperIsOptional' | localize:'Is Optional?' }}</th>
+                          <th>{{ ::'DRMapperDescription' | localize:'Description' }}</th>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Id</td>
+                            <td>{{ ::'DRMapperRequired' | localize:'Required' }}</td>
+                            <td>{{ ::'DRMapperContextIdHelp' | localize:'The Id to be used to trigger this bundle'}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <h4>{{ ::'DRMapperURLParameters' | localize:'URL Parameters' }}</h4>
+                      <code>GET /services/apexrest/{{::'{!namespacePrefix}' | namespaceUrlPrefix}}v2/DataRaptor/{{bundle.Name() | urlEncode}}/?${Param1}=${Val1}&amp;${Param2}=${Val2}</code>
+                      <p>
+                        <button type="button" class="btn btn-link"
+                                ui-zeroclip="clipboardClient"
+                                ng-if="!noFlash"
+                                id="copy-url-to-clipboard-2-button"
+                                zeroclip-text="/services/apexrest/{{::'{!namespacePrefix}' | namespaceUrlPrefix}}v2/DataRaptor/{{bundle.Name() | urlEncode}}/?${Param1}=${Val1}&${Param2}=${Val2}">
+                          {{ ::'DRMapperCopyURLToClipboard' | localize:'Copy URL to Clipboard' }}<i class="icon icon-v-save-line"></i>
+                        </button>
+                      </p>
+                      <p>{{ ::'DRMapperExampleHowToInvoke' | localize:'The ${Param1} and ${Val1} are key value pairs that will be converted into JSON and sent through to this bundle. For example' }} <code>/services/apexrest/{{::'{!namespacePrefix}' | namespaceUrlPrefix}}v2/DataRaptor/{{bundle.Name() | urlEncode}}/?firstName=David&amp;state=CA</code></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- LOAD MAPPINGS CENTER COLUMN -->
+            <div class="center xcol-md-6" ng-include="'loadObjectJson.center.tpl.html'" ng-if="bundle.isLoad()"></div>
+
+            <!-- LOAD MAPPINGS PANELS -->
+            <div class="right-bar xcol-md-3" ng-include="'loadObjectJson.right.tpl.html'" ng-if="bundle.isLoad()"></div>
+
+            <!-- OUTBOUND MAPPINGS CENTER COLUMN -->
+            <div class="center xcol-md-6" ng-include="'extractJson.center.tpl.html'" ng-if="bundle.isExtract()"></div>
+
+            <!-- OUTBOUND PHASE 1 PANEL -->
+            <div class="right-bar xcol-md-3" ng-include="'extractJson.right.tpl.html'" ng-if="bundle.isExtract()"></div>
+
+            <!-- TRANSFORM CENTER COLUMN -->
+            <div class="center xcol-md-6" ng-include="'transform.center.tpl.html'" ng-if="bundle.isTransform()"></div>
+
+            <!-- TRANSFORM MAPPINGS PANELS -->
+            <div class="right-bar xcol-md-3" ng-include="'transform.right.tpl.html'" ng-if="bundle.isTransform()"></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+        var ns = namespacePrefix = "{!namespacePrefix}";
+        window.sessionId = '{!$Api.Session_ID}';
+        window.forcetkClient = new forcetk.Client();
+        window.forcetkClient.setSessionToken(sessionId);
+        window.remoteActions = {
+            loadInterfaceObjects: "{!$RemoteAction.DRMapperController.GetInterfaceObjects}",
+            getDocuments: "{!$RemoteAction.DRMapperController.GetDocuments}",
+            getAllJSONBasedDocumentTemplates: "{!$RemoteAction.DRMapperController.getAllJSONBasedDocumentTemplates}",
+            getAllTokensForJSONBasedDocumentTemplate: "{!$RemoteAction.DRMapperController.getAllTokensForJSONBasedDocumentTemplate}",
+            getDocuSignTemplates: "{!$RemoteAction.DRMapperController.getDocuSignTemplates}",
+            getDocumentData: "{!$RemoteAction.DRMapperController.GetDocumentData}",
+            loadObjects: "{!$RemoteAction.DRMapperController.GetAllObjects}",
+            loadMappings: "{!$RemoteAction.DRMapperController.GetFullMapItems}",
+            loadFieldsForObject: "{!$RemoteAction.DRMapperController.GetFieldsForObject}",
+            getAllBundles:  {  
+              action: "{!$RemoteAction.DRMapperController.GetAllBundles}",
+              config: {escape: false}
+            },
+            saveBundle: "{!$RemoteAction.DRMapperController.SaveBundleJSON}",
+            saveMappings: "{!$RemoteAction.DRMapperController.SaveMappings}",
+            deleteMappings: "{!$RemoteAction.DRMapperController.DeleteMappings}",
+            cloneDRBundle: "{!$RemoteAction.DRMapperController.cloneDRBundle}",
+            xmlToJson:  {  
+              action: "{!$RemoteAction.DRMapperController.XmlToJson}",
+              config: {escape: false}
+            },
+             jsonToXml:  {  
+              action: "{!$RemoteAction.DRMapperController.JsonToXml}",
+              config: {escape: false}
+            },
+            drPreviewExecute: {  
+              action: "{!$RemoteAction.DRMapperController.drPreviewExecute}", 
+              config: {escape: false}
+            }
+          };
+        var localeMap = {
+          "DRMapperExtract": "{!$Label.DRMapperExtract}",
+          "DRMapperTransform": "{!$Label.DRMapperTransform}",
+          "DRMapperTitle": "{!$Label.DRMapperTitle}",
+          "DRMapperInterface": "{!$Label.DRMapperInterface}",
+          "DRMapperInterfaceName": "{!$Label.DRMapperInterfaceName}",
+          "DRMapperInterfaceType": "{!$Label.DRMapperInterfaceType}",
+          "DRMapperInterfaceObject": "{!$Label.DRMapperInterfaceObject}",
+          "DRMapperDescription": "{!$Label.DRMapperDescription}",
+          "DRMapperDefaultForInterfaceObject": "{!$Label.DRMapperDefaultForInterfaceObject}",
+          "DRMapperAdd": "{!$Label.DRMapperAdd}",
+          "DRMapperCreationSequence": "{!$Label.DRMapperCreationSequence}",
+          "DRMapperOptions": "{!$Label.DRMapperOptions}",
+          "DRMapperBatchSize": "{!$Label.DRMapperBatchSize}",
+          "DRMapperBatchSizeHelp": "{!$Label.DRMapperBatchSizeHelp}",
+          "DRMapperProcessNowThreshold": "{!$Label.DRMapperProcessNowThreshold}",
+          "DRMapperProcessNowThresholdHelp": "{!$Label.DRMapperProcessNowThresholdHelp}",
+          "DRMapperPreprocessorClassName": "{!$Label.DRMapperPreprocessorClassName}",
+          "DRMapperPreprocessorClassNameHelp": "{!$Label.DRMapperPreprocessorClassNameHelp}",
+          "DRMapperDeleteOnSuccess": "{!$Label.DRMapperDeleteOnSuccess}",
+          "DRMapperDeleteOnSuccessHelp": "{!$Label.DRMapperDeleteOnSuccessHelp}",
+          "DRMapperProcessSuperBulk": "{!$Label.DRMapperProcessSuperBulk}",
+          "DRMapperProcessSuperBulkHelp": "{!$Label.DRMapperProcessSuperBulkHelp}",
+          "DRMapperIgnoreErrors": "{!$Label.DRMapperIgnoreErrors}",
+          "DRMapperCheckFieldLevelSecurity": "{!$Label.DRMapperCheckFieldLevelSecurity}",
+          "DRMapperDataMappings": "{!$Label.DRMapperDataMappings}",
+          "DRMapperNewMapping": "{!$Label.DRMapperNewMapping}",
+          "DRMapperShowDomainObjReqFields": "{!$Label.DRMapperShowDomainObjReqFields}",
+          "DRMapperInterfaceField": "{!$Label.DRMapperInterfaceField}",
+          "DRMapperSequence": "{!$Label.DRMapperSequence}",
+          "DRMapperDomainObject": "{!$Label.DRMapperDomainObject}",
+          "DRMapperDomainObjectField": "{!$Label.DRMapperDomainObjectField}",
+          "DRMapperMappingDetail": "{!$Label.DRMapperMappingDetail}",
+          "DRMapperMappingDetailEmpty1": "{!$Label.DRMapperMappingDetailEmpty1}",
+          "DRMapperMappingDetailEmpty2": "{!$Label.DRMapperMappingDetailEmpty2}",
+          "DRMapperJSONOutputPath":"{!$Label.DRMapperJSONOutputPath}",
+          "DRMapperNew": "{!$Label.DRMapperNew}",
+          "DRMapperExtractObjectOrder": "{!$Label.DRMapperExtractObjectOrder}",
+          "DRMapperHowToTrigger": "{!$Label.DRMapperHowToTrigger}",
+          "DRMapperWaysToExtractJsonHelp": "{!$Label.DRMapperWaysToExtractJsonHelp}",
+          "DRMapperCopyURLToClipboard": "{!$Label.DRMapperCopyURLToClipboard}",
+          "DRMapperParamName": "{!$Label.DRMapperParamName}",
+          "DRMapperIsOptional": "{!$Label.DRMapperIsOptional}",
+          "DRMapperRequired": "{!$Label.DRMapperRequired}",
+          "DRMapperContextIdHelp": "{!$Label.DRMapperContextIdHelp}",
+          "DRMapperURLParameters": "{!$Label.DRMapperURLParameters}",
+          "DRMapperExampleHowToInvoke": "{!$Label.DRMapperExampleHowToInvoke}",
+          "DRMapperIndex": "{!$Label.DRMapperIndex}",
+          "DRMapperExtractObject": "{!$Label.DRMapperExtractObject}",
+          "DRMapperExtractJsonObjectPath": "{!$Label.DRMapperExtractJsonObjectPath}",
+          "DRMapperExtractJsonEmptyMappingExtract1": "{!$Label.DRMapperExtractJsonEmptyMappingExtract1}",
+          "DRMapperExtractJsonEmptyMappingExtract2": "{!$Label.DRMapperExtractJsonEmptyMappingExtract2}",
+          "DRMapperExtractJsonEmptyMappingExtract3": "{!$Label.DRMapperExtractJsonEmptyMappingExtract3}",
+          "DRMapperExtractionStepJSON": "{!$Label.DRMapperExtractionStepJSON}",
+          "DRMapperShowSObjectFields": "{!$Label.DRMapperShowSObjectFields}",
+          "DRMapperExtractJsonFieldPath": "{!$Label.DRMapperExtractJsonFieldPath}",
+          "DRMapperTransformJsonOutputPath": "{!$Label.DRMapperTransformJsonOutputPath}",
+          "DRMapperOutputJSON": "{!$Label.DRMapperOutputJSON}",
+          "DRMapperExtractJSONOutputPath": "{!$Label.DRMapperExtractJSONOutputPath}",
+          "DRMapperFilter": "{!$Label.DRMapperFilter}",
+          "DRMapperAND": "{!$Label.DRMapperAND}",
+          "DRMapperConfirmDeleteTitle": "{!$Label.DRMapperConfirmDeleteTitle}",
+          "DRMapperConfirmMappingDelete": "{!$Label.DRMapperConfirmMappingDelete}",
+          "DRMapperOK": "{!$Label.DRMapperOK}",
+          "DRMapperCancel": "{!$Label.DRMapperCancel}",
+          "DRMapperConfirmExtractMappingDelete": "{!$Label.DRMapperConfirmExtractMappingDelete}",
+          "DRMapperUnmapped": "{!$Label.DRMapperUnmapped}",
+          "DRMapperActive": "{!$Label.DRMapperActive}",
+          "DRMapperMappingTypeSettings": "{!$Label.DRMapperMappingTypeSettings}",
+          "DRMapperMappingTypeNone": "{!$Label.DRMapperMappingTypeNone}",
+          "DRMapperMappingTypeLinked": "{!$Label.DRMapperMappingTypeLinked}",
+          "DRMapperMappingTypeLookUp": "{!$Label.DRMapperMappingTypeLookUp}",
+          "DRMapperDefaultValue": "{!$Label.DRMapperDefaultValue}",
+          "DRMapperUpsertKey": "{!$Label.DRMapperUpsertKey}",
+          "DRMapperIsRequiredForUpsert": "{!$Label.DRMapperIsRequiredForUpsert}",
+          "DRMapperJSON": "{!$Label.DRMapperJSON}",
+          "DRMapperHowToTriggerDesc": "{!$Label.DRMapperHowToTriggerDesc}",
+          "DRMapperBundleNameHelp": "{!$Label.DRMapperBundleNameHelp}",
+          "DRMapperObjectListHelp": "{!$Label.DRMapperObjectListHelp}",
+          "DRMapperOptional": "{!$Label.DRMapperOptional}",
+          "DRMapperFilesMapHelp": "{!$Label.DRMapperFilesMapHelp}",
+          "DRMapperBulkUploadHelp": "{!$Label.DRMapperBulkUploadHelp}",
+          "DRMapperForExampleJsonText": "{!$Label.DRMapperForExampleJsonText}",
+          "DRMapperInputPath": "{!$Label.DRMapperInputPath}",
+          "DRMapperOutputPath": "{!$Label.DRMapperOutputPath}",
+          "DRMapperAddOutboundMappings": "{!$Label.DRMapperAddOutboundMappings}",
+          "DRMapperTargetJSONOutput": "{!$Label.DRMapperTargetJSONOutput}",
+          "DRMapperTargetDocument": "{!$Label.DRMapperTargetDocument}",
+          "DRMapperExtractFields": "{!$Label.DRMapperExtractFields}",
+          "DRMapperOutputNotMappedInput": "{!$Label.DRMapperOutputNotMappedInput}",
+          "DRMapperInputNotMappedOutput": "{!$Label.DRMapperInputNotMappedOutput}",
+          "DRMapperMappingDisabled": "{!$Label.DRMapperMappingDisabled}",
+          "DRMapperMustSetInterfaceName": "{!$Label.DRMapperMustSetInterfaceName}",
+          "DRMapperObject": "{!$Label.DRMapperObject}",
+          "DRMapperRequestedField": "{!$Label.DRMapperRequestedField}",
+          "DRMapperLinkCreationObject": "{!$Label.DRMapperLinkCreationObject}",
+          "DRMapperLinkCreationField": "{!$Label.DRMapperLinkCreationField}",
+          "DRMapperLookupObject": "{!$Label.DRMapperLookupObject}",
+          "DRMapperLookupField": "{!$Label.DRMapperLookupField}",
+          "DRMapperLookupRequestedField": "{!$Label.DRMapperLookupRequestedField}",
+          "DRMapperNone": "{!$Label.DRMapperNone}",
+          "DRMapperDeletingMapping": "{!$Label.DRMapperDeletingMapping}",
+          "DRMapperLoadingBundle": "{!$Label.DRMapperLoadingBundle}",
+          "DRMapperLoadingMappingsForBundle": "{!$Label.DRMapperLoadingMappingsForBundle}",
+          "DRMapperTargetDocuSignTemplate": "{!$Label.DRMapperTargetDocuSignTemplate}",
+          "DRMapperExtractDocuSignTabs": "{!$Label.DRMapperExtractDocuSignTabs}",
+          "DRMapperRollbackOnError": "{!$Label.DRMapperRollbackOnError}",
+          "DRMapperOverwriteAllNullValues": "{!$Label.DRMapperOverwriteAllNullValues}",
+          "DRMapperUseAssignmentRules": "{!$Label.DRMapperUseAssignmentRules}",
+          "DRDomainObjectFieldType":"{!$Label.DRDomainObjectFieldType}"
+        };
+    </script>
+  </body>
+</apex:page>

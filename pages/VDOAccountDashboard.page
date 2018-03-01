@@ -1,0 +1,19 @@
+<apex:page standardController="Account" showHeader="false">
+    <style>
+        .buffer iframe {
+            position:relative;
+            top:-110px;
+        }
+        .container{
+            overflow:hidden;
+        }
+        body.hasMotif.homeTab.net-withGlobalHeader.sfdcBody.brandQuaternaryBgr, body, html{
+            margin:0px !important;
+        }
+    </style>
+    <div class="container">
+        <div class="buffer">
+            <wave:dashboard developerName="Statement_Information_Account_Dashboard" showTitle="false" height="760px" openLinksInNewWindow="true" filter="{'Statements': {'vlocity_cmt__StatementId__c.vlocity_cmt__AccountId__c': ['{!Account.Id}']}}" /> 
+        </div>
+    </div>
+</apex:page>

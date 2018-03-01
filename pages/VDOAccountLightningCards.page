@@ -1,0 +1,3 @@
+<apex:page showHeader="false" standardController="Account">
+  <iframe src="/apex/VDOCards?vid=demoaccount3&layout=vdo-asset-layout-hierarchy&Id={!Account.id}" width="100%" height="2000px" frameborder="0" scrolling="no"/>
+</apex:page>

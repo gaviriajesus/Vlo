@@ -1,0 +1,116 @@
+<apex:page showHeader="false" standardStylesheets="false" standardController="Asset">
+    <apex:outputText value="{!Asset.Account}" rendered="false"/>
+    <apex:outputText value="{!Asset.Account.ShippingStreet}" rendered="false"/>
+    <apex:outputText value="{!Asset.Account.ShippingCity}" rendered="false"/>
+    <apex:outputText value="{!Asset.Account.ShippingPostalCode}" rendered="false"/>
+    <script>
+        var marker;
+        var map;
+        var image = '{!URLFOR($Resource.VDOInternalResources,"images/homemarker.png")}'
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: {lat: 0, lng: 0},
+                mapTypeId: 'terrain'
+            });
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({'address': '{!Asset.Account.ShippingStreet}, {!Asset.Account.ShippingCity}, {!Asset.Account.ShippingPostalCode}'}, function(results, status) {
+                if (status === 'OK') {
+                    map.setCenter(results[0].geometry.location);
+                    marker = new google.maps.Marker({
+                        position:  results[0].geometry.location,
+                        map: map,
+                        animation: google.maps.Animation.DROP,
+                        icon: image,
+                        title: 'Equipment Issue Detected'
+                    });
+                    marker.addListener('click', toggleBounce);
+                    for (i = 0; i < 75; i++) {
+                        color = randomColor();
+                        markericon = randomImage();
+                        circlelocation = randomGeo({lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()}, 7500);
+                        var cityCircle = new google.maps.Circle({
+                            strokeColor: color,
+                            strokeOpacity: 0,
+                            strokeWeight: 2,
+                            fillColor: color,
+                            fillOpacity: 0.35,
+                            map: map,
+                            center: circlelocation,
+                            radius: Math.random() * 1000
+                        });
+                        marker = new google.maps.Marker({
+                            position: circlelocation,
+                            map: map,
+                            animation: google.maps.Animation.DROP,
+                            icon: markericon,
+                            title: 'Ongoing Service Issue Reported at {!NOW()}'
+                        });
+                    }
+                    var cityCircle = new google.maps.Circle({
+                            strokeColor: '#1bb503',
+                            strokeOpacity: 0,
+                            strokeWeight: 2,
+                            fillColor: '#1bb503',
+                            fillOpacity: 0.55,
+                            map: map,
+                            center: results[0].geometry.location,
+                            radius: 400
+                    });
+                }
+            });
+        }
+        function toggleBounce() {
+            if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+            } else {
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+            }
+        }
+        function randomGeo(center, radius) {
+            var y0 = center.lat;
+            var x0 = center.lng;
+            var rd = radius / 111300;
+            var u = Math.random();
+            var v = Math.random();
+            var w = rd * Math.sqrt(u);
+            var t = 2 * Math.PI * v;
+            var x = w * Math.cos(t);
+            var y = w * Math.sin(t);
+            var xp = x / Math.cos(y0);
+            return {
+                'lat': y + y0,
+                'lng': xp + x0
+            };
+        }
+        function randomColor(){
+            rndcolor = Math.random();
+            switch(true){
+                case (rndcolor < 0.5):return '#ef5117';break;
+                case (rndcolor < 0.9):return '#fcc41e';break;
+                case (rndcolor >= 0.9):return '#1bb503';break;
+            }
+        }
+        function randomImage(){
+            rndimage = Math.random();
+            switch(true){
+                case (rndimage < 0.33):return '{!URLFOR($Resource.VDOInternalResources,"images/internetmarker.png")}';break;
+                case (rndimage< 0.66):return '{!URLFOR($Resource.VDOInternalResources,"images/mobilemarker.png")}';break;
+                case (rndimage >= 0.66):return '{!URLFOR($Resource.VDOInternalResources,"images/tvmarker.png")}';break;
+            }
+        }
+    </script>
+    <style>
+        #map {
+            height: 100%;
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRPQSHVAYr7JwCHA4gRGaZq4RGPiNcpF0&callback=initMap">
+    </script>
+</apex:page>

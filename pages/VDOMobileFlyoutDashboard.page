@@ -1,0 +1,22 @@
+<apex:page controller="VDODemoController" showHeader="false">
+    <style>
+        .buffer iframe {
+            position:relative;
+            top:-66px;
+            left:-2px;
+            width:454px;
+        }
+        .container{
+            overflow:hidden;
+            height:315px;
+        }
+        body.hasMotif.homeTab.net-withGlobalHeader.sfdcBody.brandQuaternaryBgr, body, html{
+            margin:0px !important;
+        }
+    </style>
+    <div class="container">
+        <div class="buffer">
+            <wave:dashboard developerName="Statement_Information_Mobile_Flyout_Dashboard" showTitle="false" height="390px" openLinksInNewWindow="true"/> 
+        </div>
+    </div>
+</apex:page>

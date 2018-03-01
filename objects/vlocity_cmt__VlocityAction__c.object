@@ -1,0 +1,939 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>vlocity_cmt__ActionIcon__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>If an image is uploaded here, it will take precedent over the Vlocity Icon. The image will automatically be resized to 22px wide in the Action.</inlineHelpText>
+        <label>Custom Icon</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__AdditionalFilter__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Additional Filter</label>
+        <length>131072</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__ApplicableTypes__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Applicable Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Account</fullName>
+                    <default>false</default>
+                    <label>Account</label>
+                </value>
+                <value>
+                    <fullName>All</fullName>
+                    <default>true</default>
+                    <label>All</label>
+                </value>
+                <value>
+                    <fullName>Aloha Home</fullName>
+                    <default>false</default>
+                    <label>Aloha Home</label>
+                </value>
+                <value>
+                    <fullName>Asset</fullName>
+                    <default>false</default>
+                    <label>Asset</label>
+                </value>
+                <value>
+                    <fullName>Campaign</fullName>
+                    <default>false</default>
+                    <label>Campaign</label>
+                </value>
+                <value>
+                    <fullName>Case</fullName>
+                    <default>false</default>
+                    <label>Case</label>
+                </value>
+                <value>
+                    <fullName>Community Home</fullName>
+                    <default>false</default>
+                    <label>Community Home</label>
+                </value>
+                <value>
+                    <fullName>Console Home</fullName>
+                    <default>false</default>
+                    <label>Console Home</label>
+                </value>
+                <value>
+                    <fullName>Contact</fullName>
+                    <default>false</default>
+                    <label>Contact</label>
+                </value>
+                <value>
+                    <fullName>Contract</fullName>
+                    <default>false</default>
+                    <label>Contract</label>
+                </value>
+                <value>
+                    <fullName>ContractVersion__c</fullName>
+                    <default>false</default>
+                    <label>ContractVersion__c</label>
+                </value>
+                <value>
+                    <fullName>Demo Link</fullName>
+                    <default>false</default>
+                    <label>Demo Link</label>
+                </value>
+                <value>
+                    <fullName>Device Support</fullName>
+                    <default>false</default>
+                    <label>Device Support</label>
+                </value>
+                <value>
+                    <fullName>Event</fullName>
+                    <default>false</default>
+                    <label>Event</label>
+                </value>
+                <value>
+                    <fullName>Guided Help</fullName>
+                    <default>false</default>
+                    <label>Guided Help</label>
+                </value>
+                <value>
+                    <fullName>Home</fullName>
+                    <default>false</default>
+                    <label>Home</label>
+                </value>
+                <value>
+                    <fullName>Internet</fullName>
+                    <default>false</default>
+                    <label>Internet</label>
+                </value>
+                <value>
+                    <fullName>Landline</fullName>
+                    <default>false</default>
+                    <label>Landline</label>
+                </value>
+                <value>
+                    <fullName>Mobile</fullName>
+                    <default>false</default>
+                    <label>Mobile</label>
+                </value>
+                <value>
+                    <fullName>Mobile Launch Pad</fullName>
+                    <default>false</default>
+                    <label>Mobile Launch Pad</label>
+                </value>
+                <value>
+                    <fullName>Network &amp; Coverage</fullName>
+                    <default>false</default>
+                    <label>Network &amp; Coverage</label>
+                </value>
+                <value>
+                    <fullName>Note</fullName>
+                    <default>false</default>
+                    <label>Note</label>
+                </value>
+                <value>
+                    <fullName>Order</fullName>
+                    <default>false</default>
+                    <label>Order</label>
+                </value>
+                <value>
+                    <fullName>Product</fullName>
+                    <default>false</default>
+                    <label>Product</label>
+                </value>
+                <value>
+                    <fullName>Retail</fullName>
+                    <default>false</default>
+                    <label>Retail</label>
+                </value>
+                <value>
+                    <fullName>Task</fullName>
+                    <default>false</default>
+                    <label>Task</label>
+                </value>
+                <value>
+                    <fullName>TV</fullName>
+                    <default>false</default>
+                    <label>TV</label>
+                </value>
+                <value>
+                    <fullName>vlocity_cmt__VlocityInteraction__c</fullName>
+                    <default>false</default>
+                    <label>vlocity_cmt__VlocityInteraction__c</label>
+                </value>
+                <value>
+                    <fullName>vlocity_cmt__CustomerInteractionTopic__c</fullName>
+                    <default>false</default>
+                    <label>vlocity_cmt__CustomerInteractionTopic__c</label>
+                </value>
+                <value>
+                    <fullName>vlocity_cmt__CustomerInteraction__c</fullName>
+                    <default>false</default>
+                    <label>vlocity_cmt__CustomerInteraction__c</label>
+                </value>
+                <value>
+                    <fullName>Opportunity</fullName>
+                    <default>false</default>
+                    <label>Opportunity</label>
+                </value>
+                <value>
+                    <fullName>vlocity_cmt__ContractVersion__c</fullName>
+                    <default>false</default>
+                    <label>vlocity_cmt__ContractVersion__c</label>
+                </value>
+                <value>
+                    <fullName>Quote</fullName>
+                    <default>false</default>
+                    <label>Quote</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__ApplicableUserProfiles__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Applicable User Profile</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Vlocity Admin</fullName>
+                    <default>false</default>
+                    <label>Vlocity Admin</label>
+                </value>
+                <value>
+                    <fullName>All</fullName>
+                    <default>true</default>
+                    <label>All</label>
+                </value>
+                <value>
+                    <fullName>Vlocity Partner Community User</fullName>
+                    <default>false</default>
+                    <label>Vlocity Partner Community User</label>
+                </value>
+                <value>
+                    <fullName>System Administrator</fullName>
+                    <default>false</default>
+                    <label>System Administrator</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__DisplayLabel__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Display Label</label>
+        <length>100</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__DisplayOn__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Display On</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>All</fullName>
+                    <default>false</default>
+                    <label>All</label>
+                </value>
+                <value>
+                    <fullName>Mobile</fullName>
+                    <default>false</default>
+                    <label>Mobile</label>
+                </value>
+                <value>
+                    <fullName>Web Client</fullName>
+                    <default>false</default>
+                    <label>Web Client</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__DisplaySequence__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Display Sequence</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__Filter__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Filter</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__InvokeClassName__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Invocation Class Name</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__InvokeMethodName__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Invocation Method Name</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__IsActive__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Active</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__IsSeedAction__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Is Seed Action</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__LinkType__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Link Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>OmniScript</fullName>
+                    <default>false</default>
+                    <label>OmniScript</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Document</fullName>
+                    <default>false</default>
+                    <label>Document</label>
+                </value>
+                <value>
+                    <fullName>ConsoleCards</fullName>
+                    <default>false</default>
+                    <label>ConsoleCards</label>
+                </value>
+                <value>
+                    <fullName>Verification</fullName>
+                    <default>false</default>
+                    <label>Verification</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__OpenURLMode__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Open URL in</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Current Window</fullName>
+                    <default>true</default>
+                    <label>Current Window</label>
+                </value>
+                <value>
+                    <fullName>New Tab / Window</fullName>
+                    <default>false</default>
+                    <label>New Tab / Window</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__StateId__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>To State</label>
+        <referenceTo>vlocity_cmt__VlocityState__c</referenceTo>
+        <relationshipLabel>Vlocity Actions</relationshipLabel>
+        <relationshipName>Vlocity_Actions</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__StateModelId__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>State Model</label>
+        <referenceTo>vlocity_cmt__VlocityStateModel__c</referenceTo>
+        <relationshipLabel>Vlocity Actions</relationshipLabel>
+        <relationshipName>VlocityActions</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__URL__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Target URL</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__UrlParameters__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>URL Parameter</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__ValidationClassName__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Validation Class Name</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__ValidationMethodName__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Validation Method Name</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__VlocityIcon__c</fullName>
+        <defaultValue>&apos;icon-v-document1-line&apos;</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Choose an icon from the list of icons below the Vlocity Action Detail (will not show up in Vlocity Action Edit) by copying its class name here (i.e. icon-v-document1-line). Use attachment to load custom image.</inlineHelpText>
+        <label>Vlocity Icon</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Vlocity Action</label>
+    <listViews>
+        <fullName>Account_Actions</fullName>
+        <columns>NAME</columns>
+        <columns>vlocity_cmt__DisplayLabel__c</columns>
+        <columns>vlocity_cmt__DisplayOn__c</columns>
+        <columns>vlocity_cmt__LinkType__c</columns>
+        <columns>vlocity_cmt__OpenURLMode__c</columns>
+        <columns>vlocity_cmt__URL__c</columns>
+        <columns>vlocity_cmt__UrlParameters__c</columns>
+        <columns>vlocity_cmt__VlocityIcon__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>vlocity_cmt__ApplicableTypes__c</field>
+            <operation>includes</operation>
+            <value>Account</value>
+        </filters>
+        <label>Account Actions</label>
+    </listViews>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>vlocity_cmt__DisplayLabel__c</columns>
+        <columns>vlocity_cmt__ApplicableTypes__c</columns>
+        <columns>vlocity_cmt__LinkType__c</columns>
+        <columns>vlocity_cmt__UrlParameters__c</columns>
+        <columns>vlocity_cmt__URL__c</columns>
+        <columns>vlocity_cmt__DisplayOn__c</columns>
+        <columns>vlocity_cmt__OpenURLMode__c</columns>
+        <columns>vlocity_cmt__IsActive__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>vlocity_cmt__Filter__c</columns>
+        <columns>vlocity_cmt__ApplicableUserProfiles__c</columns>
+        <columns>vlocity_cmt__VlocityIcon__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All Actions</label>
+    </listViews>
+    <listViews>
+        <fullName>AllClass</fullName>
+        <columns>NAME</columns>
+        <columns>vlocity_cmt__DisplayLabel__c</columns>
+        <columns>vlocity_cmt__ApplicableTypes__c</columns>
+        <columns>vlocity_cmt__UrlParameters__c</columns>
+        <columns>vlocity_cmt__LinkType__c</columns>
+        <columns>vlocity_cmt__URL__c</columns>
+        <columns>vlocity_cmt__InvokeClassName__c</columns>
+        <columns>vlocity_cmt__InvokeMethodName__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>vlocity_cmt__DisplayOn__c</columns>
+        <columns>vlocity_cmt__OpenURLMode__c</columns>
+        <columns>vlocity_cmt__VlocityIcon__c</columns>
+        <columns>vlocity_cmt__IsActive__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>Class Actions</label>
+    </listViews>
+    <listViews>
+        <fullName>Aloha_Actions</fullName>
+        <columns>NAME</columns>
+        <columns>vlocity_cmt__DisplayLabel__c</columns>
+        <columns>vlocity_cmt__DisplayOn__c</columns>
+        <columns>vlocity_cmt__LinkType__c</columns>
+        <columns>vlocity_cmt__OpenURLMode__c</columns>
+        <columns>vlocity_cmt__URL__c</columns>
+        <columns>vlocity_cmt__UrlParameters__c</columns>
+        <columns>vlocity_cmt__VlocityIcon__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>vlocity_cmt__ApplicableTypes__c</field>
+            <operation>includes</operation>
+            <value>Aloha Home</value>
+        </filters>
+        <label>Aloha Actions</label>
+    </listViews>
+    <listViews>
+        <fullName>Asset_Actions</fullName>
+        <columns>NAME</columns>
+        <columns>vlocity_cmt__DisplayLabel__c</columns>
+        <columns>vlocity_cmt__DisplayOn__c</columns>
+        <columns>vlocity_cmt__LinkType__c</columns>
+        <columns>vlocity_cmt__OpenURLMode__c</columns>
+        <columns>vlocity_cmt__URL__c</columns>
+        <columns>vlocity_cmt__ApplicableTypes__c</columns>
+        <columns>vlocity_cmt__UrlParameters__c</columns>
+        <columns>vlocity_cmt__VlocityIcon__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>vlocity_cmt__ApplicableTypes__c</field>
+            <operation>includes</operation>
+            <value>Asset</value>
+        </filters>
+        <label>Asset Actions</label>
+    </listViews>
+    <listViews>
+        <fullName>Community_Actions</fullName>
+        <columns>NAME</columns>
+        <columns>vlocity_cmt__DisplayLabel__c</columns>
+        <columns>vlocity_cmt__DisplayOn__c</columns>
+        <columns>vlocity_cmt__LinkType__c</columns>
+        <columns>vlocity_cmt__OpenURLMode__c</columns>
+        <columns>vlocity_cmt__URL__c</columns>
+        <columns>vlocity_cmt__UrlParameters__c</columns>
+        <columns>vlocity_cmt__VlocityIcon__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>vlocity_cmt__ApplicableTypes__c</field>
+            <operation>includes</operation>
+            <value>Community Home</value>
+        </filters>
+        <label>Community Actions</label>
+    </listViews>
+    <listViews>
+        <fullName>Console_Actions</fullName>
+        <columns>NAME</columns>
+        <columns>vlocity_cmt__DisplayLabel__c</columns>
+        <columns>vlocity_cmt__DisplayOn__c</columns>
+        <columns>vlocity_cmt__LinkType__c</columns>
+        <columns>vlocity_cmt__OpenURLMode__c</columns>
+        <columns>vlocity_cmt__URL__c</columns>
+        <columns>vlocity_cmt__UrlParameters__c</columns>
+        <columns>vlocity_cmt__VlocityIcon__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>vlocity_cmt__ApplicableTypes__c</field>
+            <operation>includes</operation>
+            <value>Console Home</value>
+        </filters>
+        <label>Console Actions</label>
+    </listViews>
+    <listViews>
+        <fullName>Contact_Actions</fullName>
+        <columns>NAME</columns>
+        <columns>vlocity_cmt__DisplayLabel__c</columns>
+        <columns>vlocity_cmt__DisplayOn__c</columns>
+        <columns>vlocity_cmt__LinkType__c</columns>
+        <columns>vlocity_cmt__OpenURLMode__c</columns>
+        <columns>vlocity_cmt__URL__c</columns>
+        <columns>vlocity_cmt__UrlParameters__c</columns>
+        <columns>vlocity_cmt__VlocityIcon__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>vlocity_cmt__ApplicableTypes__c</field>
+            <operation>includes</operation>
+            <value>Contact</value>
+        </filters>
+        <label>Contact Actions</label>
+    </listViews>
+    <listViews>
+        <fullName>Contract_Actions</fullName>
+        <columns>NAME</columns>
+        <columns>vlocity_cmt__DisplayLabel__c</columns>
+        <columns>vlocity_cmt__DisplayOn__c</columns>
+        <columns>vlocity_cmt__LinkType__c</columns>
+        <columns>vlocity_cmt__OpenURLMode__c</columns>
+        <columns>vlocity_cmt__URL__c</columns>
+        <columns>vlocity_cmt__UrlParameters__c</columns>
+        <columns>vlocity_cmt__VlocityIcon__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>vlocity_cmt__ApplicableTypes__c</field>
+            <operation>includes</operation>
+            <value>vlocity_cmt__ContractVersion__c,Contract</value>
+        </filters>
+        <label>Contract Actions</label>
+    </listViews>
+    <listViews>
+        <fullName>Demo_Actions</fullName>
+        <columns>NAME</columns>
+        <columns>vlocity_cmt__DisplayLabel__c</columns>
+        <columns>vlocity_cmt__DisplayOn__c</columns>
+        <columns>vlocity_cmt__LinkType__c</columns>
+        <columns>vlocity_cmt__OpenURLMode__c</columns>
+        <columns>vlocity_cmt__URL__c</columns>
+        <columns>vlocity_cmt__UrlParameters__c</columns>
+        <columns>vlocity_cmt__VlocityIcon__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>vlocity_cmt__ApplicableTypes__c</field>
+            <operation>includes</operation>
+            <value>Demo Link</value>
+        </filters>
+        <label>Demo Actions</label>
+    </listViews>
+    <listViews>
+        <fullName>Interaction_Actions</fullName>
+        <booleanFilter>1 or 2</booleanFilter>
+        <columns>NAME</columns>
+        <columns>vlocity_cmt__DisplayLabel__c</columns>
+        <columns>vlocity_cmt__DisplayOn__c</columns>
+        <columns>vlocity_cmt__LinkType__c</columns>
+        <columns>vlocity_cmt__OpenURLMode__c</columns>
+        <columns>vlocity_cmt__URL__c</columns>
+        <columns>vlocity_cmt__UrlParameters__c</columns>
+        <columns>vlocity_cmt__VlocityIcon__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>vlocity_cmt__ApplicableTypes__c</field>
+            <operation>includes</operation>
+            <value>vlocity_cmt__VlocityInteraction__c,vlocity_cmt__CustomerInteraction__c</value>
+        </filters>
+        <filters>
+            <field>vlocity_cmt__ApplicableTypes__c</field>
+            <operation>includes</operation>
+            <value>vlocity_cmt__CustomerInteractionTopic__c</value>
+        </filters>
+        <label>Interaction Actions</label>
+    </listViews>
+    <listViews>
+        <fullName>Mobile_Actions</fullName>
+        <columns>NAME</columns>
+        <columns>vlocity_cmt__DisplayLabel__c</columns>
+        <columns>vlocity_cmt__DisplayOn__c</columns>
+        <columns>vlocity_cmt__LinkType__c</columns>
+        <columns>vlocity_cmt__OpenURLMode__c</columns>
+        <columns>vlocity_cmt__URL__c</columns>
+        <columns>vlocity_cmt__UrlParameters__c</columns>
+        <columns>vlocity_cmt__VlocityIcon__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>vlocity_cmt__ApplicableTypes__c</field>
+            <operation>includes</operation>
+            <value>Mobile Launch Pad</value>
+        </filters>
+        <label>Mobile Actions</label>
+    </listViews>
+    <listViews>
+        <fullName>Opportunity_Actions</fullName>
+        <columns>NAME</columns>
+        <columns>vlocity_cmt__DisplayLabel__c</columns>
+        <columns>vlocity_cmt__DisplayOn__c</columns>
+        <columns>vlocity_cmt__LinkType__c</columns>
+        <columns>vlocity_cmt__OpenURLMode__c</columns>
+        <columns>vlocity_cmt__URL__c</columns>
+        <columns>vlocity_cmt__UrlParameters__c</columns>
+        <columns>vlocity_cmt__VlocityIcon__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>vlocity_cmt__ApplicableTypes__c</field>
+            <operation>includes</operation>
+            <value>Opportunity</value>
+        </filters>
+        <label>Opportunity Actions</label>
+    </listViews>
+    <listViews>
+        <fullName>Order_Actions</fullName>
+        <columns>NAME</columns>
+        <columns>vlocity_cmt__DisplayLabel__c</columns>
+        <columns>vlocity_cmt__DisplayOn__c</columns>
+        <columns>vlocity_cmt__LinkType__c</columns>
+        <columns>vlocity_cmt__OpenURLMode__c</columns>
+        <columns>vlocity_cmt__URL__c</columns>
+        <columns>vlocity_cmt__UrlParameters__c</columns>
+        <columns>vlocity_cmt__VlocityIcon__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>vlocity_cmt__ApplicableTypes__c</field>
+            <operation>includes</operation>
+            <value>Order</value>
+        </filters>
+        <label>Order Actions</label>
+    </listViews>
+    <listViews>
+        <fullName>Quote_Actions</fullName>
+        <columns>NAME</columns>
+        <columns>vlocity_cmt__DisplayLabel__c</columns>
+        <columns>vlocity_cmt__DisplayOn__c</columns>
+        <columns>vlocity_cmt__LinkType__c</columns>
+        <columns>vlocity_cmt__OpenURLMode__c</columns>
+        <columns>vlocity_cmt__URL__c</columns>
+        <columns>vlocity_cmt__UrlParameters__c</columns>
+        <columns>vlocity_cmt__VlocityIcon__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>vlocity_cmt__ApplicableTypes__c</field>
+            <operation>includes</operation>
+            <value>Quote</value>
+        </filters>
+        <label>Quote Actions</label>
+    </listViews>
+    <listViews>
+        <fullName>Retail_Actions</fullName>
+        <columns>NAME</columns>
+        <columns>vlocity_cmt__DisplayLabel__c</columns>
+        <columns>vlocity_cmt__DisplayOn__c</columns>
+        <columns>vlocity_cmt__LinkType__c</columns>
+        <columns>vlocity_cmt__OpenURLMode__c</columns>
+        <columns>vlocity_cmt__URL__c</columns>
+        <columns>vlocity_cmt__UrlParameters__c</columns>
+        <columns>vlocity_cmt__VlocityIcon__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>vlocity_cmt__ApplicableTypes__c</field>
+            <operation>includes</operation>
+            <value>Retail</value>
+        </filters>
+        <label>Retail Actions</label>
+    </listViews>
+    <nameField>
+        <label>Vlocity Actions Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Vlocity Actions</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>vlocity_cmt__DisplayLabel__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>vlocity_cmt__IsActive__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>vlocity_cmt__ApplicableTypes__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>vlocity_cmt__OpenURLMode__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>vlocity_cmt__LinkType__c</customTabListAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+    <webLinks>
+        <fullName>vlocity_cmt__Export</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Export</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>var dataPackType = &apos;VlocityAction&apos;;
+var objectId = &apos;{!vlocity_cmt__VlocityAction__c.Id}&apos;;
+var suggestedName = &apos;{!vlocity_cmt__VlocityAction__c.Name}&apos;;
+
+{!REQUIRESCRIPT(&quot;/soap/ajax/30.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/30.0/apex.js&quot;)}
+
+var namespace_prefix = &apos;&apos;; 
+var result = sforce.connection.describeGlobal(); 
+var TOKEN_OBJ = &quot;VlocityDataPack__c&quot;; 
+var sobjects = result.getArray(&quot;sobjects&quot;); 
+for (var i=0; i&lt;sobjects.length; i++) { 
+	var sobjName = sobjects[i].name; 
+
+	var str = sobjName.split(&quot;__&quot;); 
+
+	//if there are 3 values there is a namespace 
+	if (str.length == 3) {
+		var sobj = str[1].valueOf() +&apos;__c&apos;; 
+		if (sobj == TOKEN_OBJ) { 
+			namespace_prefix = str[0].valueOf(); 
+		}
+	}
+} 
+
+if (namespace_prefix != &quot;&quot;) { 
+	namespace_prefix += &apos;__&apos;; 
+}
+
+window.location = &apos;apex/&apos;+namespace_prefix+&apos;DataPacksHome?exportDataPackType=&apos;+dataPackType+&apos;&amp;exportData=&apos;+objectId+&apos;&amp;exportSuggestedName=&apos;+suggestedName;</url>
+    </webLinks>
+    <webLinks>
+        <fullName>vlocity_cmt__ImportExport</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Import/Export</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/30.0/connection.js&quot;)} 
+
+{!REQUIRESCRIPT(&quot;/soap/ajax/30.0/apex.js&quot;)} 
+
+var namespace_prefix = &apos;&apos;; 
+
+
+
+var result = sforce.connection.describeGlobal(); 
+
+var TOKEN_OBJ = &quot;Party__c&quot;; 
+
+var sobjects = result.getArray(&quot;sobjects&quot;); 
+
+
+
+for(var i=0; i&lt;sobjects.length; i++) { 
+
+var sobjName = sobjects[i].name; 
+
+var str = sobjName.split(&quot;__&quot;); 
+
+//if there are 3 values there is a namespace 
+
+if (str.length == 3){ 
+
+//Is it one of ours? 
+
+var sobj = str[1].valueOf() +&apos;__c&apos;; 
+
+if(sobj == TOKEN_OBJ) { 
+
+namespace_prefix = str[0].valueOf(); 
+
+} 
+
+} 
+
+} 
+
+if(namespace_prefix != &quot;&quot;){ 
+
+namespace_prefix+= &apos;__&apos;; 
+
+} 
+window.location = &apos;apex/&apos;+namespace_prefix+&apos;ActionImportExport?Id=&apos; +&apos;{!vlocity_cmt__VlocityAction__c.Id}&apos;;</url>
+    </webLinks>
+</CustomObject>

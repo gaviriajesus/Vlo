@@ -1,0 +1,33 @@
+<apex:component >
+    <apex:attribute name="backgroundImageURL" description="This is the URL for the background image" type="String" required="false"/>
+    <apex:attribute name="backgroundColour" description="This is the colour for the background" type="String" required="false"/>
+    <apex:attribute name="height" description="This is a height for the entire component" type="String" required="false"/>
+    <apex:attribute name="width" description="This is a width for the content of the component" type="String" required="false"/>
+    <apex:attribute name="classname" description="This is a unique class for the component to use for styling" type="String" required="false"/>
+
+    <style>
+        .{!classname}{
+            width:100%;
+            display:table;
+            background-color:{!backgroundColour};
+            background-image: url('{!backgroundImageURL}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            min-height:{!height};
+            height:{!height};
+        }
+        .{!classname} > div{
+            margin:auto;
+            display:block;
+            width:{!width};
+            position:relative;
+            padding:10px 0px;
+        }
+    </style>
+    <div class="wide {!classname}">
+        <div>
+            <apex:componentBody />
+        </div>
+    </div>
+</apex:component>

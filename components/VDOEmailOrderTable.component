@@ -1,0 +1,73 @@
+<apex:component controller="VDOEmailController" access="global">
+
+    <apex:attribute name="OrderId" description="This is the Order Id." type="Order" assignTo="{!theOrder}"/>
+    <apex:stylesheet value="/apex/VDODemoCSS"/>
+    <apex:stylesheet value="/apex/VDOCommunityCSS"/> 
+    
+    <style>
+        #ordertable, #customertable, #invoicetable{
+            width:100%%;
+            margin:auto;
+            font-family:arial;
+        }
+    </style>
+    <body style="background:#F4F6F9;font-size:1.1em;padding:20px;">
+        <div style="width:100%; max-width:900px;margin:auto;display:table;"><img style="width:150px;display:block;float:left;margin-bottom:20px;padding-top:0px;" src="{!'http://' + theSite.subdomain + '.force.com'}/resource/VDOLogo"/><div style="float:right; color:#CCC;">Receipt</div></div>
+        <table id="customertable" style="width:100%;margin:auto;font-family:arial; max-width:600px;margin-bottom:20px;">
+            <tr>
+                <td><div style="background-size: cover;color:#16325C;margin:auto;background-image:url({!'http://' + theSite.subdomain + '.force.com' + theDemoAccount.Vlocity_Demo_Image__c}); background-size:cover; background-position:center center; width:75px;height:75px;border-radius:50%;margin-bottom:20px;"/></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;color:#16325C;"><div style="font-weight:bold">Thank you for shopping with us today {!theDemoAccount.Vlocity_Demo_Name__c}!</div><br/> Please find below the details of your order. If there is anything else we can assist you with today please let us know or check out our <a href="#">customer community</a>. We hope you have had a great experience shopping with us today!</td>
+            </tr>
+        </table>
+        
+        
+        <table cellspacing="20" id="invoicetable" style="color:#16325C;width:100%; max-width:900px;background:#fff;border-radius:5px;margin:auto;font-family:arial;margin-bottom:20px;">
+            <tr>
+                <td><span class="label" style="font-weight:bold;color:#16325C;display:block;">Order Number</span><br/><span class="data" style="color:#16325C;">{!theDisplayOrder.OrderNumber}</span></td>
+                <td><span class="label" style="font-weight:bold;color:#16325C;display:block;">Order Date</span><br/><span class="data" style="color:#16325C;"><apex:outputText value="{0, date, MMMM d','  yyyy}"><apex:param value="{!NOW()}"/></apex:outputText></span></td>
+            </tr>
+            <tr>
+                <td><span class="label" style="font-weight:bold;color:#16325C;display:block;">Initial Cost</span><br/><span class="data" style="color:#16325C;">{!$Setup.VDO_Settings__c.Currency_Symbol__c}{!theDisplayOrder.vlocity_cmt__OneTimeTotal__c}</span></td>
+                <td><span class="label" style="font-weight:bold;color:#16325C;display:block;">Recurring Cost</span><br/><span class="data" style="color:#16325C;">{!$Setup.VDO_Settings__c.Currency_Symbol__c}{!theDisplayOrder.vlocity_cmt__RecurringTotal__c}</span></td>
+            </tr>
+        </table>
+        
+        <table id="ordertable" style="color:#16325C;width:100%;max-width:900px;background:#fff;border-radius:5px;margin:auto;font-family:arial;" cellspacing="20">
+            <tr>
+                <td style="width:50%; font-weight:bold;color:#16325C;">Product Details</td>
+                <td style="width:25%; font-weight:bold;color:#16325C;">Initial</td>
+                <td style="width:25%; font-weight:bold;color:#16325C;">Monthly</td>
+            </tr>
+            <apex:repeat var="ox" value="{!theProducts}">
+                <tr>
+                    <td colspan="3" style="margin-bottom:10px;">
+                        <div style="margin-bottom:10px;color:#16325C;"><b>{!ox.theOrderItem.PricebookEntry.Product2.Name}</b></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <apex:outputPanel rendered="{!ox.theImageURL != '#'}">
+                            <img style="display:block; margin:auto;margin-bottom:10px;width:150px;height:150px;border-radius:5px;" src="{!ox.theImageURL}"/>
+                        </apex:outputPanel>
+                    </td>
+                    <td style="color:#16325C;"><i>{!$Setup.VDO_Settings__c.Currency_Symbol__c}{!ox.theOrderItem.vlocity_cmt__OneTimeTotal__c}</i></td>
+                    <td style="color:#16325C;"><i>{!$Setup.VDO_Settings__c.Currency_Symbol__c}{!ox.theOrderItem.vlocity_cmt__RecurringTotal__c}</i></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="border-bottom:1px solid #f8f8f8;padding-bottom:20px;margin-bottom:20px;color:#16325C;">
+                        {!ox.theOrderItem.PricebookEntry.Product2.Description}
+                    </td>
+                </tr>
+            </apex:repeat>
+        </table>
+        
+        <table style="width:100%;margin:auto;font-family:arial; max-width:600px;margin-top:20px;">
+            <tr>
+                <td style="text-align:center;color:#16325C;">If any of the above information is incorrect or you did not place this order please contact our support team so we can assist you.</td>
+            </tr>
+        </table>
+        
+    </body>
+</apex:component>

@@ -1,0 +1,15 @@
+<!--c:sub-->
+<aura:component access="GLOBAL" controller="vlocity_cmt.ActionDisplayController" implements="force:hasRecordId,forceCommunity:availableForAllPageTypes,force:appHostable">
+    <aura:attribute name="parameters" type="String" access='global'/> 
+    <aura:attribute name="recordId" type="String" access='global' default="{!recordId}"/> 
+    <aura:attribute name="height" type="String" access='global'/> 
+    <aura:attribute name="width" type="String" access='global'/> 
+    <aura:attribute name="src" type="String" default="{!'/apex/VlocityDemoCards?' + v.parameters + 'Id=' + v.recordId}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:if isTrue="{!v.hostURL}">
+    <iframe id="iFrame" src='{!v.hostURL + v.src}'
+            width='{!v.width}' height='{!v.height}' frameBorder="0px" 
+             scrolling="false" markerUnits="strokeWidth"/>
+    </aura:if>
+  
+</aura:component>

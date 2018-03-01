@@ -1,0 +1,26 @@
+<apex:page standardController="Account">
+    <style>
+        .buffer iframe {
+            position:relative;
+            width: calc(100% + 4px);
+            left: -2px;
+        }
+        .buffer {
+            position: relative;
+            height:1300px;
+            top: -66px;
+        }
+        .container{
+            overflow:hidden;
+            height:1300px;
+        }
+        body.hasMotif.homeTab.net-withGlobalHeader.sfdcBody.brandQuaternaryBgr, body, html{
+            margin:0px !important;
+        }
+    </style>
+    <div class="container">
+        <div class="buffer">
+            <wave:dashboard developerName="Statement_Information_Overview_Dashboard" showTitle="false" height="1300px" openLinksInNewWindow="true"/> 
+        </div>
+    </div>
+</apex:page>

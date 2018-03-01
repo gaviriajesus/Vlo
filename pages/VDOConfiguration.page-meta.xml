@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>38.0</apiVersion>
+    <availableInTouch>true</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>This page provides controls to configure the demo environment.</description>
+    <label>VDOConfiguration</label>
+    <packageVersions>
+        <majorNumber>11</majorNumber>
+        <minorNumber>46</minorNumber>
+        <namespace>vlocity_cmt</namespace>
+    </packageVersions>
+</ApexPage>

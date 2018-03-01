@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ManagedTopics xmlns="http://soap.sforce.com/2006/04/metadata">
+    <managedTopic>
+        <fullName>Vlocity Customer Community.Featured:Device Support</fullName>
+        <managedTopicType>Featured</managedTopicType>
+        <name>Device Support</name>
+        <parentName></parentName>
+        <position>5</position>
+        <topicDescription>A place to discuss everything about device support.</topicDescription>
+    </managedTopic>
+    <managedTopic>
+        <fullName>Vlocity Customer Community.Featured:Internet</fullName>
+        <managedTopicType>Featured</managedTopicType>
+        <name>Internet</name>
+        <parentName></parentName>
+        <position>2</position>
+        <topicDescription>A place to discuss everything about our internet products.</topicDescription>
+    </managedTopic>
+    <managedTopic>
+        <fullName>Vlocity Customer Community.Featured:Landline</fullName>
+        <managedTopicType>Featured</managedTopicType>
+        <name>Landline</name>
+        <parentName></parentName>
+        <position>3</position>
+        <topicDescription>A place to discuss everything about our landline products.</topicDescription>
+    </managedTopic>
+    <managedTopic>
+        <fullName>Vlocity Customer Community.Featured:Mobile</fullName>
+        <managedTopicType>Featured</managedTopicType>
+        <name>Mobile</name>
+        <parentName></parentName>
+        <position>0</position>
+        <topicDescription>A place to discuss everything about our mobile products.</topicDescription>
+    </managedTopic>
+    <managedTopic>
+        <fullName>Vlocity Customer Community.Featured:Network &amp; Coverage</fullName>
+        <managedTopicType>Featured</managedTopicType>
+        <name>Network &amp; Coverage</name>
+        <parentName></parentName>
+        <position>4</position>
+        <topicDescription>A place to discuss everything about network and coverage.</topicDescription>
+    </managedTopic>
+    <managedTopic>
+        <fullName>Vlocity Customer Community.Featured:TV</fullName>
+        <managedTopicType>Featured</managedTopicType>
+        <name>TV</name>
+        <parentName></parentName>
+        <position>1</position>
+        <topicDescription>A place to discuss everything about our TV products.</topicDescription>
+    </managedTopic>
+    <managedTopic>
+        <fullName>Vlocity Customer Community.Navigational:Internet</fullName>
+        <managedTopicType>Navigational</managedTopicType>
+        <name>Internet</name>
+        <parentName></parentName>
+        <position>2</position>
+        <topicDescription>A place to discuss everything about our internet products.</topicDescription>
+    </managedTopic>
+    <managedTopic>
+        <fullName>Vlocity Customer Community.Navigational:Landline</fullName>
+        <managedTopicType>Navigational</managedTopicType>
+        <name>Landline</name>
+        <parentName></parentName>
+        <position>3</position>
+        <topicDescription>A place to discuss everything about our landline products.</topicDescription>
+    </managedTopic>
+    <managedTopic>
+        <fullName>Vlocity Customer Community.Navigational:Mobile</fullName>
+        <managedTopicType>Navigational</managedTopicType>
+        <name>Mobile</name>
+        <parentName></parentName>
+        <position>0</position>
+        <topicDescription>A place to discuss everything about our mobile products.</topicDescription>
+    </managedTopic>
+    <managedTopic>
+        <fullName>Vlocity Customer Community.Navigational:TV</fullName>
+        <managedTopicType>Navigational</managedTopicType>
+        <name>TV</name>
+        <parentName></parentName>
+        <position>1</position>
+        <topicDescription>A place to discuss everything about our TV products.</topicDescription>
+    </managedTopic>
+</ManagedTopics>

@@ -1,0 +1,40 @@
+<apex:page cache="true" showHeader="false" sidebar="false" controller="vlocity_cmt.VFPageControllerBase" title="Communications OmniScript - {!$Organization.Name} - {!$User.Username}" docType="html-5.0">
+    <meta name="viewport" content="width=device-width"/>
+    <apex:stylesheet value="{!URLFOR($Resource.via_slds, '/assets/styles/salesforce-lightning-design-system-vf.min.css')}"/>
+    <apex:stylesheet value="{!LEFT($Site.CurrentSiteUrl, LEN($Site.CurrentSiteUrl)-1)}/apex/VDODemoCSS"/>
+    <apex:stylesheet value="{!URLFOR($Resource.vlocity_icons, '/css/vlocity-icons.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.vlocity_cmt__CardFramework_Assets)}"/>
+    <style>
+        body, html{
+            margin:0px !important;
+            padding:0px !important;
+        }
+        .via-slds .vlc-slds-cart ng-include{
+            padding:0px !important;
+            border-top: 0px !important;
+        }
+        .vlc-slds-cart.ng-scope{
+            height:0px;
+        }
+        sidebar.slds-col--padded.slds-cleafix{
+            border:0px !important;
+        }
+    </style>
+    <div class="vlocity via-slds" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" ng-app="ContactInformationVerify">
+        <vlocity_cmt:BusinessProcessComponent strOmniScriptType="Contact Information"
+            strOmniScriptSubType="Verify"
+            strOmniScriptLang="English"
+            previewMode="{!$CurrentPage.parameters.previewEmbedded}"
+            verticalMode="{!$CurrentPage.parameters.verticalMode}"
+            strOmniScriptId="{!$CurrentPage.parameters.designerPreviewId}"
+            scriptLayout="lightning"/>
+        <vlocity_cmt:BusinessProcessHelperComponent />
+        <vlocity_cmt:JSONTreeHTMLTemplateComponent />
+        <c:VDOOmniscriptSelectableTemplates />
+        <script type="text/javascript">
+            var modules = ['vlocity-business-process'];
+            var myModule = angular.module('ContactInformationVerify', modules);
+        </script>
+    </div>
+    <vlocity_cmt:VFActionFunction /> 
+</apex:page>

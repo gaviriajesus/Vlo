@@ -1,0 +1,489 @@
+<apex:page showHeader="false" standardStylesheets="false" docType="html-5.0" cache="true" applyHtmlTag="false" controller="VDODemoController">
+    <html>
+        <head>
+            <title>{!$Setup.VDO_Settings__c.Mobile_App_Title__c}</title>
+            <meta name="apple-mobile-web-app-capable" content="yes"/>
+            <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+            <meta name="viewport" content = "width = device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 1, user-scalable = no"/>
+            <apex:stylesheet value="{!URLFOR($Resource.vlocity_icons, '/css/vlocity-icons.css')}"/>
+            <apex:stylesheet value="{!LEFT($Site.CurrentSiteUrl, LEN($Site.CurrentSiteUrl)-1)}/apex/VlocityDemoCSS"/>
+            <script src="/resource/VDOInternalResources/js/jquery.js" type="text/javascript"></script>
+            <style>
+                html, body{
+                    width:100%;
+                    min-height:100vh;
+                    margin:0px;
+                    padding:0px;
+                    font-family: "Salesforce Sans", Arial, sans-serif !important;
+                    overflow-x:hidden;
+                    color:#16325C;
+                }
+                .mobilelaunchpad .content{
+                    width: calc(100% - 56px);
+                    min-height:100vh;
+                    position:relative;
+                    z-index:20;
+                    background: #fff;
+                    -webkit-transition: left 0.5s; /* Safari */
+                    transition: left 0.5s;
+                }
+                .mobilelaunchpad .narrow{
+                    left:56px;
+                }
+                .mobilelaunchpad .wide{
+                    left:220px;
+                }
+                .mobilelaunchpad .actioncontainer:hover{
+                    background:{!$Setup.VDO_Settings__c.Colour3__c};
+                    cursor:pointer;
+                }
+                .mobilelaunchpad .actioncontainer{
+                    float: left;
+                    width: 120px;
+                    height: 120px;
+                    background: #fdfdfd;
+                    margin: 10px;
+                    text-align: center;
+                    border-radius: .25em;
+                    position: relative;
+                    box-sizing: border-box;
+                    position:relative;
+                    color:#16325C;
+                    border-radius:3px;
+                }
+                .mobilelaunchpad .actioncontainer .actionheader{
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    display: block !important;
+                    width: 100%;
+                    text-align: center;
+                    height: 45px;
+                    background-color: #f4f6f9;
+                    padding: 5px;
+                    font-size: 13px !important;
+                    margin: 0px !important;
+                    text-transform: none !important;
+                    letter-spacing: 0px !important;
+                    box-sizing: border-box;
+                    border-radius:3px;
+                    text-overflow: clip;
+                    overflow: hidden;
+                    line-height: 18px;
+                }
+                .mobilelaunchpad .actioncontainer .actioncontent{
+                    padding-top: 40px;
+                    font-size: 60px;
+                    color: {!$Setup.VDO_Settings__c.Colour1__c};
+                }
+                .mobilelaunchpad .logo{
+                    width:100%;
+                    height:55px;
+                    background: url('{!URLFOR($Resource.VDOMobileResources,'images/logo.png')}') no-repeat;
+                    background-size: auto 35px;
+                    background-position:20px center;
+                    box-shadow: 0 2px 4px rgba(0,0,0,.07);
+                    padding:10px 20px 10px 20px;
+                    box-sizing:border-box;
+                }
+                .mobilelaunchpad .logo .usericon{
+                    float: right;
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 35px;
+                }
+                .mobilelaunchpad .logo .sidebaricon{
+                    float: left;
+                    height: 35px;
+                    display:none;
+                }
+                .mobilelaunchpad .title{
+                    width:100%;
+                    height:35px;
+                    background-color: #f4f6f9;
+                    text-align:center;
+                    text-transform: uppercase;
+                    line-height: 35px;
+                    margin-right: 20px;
+                    color: rgb(84, 105, 141);
+                }
+                .mobilelaunchpad .home{
+                    padding:10px;
+                    display:table;
+                    background:#fff;
+                    width:100%;
+                    box-sizing:border-box;
+                }
+                .mobilelaunchpad .frame{
+                    display:none;
+                    position:relative;
+                    width:100%;
+                    max-width:100%;
+                    height: calc(100vh - 90px);
+                    overflow-y:scroll !important;
+                    overflow-x:hidden;
+                    -webkit-overflow-scrolling: touch !important;
+                }
+                .mobilelaunchpad .frame iframe{
+                      position: absolute;
+                      top: 0;
+                      left: 0;
+                      width: 100%;
+                      height: 100%;
+                      margin: 0;
+                      padding: 0;
+                      border: none;
+                }
+                .mobilelaunchpad .sidebar {
+                    position:fixed;
+                    width: 220px;
+                    background: rgb(22, 50, 92);
+                    padding: 8px;
+                    box-sizing: border-box;
+                    z-index: 10;
+                    top:0px;
+                    left:0px;
+                    bottom:0px;
+                    overflow-x:hidden;
+                    overflow-y:scroll;
+                }
+                .mobilelaunchpad .sidebar .row .button {
+                    height: 40px;
+                    width: 40px;
+                    padding: 4px;
+                    box-sizing: border-box;
+                    border-radius: 3px;
+                    margin-bottom: 8px;
+                    float:left;
+                }
+                .mobilelaunchpad .sidebar .row .button img {
+                    width: 32px;
+                    height: 32px;
+                    margin: auto;
+                    border-radius: 3px;
+                    display: block;
+                    background-color:rgb(22, 50, 92);
+                }
+                .mobilelaunchpad .sidebar .row .button i{
+                    width: 32px;
+                    height: 32px;
+                    color: #FFF;
+                    display: block;
+                    text-align: center;
+                    line-height: 32px;
+                    font-size: 22px;
+                    border-radius: 3px;
+                    background-color:{!$Setup.VDO_Settings__c.Colour1__c};
+                }
+                .mobilelaunchpad .sidebar .row span{
+                    color: #fff;
+                    text-transform: uppercase;
+                    width: 135px;
+                    display: block;
+                    float: left;
+                    text-overflow: ellipsis;
+                    overflow-x: hidden;
+                    height: 40px;
+                    line-height: 40px;
+                    white-space: nowrap;
+                    padding-left: 10px;
+                }
+                .mobilelaunchpad .sidebar .row{
+                    display:table;
+                }
+                
+                .userprofile{
+                    width:260px;
+                    height:260px;
+                    float:left;
+                    position:relative;
+                    margin:10px;
+                    border-radius:3px;
+                    box-sizing:border-box;
+                }
+                .userbackground{
+                    position:absolute;
+                    width:100%;
+                    height:130px;
+                    background: url('{!URLFOR($Resource.VDOMobileResources,'images/profilebackground.png')}');
+                    background-size:cover;
+                    background-position:50% 50%;
+                    z-index:21;
+                    top:0px;
+                    left:0px;
+                    right:0px;
+                    border-radius:3px;
+                }
+                .userhighlight{
+                    position:absolute;
+                    width:100%;
+                    height:130px;
+                    top:0px;
+                    left:0px;
+                    right:0px;
+                    z-index:22;
+                    background:{!$Setup.VDO_Settings__c.Colour4__c};
+                    opacity:0.5;
+                    border-radius:3px;
+                }
+                .userpic{
+                    width:100px;
+                    height:100px;
+                    border-radius:100px;
+                    border:5px #fff solid;
+                    display:block;
+                    margin:auto;
+                    z-index:23;
+                    position:relative;
+                    margin-top:70px;
+                    background: url('{!currentUser.fullphotourl}');
+                    background-size: cover;
+                    background-position: 50% 50%;
+                }
+                .consumerpic{
+                    background-image: url('/services/images/photo/{!currentContact.id}');
+                }
+                .username{
+                    text-align: center;
+                    margin-top: 10px;
+                    font-size: 20px;
+                    font-weight: 100;
+                }
+                .userdetails{
+                    text-align: center;
+                    margin-top: 10px;
+                    font-size: 14px;
+                    font-weight: 100;
+                }
+                .ribbon{
+                    background:{!$Setup.VDO_Settings__c.Colour4__c};
+                    height: 20px;
+                    width: 15px;
+                    color: #fff;
+                    position: absolute;
+                    margin-left: 10px;
+                    line-height: 20px;
+                    font-size: 12px;
+                }
+                .ribbon:before{
+                    content: '';
+                    position: absolute;
+                    border-top: 6px solid {!$Setup.VDO_Settings__c.Colour4__c};
+                    height: 0;
+                    width: 0;
+                    top: 100%;
+                    border-right: 8px solid transparent;
+                    left: 0px;
+                }
+                .ribbon:after{
+                    content: '';
+                    position: absolute;
+                    border-top: 6px solid {!$Setup.VDO_Settings__c.Colour4__c};
+                    height: 0;
+                    width: 0;
+                    top: 100%;
+                    border-left: 8px solid transparent;
+                    right: 0px;
+                }
+                .modal{
+                    display: none;
+                    position: fixed;
+                    z-index: 100;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    overflow: auto;
+                    background-color: rgb(0,0,0);
+                    background-color: rgba(0,0,0,0.4);
+                }
+                .modalcontent{
+                    background-color: #fefefe;
+                    margin: 15% auto;
+                    padding: 20px;
+                    width: 80%;
+                    border-radius:2px;
+                }
+                .modal .message{
+                    width:100%;
+                    text-align:center;
+                    margin-top:20px;
+                }
+                .modal .confirm{
+                    width:50%;
+                    margin:auto;
+                    margin-top:20px;
+                    background:{!$Setup.VDO_Settings__c.Colour4__c};
+                    color:#FFF;
+                    text-transform:uppercase;
+                    text-align:center;
+                    padding:10px;
+                    border-radius:2px;
+                    cursor:pointer;
+                }
+                
+                /* Mobile Portrait */
+                @media (max-width: 600px) {
+                    .mobilelaunchpad .actioncontainer{
+                        width: calc(50% - 20px);
+                    }
+                    .mobilelaunchpad .logo{
+                        background-position: 60px center;
+                    }
+                    .mobilelaunchpad .logo .sidebaricon{
+                        display:block;
+                    }
+                    .sidebar .row:first-child{
+                        display:none;
+                    }
+                    .mobilelaunchpad .narrow{
+                        left:0px;
+                    }
+                    .mobilelaunchpad .content{
+                        width:100%;
+                    }
+                    .userprofile{
+                        width:100%;
+                        margin:0px;
+                    }
+                }
+                /* Mobile Landscape and Tablet Portrait */
+                @media (max-width: 800px) and (min-width: 600px) {
+                    .mobilelaunchpad .actioncontainer{
+                        width: calc(25% - 20px);
+                    }
+                    .userprofile{
+                        width:100%;
+                        margin:0px;
+                    }
+                
+                }
+                /* Tablet Landscape */
+                @media (max-width: 1200px) and (min-width: 800px) {
+                    .mobilelaunchpad .actioncontainer{
+                        width: calc(20% - 20px);
+                    }
+                    .userprofile {
+                        width: calc(40% - 20px);
+                    }
+                }
+                                
+            </style>
+            <script type="text/javascript">
+                function toggleSidebar(){
+                    $('.content').toggleClass('narrow');
+                    $('.content').toggleClass('wide');
+                }
+                function launchAction(src, label){
+                    $('.frame').show();
+                    $('.frame iFrame').attr('src', src);
+                    $('.home').hide();
+                    $('.title').html(label);
+                    $('.content').addClass('narrow');
+                    $('.content').removeClass('wide');
+                }
+                function launchHome(){
+                    $('.frame').hide();
+                    $('.frame iFrame').attr('src', '');
+                    $('.home').show();
+                    $('.title').html('{!$Setup.VDO_Settings__c.Mobile_App_Title__c}');
+                    $('.content').addClass('narrow');
+                    $('.content').removeClass('wide');
+                }
+                $(document).ready(function(){
+                    $('.mobilelaunchpad .sidebar .button i').each(function(i, obj) {
+                        var colors = ['{!$Setup.VDO_Settings__c.Colour1__c}', '{!$Setup.VDO_Settings__c.Colour1__c}', '{!$Setup.VDO_Settings__c.Colour4__c}', '{!$Setup.VDO_Settings__c.Colour5__c}', '{!$Setup.VDO_Settings__c.Colour6__c}'];
+                        var random_color = colors[Math.floor(Math.random() * colors.length)];
+                        $(obj).css('background', random_color);
+                    });
+                    if('{!$Setup.VDO_Settings__c.Mobile_App_Show_Message__c}' == 'true'){
+                        setTimeout(function(){
+                            $('.modal').css('display', 'block');
+                        }, 3000);
+                    }
+                    $('.confirm').click(function(){
+                        $('.modal').css('display', 'none');
+                    });
+                });
+            </script>
+            </head>
+        <body class="mobilelaunchpad">
+            <div class="modal">
+                <div class="modalcontent">
+                    <div class="title">{!$Setup.VDO_Settings__c.Mobile_App_Title__c}</div>
+                    <div class="message">{!$Setup.VDO_Settings__c.Mobile_App_Message__c}</div>
+                    <div class="confirm">Confirm</div>
+                </div>
+            </div>
+            <div class="sidebar">
+                <div class="row" onclick="toggleSidebar();">
+                    <div class="button">
+                        <img src="/img/icon/t4v35/standard/apps_120.png"/>
+                    </div>
+                    <span>Menu</span>
+                </div>
+                <div class="row" onclick="launchHome();">
+                    <div class="button">
+                        <img src="/img/icon/t4v35/standard/home_120.png"/>
+                    </div>
+                    <span>Home</span>
+                </div>
+                <apex:repeat value="{!listActions}" var="action">
+                    <div class="row" onclick="launchAction('{!action.vlocity_cmt__URL__c}', '{!action.vlocity_cmt__DisplayLabel__c}');">
+                        <div class="button">
+                            <i class="icon {!action.vlocity_cmt__VlocityIcon__c}"/>
+                        </div>
+                        <span>{!action.vlocity_cmt__DisplayLabel__c}</span>
+                    </div>
+                </apex:repeat>
+            </div>
+            <div class="content narrow">
+                <div class="logo">
+                    <img class="sidebaricon" src="{!URLFOR($Resource.VDOMobileResources,'images/sidebaricon.png')}" onclick="toggleSidebar();"/>
+                    <apex:outputPanel rendered="{!$Setup.VDO_Settings__c.Mobile_App_Type__c == 'Consumer'}">
+                        <img class="usericon" src="/services/images/photo/{!currentContact.id}"/>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!$Setup.VDO_Settings__c.Mobile_App_Type__c == 'Employee'}">
+                        <img class="usericon" src="{!currentUser.smallphotourl}"/>
+                    </apex:outputPanel>
+                </div>
+                <div class="title">
+                    {!$Setup.VDO_Settings__c.Mobile_App_Title__c}
+                </div>
+                <div class="home">
+                    <apex:outputPanel rendered="{!$Setup.VDO_Settings__c.Mobile_App_Type__c == 'Employee'}">
+                        <div class="userprofile">
+                            <div class="userbackground"></div>
+                            <div class="userhighlight"></div>
+                            <div class="userpic"></div>
+                            <div class="username">{!currentUser.name}<span class="ribbon">★</span></div>
+                            <div class="userdetails">Peak Performer | 94% Quota Attainment</div>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!$Setup.VDO_Settings__c.Mobile_App_Type__c == 'Consumer'}">
+                        <div class="userprofile">
+                            <div class="userbackground"></div>
+                            <div class="userhighlight"></div>
+                            <div class="userpic consumerpic"></div>
+                            <div class="username">{!currentContact.name}<span class="ribbon">★</span></div>
+                            <div class="userdetails">{!currentContact.Email} | {!currentContact.Phone}</div>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:repeat value="{!listActions}" var="action">
+                        <div class="actioncontainer" onclick="launchAction('{!action.vlocity_cmt__URL__c}', '{!action.vlocity_cmt__DisplayLabel__c}');">
+                            <div class="actionheader">
+                                {!action.vlocity_cmt__DisplayLabel__c}
+                            </div>
+                            <div class="actioncontent">
+                                <i class="icon {!action.vlocity_cmt__VlocityIcon__c}"/>
+                            </div>
+                        </div>
+                    </apex:repeat>
+                </div>
+                <div class="frame">
+                    <iframe width="100%" frameborder="0" scrolling="yes" src=""/>
+                </div>
+            </div>
+        </body>
+    </html>
+</apex:page>

@@ -1,0 +1,53 @@
+<apex:page showHeader="false" standardStylesheets="false" docType="html-5.0" cache="true" applyHtmlTag="false">
+    <html>
+        <head>
+            <title>{!$Setup.VDO_Settings__c.Mobile_App_Title__c}</title>
+            <link rel="apple-touch-icon-precomposed" href="{!URLFOR($Resource.VDOMobileResources,'images/appicon.png')}"/>
+            <meta name="apple-mobile-web-app-capable" content="yes"/>
+            <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+            <meta name="viewport" content = "width = device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 1, user-scalable = no"/>
+            <meta http-equiv="refresh" content="1;url=https://login.salesforce.com/login.jsp?un={!$Setup.VDO_Settings__c.Username__c}&pw={!$Setup.VDO_Settings__c.Password__c}&startURL=/apex/VDOMobileLaunchPadHome"/>
+            <style>
+                html{
+                    width:100%;
+                    height:100%;
+                    margin:0px;
+                    padding:0px;
+                    background-image:url("{!URLFOR($Resource.VDOMobileResources,'images/splashscreen.png')}");
+                    background-size:cover;
+                    background-position:50% 50%;  
+                }
+                .logo{
+                    width:100%;
+                    height:100%;
+                    margin:0px;
+                    padding:0px; 
+                    background-image:url("{!URLFOR($Resource.VDOMobileResources,'images/logo.png')}");
+                    background-position:50% 50%;
+                    background-size:50%;
+                    background-repeat:no-repeat;
+                    position:absolute;
+                    top:0px;
+                }
+                .overlay{
+                    width:100%;
+                    height:100%;
+                    margin:0px;
+                    padding:0px; 
+                    background-color:{!$Setup.VDO_Settings__c.Colour4__c};
+                    opacity:0.75;
+                }
+                body{
+                    width:100%;
+                    height:100%;
+                    margin:0px;
+                    padding:0px; 
+                }
+            </style>
+        </head>
+        <body>
+            <div class="overlay"/> 
+            <div class="logo"/>
+        </body>
+    </html>
+</apex:page>

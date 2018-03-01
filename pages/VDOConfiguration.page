@@ -1,0 +1,763 @@
+<apex:page controller="VDOConfigurationController" tabStyle="vlocity_cmt__VlocityUITemplateDesigner__tab" sidebar="false">
+    <head>
+        <script type="text/javascript" src="{!URLFOR($Resource.VDOInternalResources,'js/jquery.js')}"/>
+        <script type="text/javascript" src="{!URLFOR($Resource.VDOInternalResources,'js/jscolor.min.js')}"/>
+        <script type="text/javascript">
+            var colour1 = '{!currentDemoValues.colour1__c}', colour2 = '{!currentDemoValues.colour2__c}', colour3 = '{!currentDemoValues.colour3__c}', colour4 = '{!currentDemoValues.colour4__c}', colour5 = '{!currentDemoValues.colour5__c}', colour6 = '{!currentDemoValues.colour6__c}', colour7 = '{!currentDemoValues.colour7__c}', colour8 = '{!currentDemoValues.colour8__c}', colour9 = '{!currentDemoValues.colour9__c}';         
+            //Update colours
+            function changeColours(picker){
+                switch(picker.targetElement.id) {
+                    case 'colour1':
+                        colour1 = picker.toHEXString();
+                        break;
+                    case 'colour2':
+                        colour2 = picker.toHEXString();
+                        break;
+                    case 'colour3':
+                        colour3 = picker.toHEXString();
+                        break;
+                    case 'colour4':
+                        colour4 = picker.toHEXString();
+                        break;
+                    case 'colour5':
+                        colour5 = picker.toHEXString();
+                        break;
+                    case 'colour6':
+                        colour6 = picker.toHEXString();
+                        break;   
+                    case 'colour7':
+                        colour7 = picker.toHEXString();
+                        break;  
+                    case 'colour8':
+                        colour8 = picker.toHEXString();
+                        break;  
+                    case 'colour9':
+                        colour9 = picker.toHEXString();
+                        break;                                                                                                                                                                                         
+                }
+            }
+            Visualforce.remoting.timeout = 120000;
+            //Change record names
+            function renameRecords(){
+                $('#renameContent > .spinner').show();
+                var objectTypeSelect = document.getElementById("objectType");
+                var objectType = objectTypeSelect.options[objectTypeSelect.selectedIndex].value;
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.VDOConfigurationController.RenameRecords}',
+                    document.getElementById('oldName').value,
+                    document.getElementById('newName').value,
+                    objectType,
+                    handleRenameResult
+                );
+            }
+            //Change all org data to a specific country
+            function setCountry(){
+                $('#countryContent > .spinner').show();
+                var countrySelect = document.getElementById("orgCountry");
+                var orgCountry = countrySelect.options[countrySelect.selectedIndex].value;
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.VDOConfigurationController.ChangeOrgCountry}',
+                    orgCountry,
+                    handleCountryResult
+                );
+            }
+            //Update mobile launch pad app settings
+            function updateMobile(){
+                $('#mobileContent > .spinner').show();
+                var mobileSelect = document.getElementById("mobileappType");
+                var mobileType = mobileSelect.options[mobileSelect.selectedIndex].value;
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.VDOConfigurationController.UpdateMobile}',
+                    $('#newTitle').val(),
+                    $('#newUsername').val(),
+                    $('#newPassword').val(),
+                    mobileType,
+                    document.getElementById('newShow').checked,
+                    $('#newMessage').val(),
+                    handleMobileResult
+                );
+            }
+            //Change all currency values
+            function setCurrency(){
+                $('#currencyContent > .spinner').show();
+                var currencySelect = document.getElementById("orgCurrency");
+                var orgCurrency = currencySelect.options[currencySelect.selectedIndex].value;
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.VDOConfigurationController.ChangeCurrency}',
+                    orgCurrency,
+                    handleCurrencyResult
+                );
+            }            
+            //Delete all statements and creates new data
+            function resetStatements(){
+                $('#statementContent > .spinner').show();
+                var statementSelect = document.getElementById("statementType");
+                var statementType = statementSelect.options[statementSelect.selectedIndex].value;
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.VDOConfigurationController.ResetStatements}',
+                    statementType,
+                    handleStatementResult
+                );
+            }
+            //Reset all demo accounts, contacts and households
+            function resetAccounts(){
+                $('#resetContent > .spinner').show();
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.VDOConfigurationController.ResetDemoData}',
+                    handleResetResult
+                );
+            }
+            //Delete all new assets
+            function resetAssets(){
+                $('#resetContent > .spinner').show();
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.VDOConfigurationController.DeleteNewAssets}',
+                    handleResetResult
+                );
+            }
+            //Delete all draft orders
+            function resetOrders(){
+                $('#resetContent > .spinner').show();
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.VDOConfigurationController.DeleteDraftOrders}',
+                    handleResetResult
+                );
+            }
+            //Delete all draft contracts
+            function resetContracts(){
+                $('#resetContent > .spinner').show();
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.VDOConfigurationController.DeleteDraftContracts}',
+                    handleResetResult
+                );
+            }            
+            //Delete all paused scripts
+            function resetScripts(){
+                $('#resetContent > .spinner').show();
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.VDOConfigurationController.DeletePausedScripts}',
+                    handleResetResult
+                );
+            }
+            //Delete all paused orchestration plans
+            function resetOrchestrationPlans(){
+                $('#resetContent > .spinner').show();
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.VDOConfigurationController.DeleteOrchestrationPlans}',
+                    handleResetResult
+                );
+            }
+            //Update Demo Colours
+            function updateColours(){
+                $('#coloursContent > .spinner').show();
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.VDOConfigurationController.UpdateColours}',
+                    colour1, colour2, colour3, colour4, colour5, colour6, colour7, colour8, colour9,
+                    handleColourUpdateResult
+                );
+            }
+            //Reset Demo Colours
+            function resetColours(){
+                document.getElementById('colour1').jscolor.fromString('05A6DF');
+                colour1 = '#05A6DF';
+                document.getElementById('colour2').jscolor.fromString('16325C');
+                colour2 = '#16325C';
+                document.getElementById('colour3').jscolor.fromString('E5F2FA');
+                colour3 = '#E5F2FA';
+                document.getElementById('colour4').jscolor.fromString('ED7932');
+                colour4 = '#ED7932';
+                document.getElementById('colour5').jscolor.fromString('DE722F');
+                colour5 = '#DE722F';
+                document.getElementById('colour6').jscolor.fromString('BB5F27');
+                colour6 = '#BB5F27';
+                document.getElementById('colour7').jscolor.fromString('16325C');
+                colour7 = '#16325C';
+                document.getElementById('colour8').jscolor.fromString('DE722F');
+                colour8 = '#DE722F';
+                document.getElementById('colour9').jscolor.fromString('ED7932');
+                colour9 = '#ED7932';
+                updateColours();
+            }
+            function displayColours(){
+                $('#coloursContent > .spinner').show();
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.VDOConfigurationController.DisplayWaveXMD}',
+                    newColour(colour1, 0), newColour(colour1, -0.05), newColour(colour1, 0.05), newColour(colour1, -0.1), newColour(colour1, 0.1), newColour(colour1, -0.15),
+                    newColour(colour1, -0.3), newColour(colour1, 0.25), newColour(colour1, 0.15), newColour(colour1, -0.2), newColour(colour1, 0.2), newColour(colour1, -0.25),
+                    newColour(colour4, 0), newColour(colour4, -0.05), newColour(colour4, 0.05), newColour(colour4, -0.1), newColour(colour4, 0.1), newColour(colour4, -0.15),
+                    newColour(colour5, 0), newColour(colour5, -0.05), newColour(colour5, 0.05), newColour(colour5, -0.1), newColour(colour5, 0.1), newColour(colour5, -0.15),
+                    newColour(colour6, 0), newColour(colour6, -0.05), newColour(colour6, 0.05), newColour(colour6, -0.1), newColour(colour6, 0.1), newColour(colour6, -0.15),
+                    handleDisplayResult
+                );
+            }
+            function newColour(hex, lum) {
+                hex = String(hex).replace(/[^0-9a-f]/gi, '');
+                if (hex.length < 6) {
+                    hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+                }
+                lum = lum || 0;
+                var rgb = "#", c, i;
+                for (i = 0; i < 3; i++) {
+                    c = parseInt(hex.substr(i*2,2), 16);
+                    c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
+                    rgb += ("00"+c).substr(c.length);
+                }
+                return rgb;
+            }
+            function handleResult(result, event){    
+            }
+            function handleRenameResult(result, event){
+                $('#renameContent > .spinner').hide();
+            }
+            function handleCountryResult(result, event){
+                $('#countryContent > .spinner').hide();
+            }
+            function handleCurrencyResult(result, event){
+                $('#currencyContent > .spinner').hide();
+            }
+            function handleColourUpdateResult(result, event){
+                $('#coloursContent > .spinner').hide();
+            }
+            function handleStatementResult(result, event){
+                $('#statementContent > .spinner').hide();
+            }
+            function handleResetResult(result, event){
+                $('#resetContent > .spinner').hide();
+            }
+            function handleMobileResult(result, event){
+                $('#mobileContent > .spinner').hide();
+            }
+            function handleDisplayResult(result, event){
+                $('#coloursContent > .spinner').hide();
+                var decoded = $('<div/>').html(result).text();
+                window.prompt("1. Copy to clipboard: Ctrl+C \n2. Save as a new JSON file: (abc.json) \n3. Upload the XMD: Wave -> Datasets -> Dataset -> Edit -> Add XMD", decoded)
+            }
+        </script>
+        <style>
+            .colourwrapper{
+                width:33.3%;
+                padding:0px 20px 20px 20px;
+                box-sizing:border-box;
+                float:left;
+            }
+            .jscolor{
+                width: 100%;
+                height: 50px;
+                border: 0px;
+                margin: auto;
+                cursor: pointer;
+                display: block;
+                padding: 10px;
+                text-align: center;
+                box-sizing: border-box;
+                border-radius: 2px; 
+                color:transparent !important;
+                outline: none;
+                opacity:0.8;
+                border: 1px solid #d8d8d8;
+            }
+            .jscolor:hover, .jscolor:focus{
+                opacity:1;
+            }
+            .boxwrapper{
+                min-width:1400px;
+                font-family: "Salesforce Sans", Arial, sans-serif !important;
+                color:#16325c !important;
+            }
+            .box{
+                background: #f4f6f9;
+                border: 1px solid #d8dde6;
+                border-left:0px;
+                float:left;
+                padding:20px;
+                box-sizing:border-box;
+                width:25%;
+                height:1070px;
+            }
+            .box:first-child{
+                border-left: 1px solid #d8dde6;
+            }
+            .boxtitle{
+                color: #7c7c7c;
+                font-size:20px;
+                text-transform:uppercase;
+                margin-bottom:20px;
+                font-weight:100;
+            }
+            .boxbtn{
+                background-color: #00a7e1;
+                background-repeat: repeat-x;
+                border-color: #00a7e1;
+                color: #FFF;
+                width: 100%;
+                height: 28px;
+                border-radius: 2px;
+                border: 0px;
+                float: left;
+                margin-top: 10px;
+                cursor:pointer;
+                outline:none;
+                font-family: "Salesforce Sans", Arial, sans-serif;
+            }
+            .boxbtn:hover{
+                background: #018aba none;
+                border-color: #00a7e1;
+            }
+            .boxcontent{
+                width:100%;
+                padding:20px;
+                box-sizing:border-box;
+                background:#fff;
+                border: 1px solid #d8dde6;
+                display:table;
+                margin-bottom:20px;
+                position:relative;
+            }
+            .boxcontent h2{
+                float: left;
+                width: 100%;
+                margin-bottom: 20px;
+                line-height:20px;
+                font-size: 16px;
+                font-family: "Salesforce Sans", Arial, sans-serif;
+                font-weight:normal;
+            }
+            .imagewrapper a, .linkwrapper a{
+                display: block;
+                width: 25%;
+                float: left;
+                text-align: center;
+                margin: 0px 0px 20px 0px;
+                text-decoration:none;
+                color: #008ab3;
+                cursor:pointer;
+            }
+            .imagewrapper p, .linkwrapper p{
+                display: block;
+                float: left;
+                width: 50%;
+                margin-top:0px;
+                margin-bottom:20px;
+            }
+            .linkwrapper p{
+                width:75%;
+            }
+            .boxcontent select{
+                display: block;
+                width: 100%;
+                height: 28px;
+                padding: 4px 8px;
+                font-size: 12px;
+                line-height: 1.428571429;
+                color: #555;
+                background-image: linear-gradient(to bottom, rgba(1,1,1,0) 0%, rgba(0,0,0,0.05) 100%);
+                background-repeat: repeat-x;
+                border: 1px solid rgba(0,0,0,0.15);
+                border-radius: 3px;
+                -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+                box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+                -webkit-transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s;
+                -o-transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s;
+                transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s;
+                outline:none;
+                margin-bottom:10px;
+            }
+            .boxcontent select:focus, .textbox:focus{
+                border-color: #05a6df;
+                outline:none;
+            }
+            .boxcontent:hover {
+                border: 1px solid #05A6DF;
+            }
+            .textbox{
+                display: block;
+                width: 75%;
+                height: 28px;
+                padding: 4px 8px;
+                box-sizing:border-box;
+                font-size: 12px;
+                line-height: 1.428571429;
+                color: #555;
+                background-color: #fff;
+                background-image: none;
+                margin-bottom:10px;
+                border: 1px solid rgba(0,0,0,0.15);
+                border-radius: 3px;
+                -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+                box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+                -webkit-transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s;
+                -o-transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s;
+                transition: border-color ease-in-out 0.15s,box-shadow ease-in-out 0.15s;
+                float:left;
+            }
+            .label{
+                width:25%;
+                height:28px;
+                line-height:28px;
+                font-weight:normal;
+                float:left;
+            }
+            .spinner{
+                background: #F6F6F6;
+                display: none;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                opacity: 0.75;     
+                z-index: 10;
+            }
+            .spinner:before{
+                content:' ';
+                background: url('{!URLFOR($Resource.VDOInternalResources,"images/spinner.png")}');
+                background-size: 100% 100%;
+                display: block;
+                width: 28px;
+                height: 28px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-left:-14px;
+                margin-top:-14px;
+                -webkit-animation: spin 1s linear infinite;
+                -moz-animation: spin 1s linear infinite;
+                animation: spin 1s linear infinite;            
+            }
+            @keyframes spin{
+              from {
+                transform: rotate(0deg);
+              }
+              to {
+                transform: rotate(360deg);
+              }
+            }
+            .overview{
+                text-align: justify;
+                line-height:20px;
+            }
+            .overview a{
+                color: #05A6DF;
+                text-decoration:none;
+            }
+            .helptext {
+                position: absolute;
+                width: 100%;
+                background: #383838;
+                color: #FFF;
+                left: 100%;
+                margin-left: 20px;
+                top: 0px;
+                z-index: 10;
+                padding:20px;
+                box-sizing:border-box;
+                border-radius:2px;
+                opacity:0.9;
+                font-weight: normal;
+                display:none;
+            }
+            .helptext:before{
+                content: ' ';
+                border-right: 10px solid #383838;
+                border-top: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+                position: absolute;
+                left: -10px;
+            }
+            .helpsymbol{
+                width:15px;
+                height:15px;
+                background: url('{!URLFOR($Resource.VDOInternalResources,"images/help.png")}');
+                float:right;
+                cursor:pointer;
+                background-size: 100% 100%;
+            }
+            .boxcontent h2 .helpsymbol:hover .helptext{
+                display:block;
+            }
+            .topheader{
+                font-family: "Salesforce Sans", Arial, sans-serif !important;
+                color:#16325c !important;
+                width:100%;
+                font-size:12px;
+                text-transform:uppercase;
+                padding-left:20px;
+                box-sizing:border-box;
+                margin-top:20px;
+            }
+            .bottomheader{
+                font-family: "Salesforce Sans", Arial, sans-serif !important;
+                color:#16325c !important;
+                width:100%;
+                font-size:20px;
+                padding-left:20px;
+                box-sizing:border-box;
+                margin-bottom:20px;
+            }
+            input[type="checkbox"] {
+                padding-top: 0;
+                width: 75%;
+                margin: 0px;
+                margin-top: 8px;
+                margin-bottom: 15px;
+            }
+            @font-face {
+                font-family: "Salesforce Sans";
+                src: url("/resource/VDOInternalResources/fonts/SalesforceSans-Light.woff2") format("woff2"), url("../resource/VDOInternalResources/fonts/SalesforceSans-Light.woff") format("woff");
+                font-weight: 300;
+            }
+            
+            @font-face {
+                font-family: "Salesforce Sans";
+                src: url("/resource/VDOInternalResources/fonts/SalesforceSans-LightItalic.woff2") format("woff2"), url("../resource/VDOInternalResources/fonts/SalesforceSans-LightItalic.woff") format("woff");
+                font-style: italic;
+                font-weight: 300;
+            }
+            
+            @font-face {
+                font-family: "Salesforce Sans";
+                src: url("/resource/VDOInternalResources/fonts/SalesforceSans-Regular.woff2") format("woff2"), url("../resource/VDOInternalResources/fonts/SalesforceSans-Regular.woff") format("woff");
+                font-weight: 400;
+            }
+            
+            @font-face {
+                font-family: "Salesforce Sans";
+                src: url("/resource/VDOInternalResources/fonts/SalesforceSans-Italic.woff2") format("woff2"), url("../resource/VDOInternalResources/fonts/SalesforceSans-Italic.woff") format("woff");
+                font-style: italic;
+                font-weight: 400;
+            }
+            
+            @font-face {
+                font-family: "Salesforce Sans";
+                src: url("/resource/VDOInternalResources/fonts/SalesforceSans-Bold.woff2") format("woff2"), url("../resource/VDOInternalResources/fonts/SalesforceSans-Bold.woff") format("woff");
+                font-weight: 700;
+            }
+            
+            @font-face {
+                font-family: "Salesforce Sans";
+                src: url("/resource/VDOInternalResources/fonts/SalesforceSans-BoldItalic.woff2") format("woff2"), url("../resource/VDOInternalResources/fonts/SalesforceSans-BoldItalic.woff") format("woff");
+                font-style: italic;
+                font-weight: 700;
+            }            
+        </style>
+    </head>
+    <body>
+        <div class="topheader">Vlocity Demo Org</div>
+        <div class="bottomheader">Demo Configuration Dashboard</div>
+        <div class="boxwrapper">
+            <div class="box">
+                <div class="boxtitle">
+                    Overview
+                </div>
+                <div class="boxcontent overview">
+                    <h2>Introduction</h2>
+                    Welcome to the demo configuration dashboard. From here you can modify the data in the org, change the branding of the demo enviroment and watch demo and training vidoes for inspiration. Make sure you have performed your intial org <a href="https://goo.gl/G6FZjt" targer="_blank">setup</a> prior to using this page. Hover over the help symbol for information on each section.
+                </div>
+                <div class="boxtitle">
+                    Data
+                </div>
+                <div class="boxcontent">
+                    <h2>
+                        Details
+                        <div class="helpsymbol">
+                            <div class="helptext">The details component is used to change the base information of the demo environment. Go through the links below and change the default currency, company name, user information and profile details. If you haven't already you should turn on 'view global header' on the system admin profile and also remove all applications other then the 4 demo apps.</div>
+                        </div>
+                    </h2>
+                    <div class="imagewrapper"><p>Org Information</p><a href="/{!$Organization.Id}" target="_blank">View</a><a href="/{!$Organization.Id}/e" target="_blank">Edit</a></div>
+                    <div class="imagewrapper"><p>User Information</p><a href="/{!$User.Id}?noredirect=1" target="_blank">View</a><a href="/{!$User.Id}/e" target="_blank">Edit</a></div>
+                    <div class="imagewrapper"><p>Profile Information</p><a href="/{!$Profile.Id}?noredirect=1" target="_blank">View</a><a href="/{!$Profile.Id}/e" target="_blank">Edit</a></div>                
+                </div>
+                <div class="boxcontent" id="currencyContent">
+                    <div class="spinner"/>
+                    <h2>
+                        Currency
+                        <div class="helpsymbol">
+                            <div class="helptext">The currency drop down controls the currency symbols and language in several demo components, templates and images. Note that this does not change the org default currency which still needs to be configured manually in the org information link above.</div>
+                        </div>
+                    </h2>
+                    <select id="orgCurrency">
+                        <option value="Dollars">Dollars</option>
+                        <option value="Euros">Euros</option>
+                        <option value="Pounds">Pounds</option>
+                    </select>
+                    <input type="button" class="boxbtn" onclick="setCurrency();" value="Change Currency"/>
+                </div>
+                <div class="boxcontent" id="countryContent">
+                    <div class="spinner"/>
+                    <h2>
+                        Region
+                        <div class="helpsymbol">
+                            <div class="helptext">Use this dropdown to change the default Account and Contact address and phone details to another region. This component loads in a spreadsheet of addresses for each region and distributes them into the existing records. If you want to modify a region template they can be downloaded from static resources.</div>
+                        </div>
+                    </h2>
+                    <select id="orgCountry">
+                        <!--<option value="DE">Germany</option>
+                        <option value="IT">Italy</option>
+                        <option value="NL">Netherlands</option>
+                        <option value="ES">Spain</option>-->
+                        <option value="US">United States</option>
+                        <option value="UK">United Kingdom</option>
+                    </select>
+                    <input type="button" class="boxbtn" onclick="setCountry();" value="Change Region"/>
+                </div>
+            </div>
+            <div class="box">
+                <div class="boxtitle">
+                    Branding
+                </div>
+                <div class="boxcontent">
+                    <h2>
+                        Images
+                        <div class="helpsymbol">
+                            <div class="helptext">The links below let you modify the images that are used throughout the demo environment. The company and console logo are documents that are used in the internal and console applications. Community images contains a folder of all the images used in the customer facing pages. Omniscript images contains a folder containing images used throughout the Omniscripts. Product images is a directory of images that have been uploaded to the product catalogue. When swapping images make sure to keep the same filename, extension and folder structure.</div>
+                        </div>
+                    </h2>
+                    <div class="imagewrapper"><p>Company Logo</p><a href="/servlet/servlet.ImageServer?id={!appLogoDocument.id}&oid={!$Organization.Id}" target="_blank">Download</a><a href="/p/doc/DocumentUploadUi?id={!appLogoDocument.id}&pid={!documentFolder.id}" target="_blank">Upload</a></div>
+                    <div class="imagewrapper"><p>Console Logo</p><a href="/servlet/servlet.ImageServer?id={!consoleappLogoDocument.id}&oid={!$Organization.Id}" target="_blank">Download</a><a href="/p/doc/DocumentUploadUi?id={!consoleappLogoDocument.id}&pid={!documentFolder.id}" target="_blank">Upload</a></div>
+                    <div class="imagewrapper"><p>Community Images</p><a href="/resource/{!communityResources.Name}" target="_blank">Download</a><a href="/{!communityResources.id}/e" target="_blank">Upload</a></div>
+                    <div class="imagewrapper"><p>Omniscript Images</p><a href="/resource/{!omniscriptResources.Name}" target="_blank">Download</a><a href="/{!omniscriptResources.id}/e" target="_blank">Upload</a></div>
+                    <div class="imagewrapper"><p>Product Images</p><a href="/resource/{!productResources.Name}" target="_blank">Download</a><a href="/{!productResources.id}/e" target="_blank">Upload</a></div>
+                </div>
+                <div class="boxcontent" id="coloursContent">
+                    <div class="spinner"/>
+                    <h2>
+                        Colours
+                        <div class="helpsymbol">
+                            <div class="helptext">Modify the colours used through out the demo environment. Click on a colour to change it, or right click and paste a HEX value you've obtained from a customer's website. Once saved, the widget will change the colours of the community, web shop, scripts, console app, console sidebar, relationship graphs, sales aid, action framework and card templates.</div>
+                        </div>
+                    </h2>    
+                    <div class="colourwrapper"><input title="Primary customer colour" id="colour1" class="jscolor {onFineChange:'changeColours(this)', width:250, height:150,
+    borderColor:'transparent', insetColor:'#666', borderRadius: '2px', backgroundColor:'#666'}" value="{!currentDemoValues.colour1__c}"/></div>
+                    <div class="colourwrapper"><input title="Dark secondary colour" id="colour2" class="jscolor {onFineChange:'changeColours(this)', width:250, height:150,
+    borderColor:'transparent', insetColor:'#666', borderRadius: '2px', backgroundColor:'#666'}" value="{!currentDemoValues.colour2__c}"/></div>
+                    <div class="colourwrapper"><input title="Light highlight colour" id="colour3" class="jscolor {onFineChange:'changeColours(this)', width:250, height:150,
+    borderColor:'transparent', insetColor:'#666', borderRadius: '2px', backgroundColor:'#666'}" value="{!currentDemoValues.colour3__c}"/></div>
+                    <div class="colourwrapper"><input title="Wave dashboard colour" id="colour4" class="jscolor {onFineChange:'changeColours(this)', width:250, height:150,
+    borderColor:'transparent', insetColor:'#666', borderRadius: '2px', backgroundColor:'#666'}" value="{!currentDemoValues.colour4__c}"/></div>
+                    <div class="colourwrapper"><input title="Wave dashboard colour" id="colour5" class="jscolor {onFineChange:'changeColours(this)', width:250, height:150,
+    borderColor:'transparent', insetColor:'#666', borderRadius: '2px', backgroundColor:'#666'}" value="{!currentDemoValues.colour5__c}"/></div>
+                    <div class="colourwrapper"><input title="Wave dashboard colour" id="colour6" class="jscolor {onFineChange:'changeColours(this)', width:250, height:150,
+    borderColor:'transparent', insetColor:'#666', borderRadius: '2px', backgroundColor:'#666'}" value="{!currentDemoValues.colour6__c}"/></div>
+                    <div class="colourwrapper"><input title="Community header colour" id="colour7" class="jscolor {onFineChange:'changeColours(this)', width:250, height:150,
+    borderColor:'transparent', insetColor:'#666', borderRadius: '2px', backgroundColor:'#666'}" value="{!currentDemoValues.colour7__c}"/></div>
+                    <div class="colourwrapper"><input title="Customer highlight colour" id="colour8" class="jscolor {onFineChange:'changeColours(this)', width:250, height:150,
+    borderColor:'transparent', insetColor:'#666', borderRadius: '2px', backgroundColor:'#666'}" value="{!currentDemoValues.colour8__c}"/></div>
+                    <div class="colourwrapper"><input title="Customer highlight colour" id="colour9" class="jscolor {onFineChange:'changeColours(this)', width:250, height:150,
+    borderColor:'transparent', insetColor:'#666', borderRadius: '2px', backgroundColor:'#666'}" value="{!currentDemoValues.colour9__c}"/></div>
+                    <input type="button" class="boxbtn" onclick="updateColours();" value="Save Colours"/>
+                    <input type="button" class="boxbtn" onclick="resetColours();" value="Reset Colours"/>
+                    <input type="button" class="boxbtn" onclick="displayColours();" value="Display Wave Data"/>
+                </div>
+                <div class="boxcontent">
+                    <h2>
+                        CSS
+                        <div class="helpsymbol">
+                            <div class="helptext">Use the below templates to modify the look and feel of the demo environment. The Demo CSS file let's you change the style information that is used in all of the demo components. This includes all omniscripts, card layouts and community pages. The Omniscript Templates lets you modify the custom templates being used in the demo Omniscripts.</div>
+                        </div>
+                    </h2>
+                    <div class="imagewrapper"><p>Demo CSS</p><a href="/{!demoCSS.id}" target="_blank">View</a><a href="/{!demoCSS.id}/e" target="_blank">Edit</a></div>
+                    <div class="imagewrapper"><p>Omniscript Templates</p><a href="/{!omniscriptTemplates.id}" target="_blank">View</a><a href="/{!omniscriptTemplates.id}/e" target="_blank">Edit</a></div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="boxtitle">
+                    Tools
+                </div>
+                <div class="boxcontent" id="renameContent">
+                    <div class="spinner"/>
+                    <h2>
+                        Rename Records
+                        <div class="helpsymbol">
+                            <div class="helptext">This widget gives you the ability to mass update record names using a find and replace. Use it to change records to match a customer's terminology. Select the object you want to change, enter a search term, enter the replacement term and then click save. For example, if you wanted to change the Hilton demo accounts to Mariott you would enter 'Hilton' and 'Mariott'.</div>
+                        </div>
+                    </h2>
+                    <select id="objectType" style="margin-bottom:20px;">
+                        <option value="Account">Account</option>
+                        <option value="Product2">Product</option>
+                    </select>
+                    <div class="label">Find</div><input class="textbox" id="oldName"></input>
+                    <div class="label">Replace</div><input class="textbox" id="newName"></input>
+                    <input type="button" class="boxbtn" onclick="renameRecords();" value="Rename Records"/>
+                </div>
+                <div class="boxcontent" id="statementContent">
+                    <div class="spinner"/>
+                    <h2>
+                        Create Billing Statements
+                        <div class="helpsymbol">
+                            <div class="helptext">Use this widget to refresh all billing statements on the demo accounts. The component deletes all existing statements and then creates new ones for the past 6 months based on the product type you want to model.</div>
+                        </div>
+                    </h2>
+                    <select id="statementType">
+                        <option value="mobile">Mobile</option>
+                        <option value="internet">Internet</option>
+                        <option value="tv">TV</option>
+                        <option value="all">All</option>
+                    </select>
+                    <input type="button" class="boxbtn" onclick="resetStatements();" value="Create Statements"/>
+                </div>
+                <div class="boxcontent" id="resetContent">
+                    <div class="spinner"/>
+                    <h2>
+                        Reset Data
+                        <div class="helpsymbol">
+                            <div class="helptext">After a demo you might have created a lot of junk data. This widget lets you delete some of the common junk data types prior to starting a new demo.</div>
+                        </div>
+                    </h2>
+                    <input type="button" class="boxbtn" onclick="resetAccounts();" value="Reset Demo Accounts"/>
+                    <input type="button" class="boxbtn" onclick="resetAssets();" value="Delete New Assets"/>
+                    <input type="button" class="boxbtn" onclick="resetOrders();" value="Delete Draft Orders"/>
+                    <input type="button" class="boxbtn" onclick="resetContracts();" value="Delete Draft Contracts"/>
+                    <input type="button" class="boxbtn" onclick="resetScripts();" value="Delete Paused Scripts"/>
+                    <input type="button" class="boxbtn" onclick="resetOrchestrationPlans();" value="Delete Orchestration Plans"/>
+                </div>
+            </div>
+            <div class="box">
+                <div class="boxtitle">
+                    Mobile
+                </div>
+                <div class="boxcontent" id="mobileContent">
+                    <div class="spinner"/>
+                    <h2>
+                        Mobile Launch Pad Application
+                    </h2>
+                    <div class="label">Title</div><input class="textbox" id="newTitle" value="{!currentDemoValues.Mobile_App_Title__c}"></input>
+                    <div class="label">Username</div><input class="textbox" id="newUsername" value="{!currentDemoValues.Username__c}"></input>
+                    <div class="label">Password</div><input class="textbox" id="newPassword" type="password" value="{!currentDemoValues.Password__c}"></input>
+                    <div class="label">Notification</div><input class="textbox" id="newMessage" value="{!currentDemoValues.Mobile_App_Message__c}"></input>
+                    <div class="label">Show</div>
+                    <apex:outputPanel rendered="{!currentDemoValues.Mobile_App_Show_Message__c == true}">
+                        <input type="checkbox" id="newShow" checked="true"></input>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!currentDemoValues.Mobile_App_Show_Message__c == false}">
+                        <input type="checkbox" id="newShow"></input>
+                    </apex:outputPanel>
+                    <select id="mobileappType" style="margin-bottom:20px;">
+                        <option value="Consumer">Consumer</option>
+                        <option value="Employee">Employee</option>
+                    </select>
+                    <div class="imagewrapper"><p>Application Images</p><a href="/resource/{!mobileResources.name}" target="_blank">Download</a><a href="/{!mobileResources.id}/e" target="_blank">Upload</a></div> 
+                    <div class="imagewrapper"><p>Application CSS</p><a href="/{!mobilecss.id}" target="_blank">View</a><a href="/{!mobilecss.id}/e" target="_blank">Edit</a></div> 
+                    <input type="button" class="boxbtn" onclick="updateMobile();" value="Update Mobile Launch Pad"/>
+                    <input type="button" class="boxbtn" onclick="window.prompt('1. Visit the URL on your mobile device. \n2. Add the page to your home screen. \n3. Open the app via the new icon. ', 'https://{!mobileSite.Subdomain}.force.com/apex/vdomobilelaunchpad')" value="Open Mobile Launch Pad"/>
+                </div>
+                <div class="boxtitle">
+                    Enablement
+                </div>
+                <div class="boxcontent">
+                    <h2>Product Marketing Library</h2>
+                    <div class="linkwrapper"><p>CLM</p><a href="https://drive.google.com/a/vlocity.com/folderview?id=0B1z2EHTRVii0ZS1uSnMzVkc1SVE&usp=sharing" target="_blank">View</a></div>
+                    <div class="linkwrapper"><p>Community</p><a href="https://drive.google.com/a/vlocity.com/folderview?id=0B1z2EHTRVii0ajZ0YW4xdUI1aTg&usp=sharing" target="_blank">View</a></div>
+                    <div class="linkwrapper"><p>Console</p><a href="https://drive.google.com/a/vlocity.com/folderview?id=0B1z2EHTRVii0ZFFOeFhDQ2ZieUE&usp=sharing" target="_blank">View</a></div>
+                    <div class="linkwrapper"><p>CPQ</p><a href="https://drive.google.com/a/vlocity.com/folderview?id=0B1z2EHTRVii0dFJoM1JPN0VSbHM&usp=sharing" target="_blank">View</a></div>
+                    <div class="linkwrapper"><p>Dreamforce</p><a href="https://drive.google.com/drive/folders/0B1z2EHTRVii0TnlYLWR3enk0NjA?usp=sharing" target="_blank">View</a></div>
+                    <div class="linkwrapper"><p>EPC</p><a href="https://drive.google.com/a/vlocity.com/folderview?id=0B1z2EHTRVii0bUNmOVM1NDZTY0k&usp=sharing" target="_blank">View</a></div>
+                    <div class="linkwrapper"><p>LEX</p><a href="https://drive.google.com/drive/folders/0B1z2EHTRVii0cVlMYkNxbVptNWc?usp=sharing" target="_blank">View</a></div>
+                    <div class="linkwrapper"><p>Mobile</p><a href="https://drive.google.com/drive/folders/0B1z2EHTRVii0NW11ZmZSVTR4Mzg?usp=sharing" target="_blank">View</a></div>
+                    <div class="linkwrapper"><p>OM</p><a href="https://drive.google.com/a/vlocity.com/folderview?id=0B1z2EHTRVii0Y0x2TzExbXpySkE&usp=sharing" target="_blank">View</a></div>
+                    <div class="linkwrapper"><p>Wave</p><a href="https://drive.google.com/a/vlocity.com/folderview?id=0B1z2EHTRVii0NDVLX2VWQVZyam8&usp=sharing" target="_blank">View</a></div>
+                </div>
+            </div>            
+        </div>
+        
+    </body>
+</apex:page>

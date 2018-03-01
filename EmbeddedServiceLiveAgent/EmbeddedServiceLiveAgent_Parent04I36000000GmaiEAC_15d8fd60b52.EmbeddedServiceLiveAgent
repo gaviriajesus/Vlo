@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmbeddedServiceLiveAgent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <embeddedServiceConfig>04I1I000000CbCc</embeddedServiceConfig>
+    <liveChatButton>5731I000000HQqH</liveChatButton>
+    <liveChatDeployment>5721I000000HSEe</liveChatDeployment>
+    <masterLabel>EmbeddedServiceLiveAgent_Parent04I36000000GmaiEAC_15d8fd60b52</masterLabel>
+    <prechatEnabled>true</prechatEnabled>
+    <prechatJson>{&quot;liveAgentConfigId&quot;:&quot;08h36000000GmaTAAS&quot;,&quot;scenario&quot;:&quot;Service&quot;,&quot;objects&quot;:[{&quot;objectTypeId&quot;:&quot;Contact&quot;,&quot;recordTypeId&quot;:&quot;012000000000000AAA&quot;,&quot;position&quot;:1,&quot;fields&quot;:[{&quot;fieldApiName&quot;:&quot;Name&quot;,&quot;required&quot;:true,&quot;position&quot;:0},{&quot;fieldApiName&quot;:&quot;Email&quot;,&quot;required&quot;:false,&quot;position&quot;:1}]},{&quot;objectTypeId&quot;:&quot;Case&quot;,&quot;recordTypeId&quot;:&quot;012000000000000AAA&quot;,&quot;position&quot;:2,&quot;fields&quot;:[{&quot;fieldApiName&quot;:&quot;Subject&quot;,&quot;required&quot;:false,&quot;position&quot;:2}]}]}</prechatJson>
+    <scenario>Service</scenario>
+</EmbeddedServiceLiveAgent>

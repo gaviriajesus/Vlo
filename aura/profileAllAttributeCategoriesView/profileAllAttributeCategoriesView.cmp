@@ -1,0 +1,69 @@
+<aura:component access="GLOBAL" controller="vlocity_cmt.ProfileClientAttributeController">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="aura:waiting" action="{!c.waiting}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.doneWaiting}"/>
+    <aura:attribute name="entityId" type="String" />
+    <aura:attribute name="applicableSubTypes" type="String[]" default="Profile Attribute" />
+    <aura:attribute name="ignoreApplicableTypes" type="Boolean" default="false" />
+    <aura:attribute name="nsPrefix" type="String"/>
+    <aura:attribute name="isLanguageRTL" type="Boolean"/>
+    <aura:attribute name="renderUsingColorCodes" type="Boolean"/>
+    <aura:attribute name="attributeCategoriesInfo" type="Object[]"/>
+    
+    <div aura:id="loading-spinner" class="slds-spinner_container">
+        <div class="slds-spinner--brand slds-spinner slds-spinner--small" role="alert">
+            <span class="slds-assistive-text">Loading</span>
+            <div class="slds-spinner__dot-a"></div>
+            <div class="slds-spinner__dot-b"></div>
+        </div>
+    </div>
+
+      <div class="profile-all-attribute-categories">
+          <section>
+              <aura:iteration items="{!v.attributeCategoriesInfo}" var="categoryInfo">
+                  <article>               
+                    <aura:if isTrue="{! equals(categoryInfo.type,'On-Off')}">
+                        <vlocity_cmt:profileOnOffAttributeCategoryView entityId="{!v.entityId}" nsPrefix="{!v.nsPrefix}"
+                                                                           attributeCategoryCode="{!categoryInfo.code}" 
+                                                                           attributeCategoryName="{!categoryInfo.name}"
+                                                                           attributeCategoryLocked="{!categoryInfo.locked}"
+                                                                           isLanguageRTL="{!v.isLanguageRTL}"
+                                                                           renderUsingColorCodes="{!v.renderUsingColorCodes}" />
+                    </aura:if>
+                    
+                    <aura:if isTrue="{! equals(categoryInfo.type,'TextComment')}">
+                        <vlocity_cmt:profileTextCommentAttributeCategoryView entityId="{!v.entityId}" nsPrefix="{!v.nsPrefix}"
+                                                                           attributeCategoryCode="{!categoryInfo.code}" 
+                                                                           attributeCategoryName="{!categoryInfo.name}"
+                                                                           attributeCategoryLocked="{!categoryInfo.locked}"
+                                                                           isLanguageRTL="{!v.isLanguageRTL}"
+                                                                           renderUsingColorCodes="{!v.renderUsingColorCodes}" />
+                    </aura:if>
+                    
+                    <aura:if isTrue="{! equals(categoryInfo.type,'3-state')}">
+                        <vlocity_cmt:profileThreeStateAttributeCategoryView entityId="{!v.entityId}" nsPrefix="{!v.nsPrefix}"
+                                                                           attributeCategoryCode="{!categoryInfo.code}" 
+                                                                           attributeCategoryName="{!categoryInfo.name}"
+                                                                           attributeCategoryLocked="{!categoryInfo.locked}"
+                                                                           isLanguageRTL="{!v.isLanguageRTL}"
+                                                                           renderUsingColorCodes="{!v.renderUsingColorCodes}" />
+                    </aura:if>
+                    
+                    <aura:if isTrue="{! equals(categoryInfo.type,'1-5 scale')}">
+                        <vlocity_cmt:profileSliderAttributeCategoryView entityId="{!v.entityId}" nsPrefix="{!v.nsPrefix}"
+                                                                           attributeCategoryCode="{!categoryInfo.code}" 
+                                                                           attributeCategoryName="{!categoryInfo.name}"
+                                                                           attributeCategoryLocked="{!categoryInfo.locked}"
+                                                                           isLanguageRTL="{!v.isLanguageRTL}"
+                                                                           renderUsingColorCodes="{!v.renderUsingColorCodes}" />
+                    </aura:if>
+                      
+                  </article>
+                  
+              </aura:iteration>
+
+              &#160;
+         </section>
+      </div>
+  
+</aura:component>

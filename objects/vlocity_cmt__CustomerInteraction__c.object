@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>An interaction between a customer, prospect, partner or other contact and your organization. Could be a phone call, a web site visit, a mobile application session or an in-person meeting.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fieldSets>
+        <fullName>vlocity_cmt__InteractionDetail</fullName>
+        <availableFields>
+            <field>vlocity_cmt__Channel__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>vlocity_cmt__EndDateTime__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>Name</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>vlocity_cmt__VerificationTimestamp__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>vlocity_cmt__VerifiedAgentName__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <availableFields>
+            <field>vlocity_cmt__Verified__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </availableFields>
+        <description>Fields that are shown in Customer Interaction Detail view.</description>
+        <displayedFields>
+            <field>vlocity_cmt__Status__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>vlocity_cmt__Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>vlocity_cmt__Comments__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>vlocity_cmt__StartDateTime__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>InteractionDetail</label>
+    </fieldSets>
+    <fields>
+        <fullName>AccountName__c</fullName>
+        <externalId>false</externalId>
+        <formula>vlocity_cmt__AccountId__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>AccountName</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Billing_Related__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Billing Related</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Business_Site__c</fullName>
+        <externalId>false</externalId>
+        <label>Business Site</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CombinedFields__c</fullName>
+        <externalId>false</externalId>
+        <formula>vlocity_cmt__AccountId__r.Name + &apos; &apos; +  Id + &apos; &apos; +  Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>CombinedFields</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_First_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>vlocity_cmt__AccountId__r.First_Name__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Customer First Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Last_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>vlocity_cmt__AccountId__r.Last_Name__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Customer Last Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Lifetime_Value__c</fullName>
+        <externalId>false</externalId>
+        <formula>vlocity_cmt__AccountId__r.vlocity_cmt__NetWorth__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Customer Lifetime Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Customer_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>vlocity_cmt__AccountId__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Customer Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Tier__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(vlocity_cmt__AccountId__r.vlocity_cmt__vCustomerPriority__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Customer Tier</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Other_Queries__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Other Queries</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Owner_Id__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner:User.Id
+&amp; MID(&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ012345&quot;,(
+   IF(FIND(MID(Owner:User.Id,1,1), &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;)&gt;0,1,0)
+   +IF(FIND(MID(Owner:User.Id,2,1), &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;)&gt;0,2,0)
+   +IF(FIND(MID(Owner:User.Id,3,1), &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;)&gt;0,4,0)
+   +IF(FIND(MID(Owner:User.Id,4,1), &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;)&gt;0,8,0)
+   +IF(FIND(MID(Owner:User.Id,5,1), &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;)&gt;0,16,0)
+   )+1,1)
+&amp; MID(&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ012345&quot;,(
+   IF(FIND(MID(Owner:User.Id,6,1), &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;)&gt;0,1,0)
+   +IF(FIND(MID(Owner:User.Id,7,1), &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;)&gt;0,2,0)
+   +IF(FIND(MID(Owner:User.Id,8,1), &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;)&gt;0,4,0)
+   +IF(FIND(MID(Owner:User.Id,9,1), &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;)&gt;0,8,0)
+   +IF(FIND(MID(Owner:User.Id,10,1), &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;)&gt;0,16,0)
+   )+1,1)
+&amp; MID(&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ012345&quot;,(
+   IF(FIND(MID(Owner:User.Id,11,1), &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;)&gt;0,1,0)
+   +IF(FIND(MID(Owner:User.Id,12,1), &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;)&gt;0,2,0)
+   +IF(FIND(MID(Owner:User.Id,13,1), &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;)&gt;0,4,0)
+   +IF(FIND(MID(Owner:User.Id,14,1), &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;)&gt;0,8,0)
+   +IF(FIND(MID(Owner:User.Id,15,1), &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;)&gt;0,16,0)
+   )+1,1)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Owner Id</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Planned_Start_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Planned Start Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Rank_In_Queue__c</fullName>
+        <externalId>false</externalId>
+        <label>Rank In Queue</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Send_Mail__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Send Mail</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Text_Mobile__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Text Mobile</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Troubleshoot_Service__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Troubleshoot Service</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Upgrade_Change_Service__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Upgrade/Change Service</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Wait_For_Call__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Wait For Call</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Wait_Time__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( ISPICKVAL( vlocity_cmt__Status__c, &apos;Waiting In Queue&apos;) ,  DATETIMEVALUE(TODAY()) - DATETIMEVALUE(CreatedDate), 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Wait Time</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__AccountId__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Customer Interactions</relationshipLabel>
+        <relationshipName>CustomerInteractions</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__Channel__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Channel</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Contact Center</fullName>
+                    <default>false</default>
+                    <label>Contact Center</label>
+                </value>
+                <value>
+                    <fullName>Rep</fullName>
+                    <default>false</default>
+                    <label>Rep</label>
+                </value>
+                <value>
+                    <fullName>Agent</fullName>
+                    <default>false</default>
+                    <label>Agent</label>
+                </value>
+                <value>
+                    <fullName>Web</fullName>
+                    <default>false</default>
+                    <label>Web</label>
+                </value>
+                <value>
+                    <fullName>Email</fullName>
+                    <default>false</default>
+                    <label>Email</label>
+                </value>
+                <value>
+                    <fullName>Retail</fullName>
+                    <default>false</default>
+                    <label>Retail</label>
+                </value>
+                <value>
+                    <fullName>Retail Kiosk</fullName>
+                    <default>false</default>
+                    <label>Retail Kiosk</label>
+                </value>
+                <value>
+                    <fullName>Door to Door</fullName>
+                    <default>false</default>
+                    <label>Door to Door</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__Comments__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Comments</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__ConsoleCardLayout__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Console Card Layout</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__ContactId__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Customer Interactions</relationshipLabel>
+        <relationshipName>CustomerInteractions</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__DurationInMinute__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF( AND(NOT(ISNULL( vlocity_cmt__EndDateTime__c )),NOT(ISNULL( vlocity_cmt__StartDateTime__c ))) ,  (vlocity_cmt__EndDateTime__c -  vlocity_cmt__StartDateTime__c)*24*60 , IF(AND(ISNULL( vlocity_cmt__EndDateTime__c ), NOT(ISNULL( vlocity_cmt__StartDateTime__c ))), ( NOW() - vlocity_cmt__StartDateTime__c)*24*60, 0))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Duration</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__EndDateTime__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>End Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__StartDateTime__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Start Time</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__Status__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Started</fullName>
+                    <default>false</default>
+                    <label>Not Started</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+                <value>
+                    <fullName>Completed</fullName>
+                    <default>false</default>
+                    <label>Completed</label>
+                </value>
+                <value>
+                    <fullName>Waiting On Someone Else</fullName>
+                    <default>false</default>
+                    <label>Waiting On Someone Else</label>
+                </value>
+                <value>
+                    <fullName>Deferred</fullName>
+                    <default>false</default>
+                    <label>Deferred</label>
+                </value>
+                <value>
+                    <fullName>Cancel</fullName>
+                    <default>false</default>
+                    <label>Cancel</label>
+                </value>
+                <value>
+                    <fullName>Waiting in Queue</fullName>
+                    <default>false</default>
+                    <label>Waiting in Queue</label>
+                </value>
+                <value>
+                    <fullName>Attempting Contact From Queue</fullName>
+                    <default>false</default>
+                    <label>Attempting Contact From Queue</label>
+                </value>
+                <value>
+                    <fullName>Cancelled - Abandoned Queue</fullName>
+                    <default>false</default>
+                    <label>Cancelled - Abandoned Queue</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__Type__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Call</fullName>
+                    <default>false</default>
+                    <label>Call</label>
+                </value>
+                <value>
+                    <fullName>Meeting</fullName>
+                    <default>false</default>
+                    <label>Meeting</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Appointment</fullName>
+                    <default>false</default>
+                    <label>Appointment</label>
+                </value>
+                <value>
+                    <fullName>Drop In</fullName>
+                    <default>false</default>
+                    <label>Drop In</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__VerificationTimestamp__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Verification Timestamp</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__VerifiedAgentName__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Verified Agent Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vlocity_cmt__Verified__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Verified</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Customer Interaction</label>
+    <listViews>
+        <fullName>View_to_Prep_Queue_for_Demo</fullName>
+        <columns>NAME</columns>
+        <columns>vlocity_cmt__AccountId__c</columns>
+        <columns>Customer_Lifetime_Value__c</columns>
+        <columns>Customer_Name__c</columns>
+        <columns>Customer_Tier__c</columns>
+        <columns>Planned_Start_Time__c</columns>
+        <columns>Rank_In_Queue__c</columns>
+        <columns>vlocity_cmt__Status__c</columns>
+        <columns>vlocity_cmt__Type__c</columns>
+        <columns>Wait_Time__c</columns>
+        <columns>vlocity_cmt__DurationInMinute__c</columns>
+        <columns>Wait_For_Call__c</columns>
+        <columns>Troubleshoot_Service__c</columns>
+        <columns>Text_Mobile__c</columns>
+        <columns>Owner_Id__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>vlocity_cmt__Status__c</field>
+            <operation>equals</operation>
+            <value>Waiting in Queue</value>
+        </filters>
+        <filters>
+            <field>vlocity_cmt__Type__c</field>
+            <operation>equals</operation>
+            <value>Call,Appointment,Drop In</value>
+        </filters>
+        <label>View to Prep Queue for Demo</label>
+    </listViews>
+    <listViews>
+        <fullName>vlocity_cmt__All</fullName>
+        <columns>LAST_UPDATE</columns>
+        <columns>NAME</columns>
+        <columns>AccountName__c</columns>
+        <columns>vlocity_cmt__AccountId__c</columns>
+        <columns>vlocity_cmt__Channel__c</columns>
+        <columns>vlocity_cmt__Type__c</columns>
+        <columns>vlocity_cmt__Status__c</columns>
+        <columns>vlocity_cmt__ContactId__c</columns>
+        <columns>vlocity_cmt__Comments__c</columns>
+        <columns>vlocity_cmt__DurationInMinute__c</columns>
+        <columns>vlocity_cmt__EndDateTime__c</columns>
+        <columns>vlocity_cmt__StartDateTime__c</columns>
+        <columns>vlocity_cmt__VerifiedAgentName__c</columns>
+        <columns>vlocity_cmt__VerificationTimestamp__c</columns>
+        <columns>vlocity_cmt__Verified__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Customer Interaction Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Customer Interactions</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

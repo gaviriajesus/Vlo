@@ -1,0 +1,1018 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <description>To hold the data of WaveDemoData CSV file. Custom Fields will represent the header column of CSV</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>vloc_cmt_track__AgentManager__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Agent Manager</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__CallHandlingTime2__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Call Handling Time -2</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>13</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__CallHandlingTime__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Call Handling Time</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>13</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__CareAgentExpTrans__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Care Agent Experience with this type of</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>13</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__CareAgentExperience__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Care Agent Expereince</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>13</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__CareAgent__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Care Agent</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__ChurnInteraction__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Churn interaction</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Y</fullName>
+                    <default>false</default>
+                    <label>Y</label>
+                </value>
+                <value>
+                    <fullName>N</fullName>
+                    <default>false</default>
+                    <label>N</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__ChurnReason__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Churn Reason</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Competitor Offer</fullName>
+                    <default>false</default>
+                    <label>Competitor Offer</label>
+                </value>
+                <value>
+                    <fullName>Move</fullName>
+                    <default>false</default>
+                    <label>Move</label>
+                </value>
+                <value>
+                    <fullName>Price</fullName>
+                    <default>false</default>
+                    <label>Price</label>
+                </value>
+                <value>
+                    <fullName>Service</fullName>
+                    <default>false</default>
+                    <label>Service</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__ChurnSaveRate__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Churn Save Rate</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__ChurnSave__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Churn Save</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Y</fullName>
+                    <default>false</default>
+                    <label>Y</label>
+                </value>
+                <value>
+                    <fullName>N</fullName>
+                    <default>false</default>
+                    <label>N</label>
+                </value>
+                <value>
+                    <fullName>N/A</fullName>
+                    <default>false</default>
+                    <label>N/A</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__ChurnScore__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Churn Score</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__ConsoleActionLogName__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Console Action Log Name</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__ContactCenter__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Contact Center</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__CustomerNPS__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Customer NPS</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>13</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__CustomerRegion__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Customer Region</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__CustomerSubRegion__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Customer Sub-Region</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__DayofWeek__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Day of Week</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Sunday</fullName>
+                    <default>false</default>
+                    <label>Sunday</label>
+                </value>
+                <value>
+                    <fullName>Monday</fullName>
+                    <default>false</default>
+                    <label>Monday</label>
+                </value>
+                <value>
+                    <fullName>Tuesday</fullName>
+                    <default>false</default>
+                    <label>Tuesday</label>
+                </value>
+                <value>
+                    <fullName>Wednesday</fullName>
+                    <default>false</default>
+                    <label>Wednesday</label>
+                </value>
+                <value>
+                    <fullName>Thursday</fullName>
+                    <default>false</default>
+                    <label>Thursday</label>
+                </value>
+                <value>
+                    <fullName>Friday</fullName>
+                    <default>false</default>
+                    <label>Friday</label>
+                </value>
+                <value>
+                    <fullName>Saturday</fullName>
+                    <default>false</default>
+                    <label>Saturday</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__FirstCallResolutionRate__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>First Call Resolution Rate</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__FirstCallResolution__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>First Call Resolution</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Y</fullName>
+                    <default>false</default>
+                    <label>Y</label>
+                </value>
+                <value>
+                    <fullName>N</fullName>
+                    <default>false</default>
+                    <label>N</label>
+                </value>
+                <value>
+                    <fullName>N/A</fullName>
+                    <default>false</default>
+                    <label>N/A</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__InteractionEndTime__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Interaction end Time</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__InteractionEnd__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Interaction End</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Y</fullName>
+                    <default>false</default>
+                    <label>Y</label>
+                </value>
+                <value>
+                    <fullName>N</fullName>
+                    <default>false</default>
+                    <label>N</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__InteractionStartTime__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Interaction start time</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__InteractionStart__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Interaction Start</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Y</fullName>
+                    <default>false</default>
+                    <label>Y</label>
+                </value>
+                <value>
+                    <fullName>N</fullName>
+                    <default>false</default>
+                    <label>N</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__InteractionTime__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Interaction Time to Step</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__InteractionType__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Interaction Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Billing</fullName>
+                    <default>false</default>
+                    <label>Billing</label>
+                </value>
+                <value>
+                    <fullName>Churn</fullName>
+                    <default>false</default>
+                    <label>Churn</label>
+                </value>
+                <value>
+                    <fullName>Trouble</fullName>
+                    <default>false</default>
+                    <label>Trouble</label>
+                </value>
+                <value>
+                    <fullName>Upsell</fullName>
+                    <default>false</default>
+                    <label>Upsell</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__ObjectId__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>ObjID</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__ObjectType__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Object Type</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__OmniScriptRecord__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>true</externalId>
+        <label>OmniScriptRecord</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__OmniScript__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>OmniScript</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Broadband Upsell</fullName>
+                    <default>false</default>
+                    <label>Broadband Upsell</label>
+                </value>
+                <value>
+                    <fullName>Change Payment Method</fullName>
+                    <default>false</default>
+                    <label>Change Payment Method</label>
+                </value>
+                <value>
+                    <fullName>Churn Prevention</fullName>
+                    <default>false</default>
+                    <label>Churn Prevention</label>
+                </value>
+                <value>
+                    <fullName>Convert Abandoned Cart</fullName>
+                    <default>false</default>
+                    <label>Convert Abandoned Cart</label>
+                </value>
+                <value>
+                    <fullName>Customer Cancel</fullName>
+                    <default>false</default>
+                    <label>Customer Cancel</label>
+                </value>
+                <value>
+                    <fullName>Past Due Bill</fullName>
+                    <default>false</default>
+                    <label>Past Due Bill</label>
+                </value>
+                <value>
+                    <fullName>Promotion Upsell</fullName>
+                    <default>false</default>
+                    <label>Promotion Upsell</label>
+                </value>
+                <value>
+                    <fullName>Re Activate Service</fullName>
+                    <default>false</default>
+                    <label>Re Activate Service</label>
+                </value>
+                <value>
+                    <fullName>Trouble - Reception</fullName>
+                    <default>false</default>
+                    <label>Trouble - Reception</label>
+                </value>
+                <value>
+                    <fullName>Trouble - Remote</fullName>
+                    <default>false</default>
+                    <label>Trouble - Remote</label>
+                </value>
+                <value>
+                    <fullName>Trouble - STB</fullName>
+                    <default>false</default>
+                    <label>Trouble - STB</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__Product__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Product</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__Promotion__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Promotion</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__RecordLink__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Record Link</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__Record__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>true</externalId>
+        <label>Record</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__ScriptMode__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Script Mode</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>A</fullName>
+                    <default>false</default>
+                    <label>A</label>
+                </value>
+                <value>
+                    <fullName>B</fullName>
+                    <default>false</default>
+                    <label>B</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__StepEvent__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Step Event</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>End Call</fullName>
+                    <default>false</default>
+                    <label>End Call</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__StepTime__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Step Time</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>13</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__StepType__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Step Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Capture Payment</fullName>
+                    <default>false</default>
+                    <label>Capture Payment</label>
+                </value>
+                <value>
+                    <fullName>Close Activity</fullName>
+                    <default>false</default>
+                    <label>Close Activity</label>
+                </value>
+                <value>
+                    <fullName>Close SR</fullName>
+                    <default>false</default>
+                    <label>Close SR</label>
+                </value>
+                <value>
+                    <fullName>Customer Assessment</fullName>
+                    <default>false</default>
+                    <label>Customer Assessment</label>
+                </value>
+                <value>
+                    <fullName>New Activity</fullName>
+                    <default>false</default>
+                    <label>New Activity</label>
+                </value>
+                <value>
+                    <fullName>New Order</fullName>
+                    <default>false</default>
+                    <label>New Order</label>
+                </value>
+                <value>
+                    <fullName>New SR</fullName>
+                    <default>false</default>
+                    <label>New SR</label>
+                </value>
+                <value>
+                    <fullName>Review Offer</fullName>
+                    <default>false</default>
+                    <label>Review Offer</label>
+                </value>
+                <value>
+                    <fullName>Review Order</fullName>
+                    <default>false</default>
+                    <label>Review Order</label>
+                </value>
+                <value>
+                    <fullName>Review SR</fullName>
+                    <default>false</default>
+                    <label>Review SR</label>
+                </value>
+                <value>
+                    <fullName>Review T&amp;C</fullName>
+                    <default>false</default>
+                    <label>Review T&amp;C</label>
+                </value>
+                <value>
+                    <fullName>Start Call</fullName>
+                    <default>false</default>
+                    <label>Start Call</label>
+                </value>
+                <value>
+                    <fullName>Switch Tab</fullName>
+                    <default>false</default>
+                    <label>Switch Tab</label>
+                </value>
+                <value>
+                    <fullName>Update Activity</fullName>
+                    <default>false</default>
+                    <label>Update Activity</label>
+                </value>
+                <value>
+                    <fullName>Update Profile</fullName>
+                    <default>false</default>
+                    <label>Update Profile</label>
+                </value>
+                <value>
+                    <fullName>Update SR</fullName>
+                    <default>false</default>
+                    <label>Update SR</label>
+                </value>
+                <value>
+                    <fullName>Validate Customer</fullName>
+                    <default>false</default>
+                    <label>Validate Customer</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__Step__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Step</label>
+        <length>5</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__TabId__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>TabID</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__TabName__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Tab Name</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__TimeOnHold__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Time on Hold</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>13</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__Time__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Time</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>13</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__TroubleInteraction__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Trouble Interaction</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Y</fullName>
+                    <default>false</default>
+                    <label>Y</label>
+                </value>
+                <value>
+                    <fullName>N</fullName>
+                    <default>false</default>
+                    <label>N</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__Type__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__UpsellDollar__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Upsell $</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>13</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__UpsellInteraction__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Upsell Interaction</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Y</fullName>
+                    <default>false</default>
+                    <label>Y</label>
+                </value>
+                <value>
+                    <fullName>N</fullName>
+                    <default>false</default>
+                    <label>N</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__UpsellSuccessRate__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Upsell Success Rate</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__UpsellSuccess__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Upsell Success</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Y</fullName>
+                    <default>false</default>
+                    <label>Y</label>
+                </value>
+                <value>
+                    <fullName>N</fullName>
+                    <default>false</default>
+                    <label>N</label>
+                </value>
+                <value>
+                    <fullName>N/A</fullName>
+                    <default>false</default>
+                    <label>N/A</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__UserId__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>UserID</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__UserName__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>UserName</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>vloc_cmt_track__UserYrsExp__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>User Yrs Exp</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>13</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Wave Data Set</label>
+    <nameField>
+        <label>WaveDataSet Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Wave Data Sets</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

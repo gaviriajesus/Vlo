@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>VDO Settings</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Vlocity Demo Values</value>
+    </caseValues>
+    <fields>
+        <label><!-- Colour10 --></label>
+        <name>Colour10__c</name>
+    </fields>
+    <fields>
+        <label><!-- Colour1 --></label>
+        <name>Colour1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Colour2 --></label>
+        <name>Colour2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Colour3 --></label>
+        <name>Colour3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Colour4 --></label>
+        <name>Colour4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Colour5 --></label>
+        <name>Colour5__c</name>
+    </fields>
+    <fields>
+        <label><!-- Colour6 --></label>
+        <name>Colour6__c</name>
+    </fields>
+    <fields>
+        <label><!-- Colour7 --></label>
+        <name>Colour7__c</name>
+    </fields>
+    <fields>
+        <label><!-- Colour8 --></label>
+        <name>Colour8__c</name>
+    </fields>
+    <fields>
+        <label><!-- Colour9 --></label>
+        <name>Colour9__c</name>
+    </fields>
+    <fields>
+        <label><!-- Currency Symbol --></label>
+        <name>Currency_Symbol__c</name>
+    </fields>
+    <fields>
+        <label><!-- Currency --></label>
+        <name>Currency__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mobile App Message --></label>
+        <name>Mobile_App_Message__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mobile App Show Message --></label>
+        <name>Mobile_App_Show_Message__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mobile App Title --></label>
+        <name>Mobile_App_Title__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mobile App Type --></label>
+        <name>Mobile_App_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Password --></label>
+        <name>Password__c</name>
+    </fields>
+    <fields>
+        <label><!-- Username --></label>
+        <name>Username__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

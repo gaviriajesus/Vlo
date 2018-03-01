@@ -1,0 +1,19 @@
+<apex:page controller="VDODemoController">
+    <style>
+        .buffer iframe {
+            position:relative;
+            top:-66px;
+        }
+        .container{
+            overflow:hidden;
+        }
+        body.hasMotif.homeTab.net-withGlobalHeader.sfdcBody.brandQuaternaryBgr{
+            margin:0px !important;
+        }
+    </style>
+    <div class="container">
+        <div class="buffer">
+            <wave:dashboard developerName="Statement_Information_Home_Page_Dashboard" showTitle="false" height="680px" openLinksInNewWindow="true" /> 
+        </div>
+    </div>
+</apex:page>

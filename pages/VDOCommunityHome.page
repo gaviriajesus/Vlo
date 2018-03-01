@@ -1,0 +1,117 @@
+<apex:page controller="VDODemoController" showHeader="false">
+    <html xmlns:ng="http://angularjs.org" ng-app="myApp" class="ng-cloak"  style="height:100%">
+        <head>
+            <script>
+                if(location.href.indexOf("VDOCommunityHome") > -1  && location.href.indexOf("&layout=") == -1){
+                    location='/apex/VDOCommunityHome?vid=demoaccount2&layout=vdo-asset-layout-grid&Id={!demoAccount2.id}';
+                }
+            </script>
+            <apex:stylesheet value="{!URLFOR($Resource.vlocity_icons, '/css/vlocity-icons.css')}"/>
+            <apex:stylesheet value="{!LEFT($Site.CurrentSiteUrl, LEN($Site.CurrentSiteUrl)-1)}/apex/VDODemoCSS"/>
+            <apex:stylesheet value="{!URLFOR($Resource.vlocity_cmt__vlocity_assets, '/css/vlocity.css')}"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <style type="text/css">
+                body {
+                    margin: 0px !important;
+                    padding: 0px !important;
+                }
+                .cards-container .form-inline {
+                    display:none;
+                }
+                .vlocity .cards-container {
+                    margin-left: -10px;
+                    margin-right: -10px;
+                    padding: 0px;            
+                }
+            </style>
+            <apex:includeScript value="/support/console/34.0/integration.js"/>
+        </head>
+        <body>  
+            <div class="sectionBuffer">
+                <div class="profileSection">
+                    <div>
+                        <div class="profileBackground">
+                            <div class="profilePic">
+                                <div class="userPhoto" style="background-image:url('{!demoAccount1.Vlocity_Demo_Image__c}')"/>
+                            </div>
+                            <div class="accountPic" id="accountPic1" onclick="location='/apex/VDOCommunityHome?vid=demoaccount1&layout=vdo-asset-layout-hierarchy&Id={!demoAccount1.id}'">
+                                <img class="userPhoto" src="{!URLFOR($Resource.VDOCommunityResources,'images/demoaccount1.png')}"/>
+                                <div class="accountName">{!demoAccount1.Name}</div>
+                            </div>
+                            <div class="accountPic" id="accountPic2" onclick="location='/apex/VDOCommunityHome?vid=demoaccount2&layout=vdo-asset-layout-grid&Id={!demoAccount2.id}'">
+                                <img class="userPhoto" src="{!URLFOR($Resource.VDOCommunityResources,'images/demoaccount2.png')}"/>
+                                <div class="accountName">{!demoAccount2.Name}</div>
+                            </div>
+                            <div class="accountPic" id="accountPic3" onclick="location='/apex/VDOCommunityHome?vid=demoaccount3&layout=vdo-asset-layout-hierarchy&Id={!demoAccount3.id}'">
+                                <img class="userPhoto" src="{!URLFOR($Resource.VDOCommunityResources,'images/demoaccount3.png')}"/>
+                                <div class="accountName">{!demoAccount3.Name}</div>
+                            </div>
+                            <div class="profileName">{!demoAccount1.Vlocity_Demo_Name__c}</div>
+                            <div class="profileInfo">Platinum Level Customer</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="welcomeSection">
+                    <div>
+                        <img class="welcomeImage" src="{!URLFOR($Resource.VDOCommunityResources,'images/communitybanner1.png')}"/>
+                    </div>
+                    <div>
+                        <img class="welcomeImage" src="{!URLFOR($Resource.VDOCommunityResources,'images/communitybanner2.png')}"/>
+                    </div>  
+                    <div>
+                        <img class="welcomeImage" src="{!URLFOR($Resource.VDOCommunityResources,'images/communitybanner3.png')}"/>
+                    </div>      
+                </div> 
+            </div>
+            <div>
+                <div class="sectionTitle">My Products</div>
+                <vlocity_cmt:CardLayoutComponent layout="{!layout}" modules="myApp"/>
+                <script type="text/javascript">
+                    // this is used to determine the sf instance url in the community environment.
+                    // it is stored in localStorage such that later on vloc-card action can retrieve this url
+                    // without this url, we would not be able to do any services/data or serevices/apexrest api call
+                    var sfInstanceUrl = '{!sfInstanceUrl}';
+                    console.log('sfInstanceUrl fetched from CardCanvasController: ' + sfInstanceUrl);
+                    localStorage.setItem('sfInstanceUrl', sfInstanceUrl);
+                    console.log('sfInstanceUrl value stored in localStorage: ' + localStorage.getItem('sfInstanceUrl'));
+            
+                    // this is used for launching Omniscript from community
+                    // because in community we launch Omniscript in iframe using getInstanceUrl(), in case the Omniscript
+                    // inside the iframe needs to communicate with the parent community page which the iframe is embedded in,
+                    // both the community page url and the iframe url must be the same to avoid cross domain issues
+                    var currentInstanceUrlWithPath = '{!currentInstanceUrlWithPath}';
+                    console.log('currentInstanceUrlWithPath fetched from CardCanvasController: ' + currentInstanceUrlWithPath);
+                    localStorage.setItem('currentInstanceUrlWithPath', currentInstanceUrlWithPath);
+                    console.log('currentInstanceUrlWithPath value stored in localStorage: ' + localStorage.getItem('currentInstanceUrlWithPath'));
+                
+                    var myApp = angular.module('myApp',['forceng','consoleCards']);
+                    //Card Framework
+                    myApp.controller('myCtrl', ['$scope','force', function($scope, force) {
+                        $scope.init = function () {
+                            if(sforce.console.isInConsole()) {
+                                console.info('inside console');
+                            } else {
+                                console.info('outside console');
+                            }
+                
+                            var listener = function (result) {
+                                console.log('Message received from event: ' + result.message);
+                            };
+                            //Add a listener for the 'SampleEvent' event type
+                            sforce.console.addEventListener('SampleEvent', listener);
+                            
+                        };
+                
+                        $scope.init();
+                
+                        $scope.openTab = function() {
+                            sforce.console.setSidebarVisible(false);
+                        };
+                    }]);
+            </script>
+        </div>
+        <c:VDOCommunityCharts ></c:VDOCommunityCharts>
+        <c:VDOCommunityScripts ></c:VDOCommunityScripts>
+        </body>
+    </html>
+</apex:page>

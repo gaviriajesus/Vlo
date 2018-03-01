@@ -1,0 +1,2 @@
+<apex:page standardController="Account" extensions="VDODemoController" action="{!newB2BOmniScript}" showHeader="false">
+</apex:page>

@@ -1,0 +1,22 @@
+<apex:page showHeader="false" >
+    <head>
+        <title>Communications Sales Application - {!$Organization.Name}</title>
+        <apex:stylesheet value="{!LEFT($Site.CurrentSiteUrl, LEN($Site.CurrentSiteUrl)-1)}/apex/VDODemoCSS"/>
+        <apex:stylesheet value="{!URLFOR($Resource.vlocity_icons, '/css/vlocity-icons.css')}"/>
+        <style>
+            .vlocity .action-container [class^="icon-"]:before, .vlocity .action-container [class*=" icon-"]:before, .vlocity .action-container .action-item:hover span.action-label{
+                color:{!$Setup.VDO_Settings__c.Colour1__c} !important;
+            }
+        </style>
+    </head> 
+    <vlocity_cmt:ActionComponent objType="Aloha Home" style="Vertical"/>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        
+        ga('create', 'UA-78170710-1', 'auto');
+        ga('send', 'pageview');
+    </script>  
+</apex:page>

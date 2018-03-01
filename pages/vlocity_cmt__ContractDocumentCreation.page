@@ -1,0 +1,190 @@
+<apex:page standardStylesheets="false" showHeader="true" sidebar="false" controller="vlocity_cmt.ContractDocumentCreationController">  
+  <html xmlns:ng="http://angularjs.org" lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <apex:includeScript value="{!URLFOR($Resource.vlocity_cmt__vlocity_assets, '/javascripts/vlocity.js')}"/>
+        <apex:includeScript value="/support/console/31.0/integration.js"/>
+        <apex:includeScript value="/xdomain/xdomain.js"/>
+        <apex:includeScript value="{!$Resource.vlocity_cmt__docxtemplater}"/>
+        <apex:includeScript value="{!$Resource.vlocity_cmt__JSZip}"/>
+        <apex:includeScript value="{!$Resource.vlocity_cmt__FileSaver}"/>
+        <apex:includeScript value="{!$Resource.vlocity_cmt__ViaDirectives}"/>
+        <apex:includeScript value="{!$Resource.vlocity_cmt__SldsAngular}"/>
+        <apex:includeScript value="{!$Resource.vlocity_cmt__ContractDocumentCreationApp}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.vlocity_cmt__slds, '/assets/styles/salesforce-lightning-design-system-vf.min.css')}"/>
+        <apex:stylesheet value="{!$Resource.vlocity_cmt__DocumentBaseCss}" />
+        <apex:stylesheet value="{!$Resource.vlocity_cmt__ContractDocumentCreationCss}"/>
+    </head>
+    <body>
+        <div class="vlocity via-slds" ng-app="contractDocumentCreationApp" ng-controller="contractDocumentCreationCtrl" via-affix="top" via-screen-height="viaScreenHeight">
+            <div class="slds-spinner_container" ng-show="vlcLoading">
+                <div class="slds-spinner slds-spinner--medium" aria-hidden="false" role="alert">
+                      <div class="slds-spinner__dot-a"></div>
+                      <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+            <div class="slds-page-header custom-contract-creation-header" role="banner">
+                <div class="slds-grid slds-grid--vertical-align-center">
+                    <div class="slds-size--1-of-2" role="banner">
+                        <div class="slds-media slds-no-space slds-grow">
+                            <div class="slds-media__figure">
+                                <slds-svg-icon id="document-creation-icon" sprite="'standard'" icon="'contract'" size="'medium'" extra-classes="'slds-icon-standard-contract'"></slds-svg-icon>
+                            </div>
+                            <div class="slds-media__body">
+                                <h1 class="slds-page-header__title custom slds-m-right--small slds-align-middle slds-truncate" title="Contract Document Creation">{!$Label.CLMContractDocCreation}</h1>
+                                <p class="slds-text-heading--label slds-line-height--reset">{{versionLoadedData.documentVersionObj.Name}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-size--1-of-2">
+                        <div class="slds-button-group slds-float--right" role="group">
+                            <button class="slds-button slds-button--neutral navigate-back" ng-if="!showTemplateSelection()" ng-click="navigateBack()">
+                                <slds-button-svg-icon id="back-to-contract" sprite="'utility'" icon="'back'" size="'small'" extra-classes="'slds-button__icon--left'"></slds-button-svg-icon>
+                                {!$Label.ContractGoBack}
+                            </button>
+                            <button class="slds-button slds-button--neutral navigate-back" ng-if="showTemplateSelection()" ng-click="navigateBackAndCheckin()">
+                                <slds-button-svg-icon id="back-to-contract" sprite="'utility'" icon="'back'" size="'small'" extra-classes="'slds-button__icon--left'"></slds-button-svg-icon>
+                                {!$Label.CLMDocGenGoBackToContract}
+                            </button>
+                            <button class="slds-button slds-button--neutral toggle-view" ng-click="reconcileChanges.toggleContractView()" ng-if="reconcileChanges.toggleView.label" ng-show="isReconciledView">
+                                <i class="icon slds-button__icon slds-button__icon--left {{reconcileChanges.toggleView.icon}}"></i>
+                                {{reconcileChanges.toggleView.label}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="outer-container">
+                <div class="two-col-inner-container">
+                    <div class="buttons-container">
+                        <div class="select-template" ng-if="showTemplateSelection()">
+                            <div class="slds-form-element version-template">
+                                <label class="slds-form-element__label" for="template-select">{!$Label.CLMDocGenSelectTemplate}</label>
+                                <div class="slds-form-element__control">
+                                    <div class="slds-select_container">
+                                        <select id="template-select" class="slds-select" ng-model="versionData.template" ng-options="template as template.templateLabel group by template.templateGroup for template in contractTemplates" ng-change="createContractSectionsforVersion(versionData.template)"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="slds-button section-action section-delete" ng-click="removeContractSections()" ng-if="versionData.template.templateId" ng-hide="currentAttachedTemplate && !versionData.template.templateId">{!$Label.CLMDocGenRemoveTemplate}</button>
+                        </div>
+                        <div class="document-buttons" ng-if="currentAttachedTemplate">
+                            <div class="main-buttons buttons-group" ng-if="showTemplateSelection()">
+                                <h4>{!$Label.CLMDocGenCheckInDoc}</h4>
+                                <button type="button" class="slds-button slds-button--brand generate-file" ng-click="generateFile()">{!$Label.CLMDocGenCheckIn}</button>
+                            </div>
+                            <div class="main-buttons buttons-group attach-buttons" ng-if="!showTemplateSelection()">
+                                <h4>{!$Label.CLMDocGenAttachToContract}</h4>
+                                <button type="button" class="slds-button slds-button--neutral attach-pdf" ng-click="attachPdf()">{!$Label.CLMDocGenAttachPDF}</button>
+                                <button type="button" class="slds-button slds-button--neutral attach-docx" ng-click="attachDocx()">{!$Label.CLMDocGenAttachWord}</button>
+                            </div>
+                            <div class="download-buttons buttons-group">
+                                <h4>{!$Label.CLMDocGenDownloadDoc}</h4>
+                                <button type="button" class="slds-button slds-button--neutral download-pdf" ng-click="preDownloadPdf()">{!$Label.CLMDocGenDownloadPDF}</button>
+                                <button type="button" class="slds-button slds-button--neutral download-word" ng-click="preDownloadDocx()">{!$Label.CLMDocGenDownloadWord}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="document-wrapper ng-hide" ng-show="isReconciledView">
+                        <div id="container" class="document-container" bs-active-pane="tabs.activeTab" bs-tabs="true" ng-class="{'regular': tabs.activeTab === 'Document View', 'reconcile': tabs.activeTab === 'Reconcile Changes'}">
+                            <p ng-if="currentAttachedTemplate === false && !versionData.template.templateId" class="no-template-attached">{!$Label.CLMDocGenNoDocTemplate}</p>
+                            <div ng-if="versionData.sections.length === 0 && versionData.template.templateId" class="alert alert-warning" role="alert"><em>{{versionData.template.templateLabel}}</em> {!$Label.CLMDocGenNoSectionsTemplate}</div>
+                            <div ng-repeat="tab in reconcileChanges.tabs" data-title="{{tab.title}}" name="{{tab.title}}" ng-bind-html="tab.html" bs-pane="true"></div>
+                        </div>
+                    </div>
+                    <div class="document-wrapper ng-hide" ng-show="!isReconciledView">
+                        <div class="document-container" id="container">
+                            <p ng-if="currentAttachedTemplate === false && !versionData.template.templateId" class="no-template-attached">{!$Label.CLMDocGenNoDocTemplate}</p>
+                            <div ng-if="versionData.sections.length === 0 && versionData.template.templateId" class="alert alert-warning" role="alert"><em>{{versionData.template.templateLabel}}</em> {!$Label.CLMDocGenNoSectionsTemplate}</div>
+                            <c:DocumentPdf />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var nameSpacePrefix, remoteActions, contractVersionId, parentId, sourceId, docName, docType, containsRedlines, baseRequestUrl,labels;
+            nameSpacePrefix = '{!nameSpacePrefix}';
+            contractVersionId = '{!$CurrentPage.parameters.Id}';
+            parentId = '{!parentId}';
+            sourceId = '{!sourceId}';
+            docName = '{!JSENCODE(documentName)}';
+            docType = '{!JSENCODE(attachDocType)}';
+            containsRedlines = {!containsRedlines};
+            baseRequestUrl = '{!$Site.BaseRequestUrl}';
+            labels = {  'allSectionSavedLabel':'{!$Label.vlocity_cmt__contractallsectionsaved}',
+                        'saveAllSectionLabel':'{!$Label.vlocity_cmt__contractsaveallsections}', 
+                        'customizeReadyCheckInLabel':'{!$Label.vlocity_cmt__contractcustomizereadycheckin}',
+                        'cancelLabel':'{!$Label.vlocity_cmt__cancel}',
+                        'yesCheckInLabel':'{!$Label.vlocity_cmt__contractyescheckin}',
+                        'noCheckInLabel':'{!$Label.vlocity_cmt__contractnocheckin}',
+                        'downloadDocRedlineLabel':'{!$Label.vlocity_cmt__contractdownloaddocredlines}',
+                        'yesDownloadLabel':'{!$Label.vlocity_cmt__contractyesdownload}',
+                        'downloadPDFLabel':'{!$Label.vlocity_cmt__contractdownloadpdf}',
+                        'downloadWordLabel':'{!$Label.vlocity_cmt__contractdownloadword}',
+                        'checkInDocLabel':'{!$Label.vlocity_cmt__contractcheckindoc}',
+                        'safariNoSupportLabel': '{!$Label.vlocity_cmt__contractsafarinosupport}',
+                        'clmContractDocWordDocRedlines':'{!$Label.vlocity_cmt__clmcontractdocworddocredlines}',
+                        'clmContractDocDownloadWord':'{!$Label.vlocity_cmt__clmcontractdocdownloadword}',
+                        'clmContractDocPdfRedlines':'{!$Label.vlocity_cmt__clmcontractdocpdfredlines}',
+                        'clmContractDocDownloadYes':'{!$Label.vlocity_cmt__clmcontractdocdownloadyes}',
+                        'clmContractDocCheckInDoc':'{!$Label.vlocity_cmt__clmcontractdoccheckindoc}',
+                        'clmContractDocDownloadPDFDoc':'{!$Label.vlocity_cmt__clmcontractdocdownloadpdfdoc}',
+                        'clmContractDocDownloadWordDoc':'{!$Label.vlocity_cmt__clmcontractdocdownloadworddoc}',
+                        'clmContractCustomizeDoc':'{!$Label.vlocity_cmt__clmcontractcustomizedoc}',
+                        'clmReconcileDocViewDoc':'{!$Label.vlocity_cmt__clmreconciledocviewdoc}',
+                        'clmReconcileDocViewReconcileDetail':'{!$Label.vlocity_cmt__clmreconciledocviewreconciledetail}'}; 
+            remoteActions = {
+                getContractSectionsForVersion: {
+                    action: '{!$RemoteAction.ContractDocumentCreationController.getContractSectionsForVersion}',
+                    config: {escape: false}
+                },
+                getTemplateList: {
+                    action: '{!$RemoteAction.ContractDocumentCreationController.getTemplateList}',
+                    config: {escape: false}
+                },
+                createContractSectionsforVersion: {
+                    action: '{!$RemoteAction.ContractDocumentCreationController.createContractSectionsforVersion}',
+                    config: {escape: false}
+                },
+                updateContractSections: {
+                    action: '{!$RemoteAction.ContractDocumentCreationController.updateContractSections}',
+                    config: {escape: false}
+                },
+                saveNewDocumentSections: {
+                    action: '{!$RemoteAction.ContractDocumentCreationController.saveNewDocumentSections}',
+                    config: {escape: false}
+                },
+                removeContractSections: {
+                    action: '{!$RemoteAction.ContractDocumentCreationController.removeContractSections}',
+                    config: {escape: false}
+                },
+                savePdf: {
+                    action: '{!$RemoteAction.ContractDocumentCreationController.savePdf}',
+                    config: {escape: false}
+                },
+                attachDocx: {
+                    action: '{!$RemoteAction.ContractDocumentCreationController.saveDocx}',
+                    config: {escape: false}
+                },
+                checkIn: {
+                    action: '{!$RemoteAction.ContractDocumentCreationController.checkIn}',
+                    config: {escape: false}
+                },
+                downloadDocx: {
+                    action: '{!$RemoteAction.ContractDocumentCreationController.getContractVersionDocument}',
+                    config: {escape: false}
+                },
+                getDocxTemplate: {
+                    action: '{!$RemoteAction.ContractDocumentCreationController.getDocTemplateForContractType}',
+                    config: {escape: false}
+                },
+                downloadPdf: {
+                    action: '{!$RemoteAction.ContractDocumentCreationController.downloadPdf}',
+                    config: {escape: false}
+                }
+            };
+        </script>
+    </body>
+</html>
+</apex:page>

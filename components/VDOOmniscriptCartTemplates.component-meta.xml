@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>38.0</apiVersion>
+    <description>This component adds custom cart templates to all demo omniscripts.</description>
+    <label>VDOOmniscriptCartTemplates</label>
+    <packageVersions>
+        <majorNumber>11</majorNumber>
+        <minorNumber>40</minorNumber>
+        <namespace>vlocity_cmt</namespace>
+    </packageVersions>
+</ApexComponent>

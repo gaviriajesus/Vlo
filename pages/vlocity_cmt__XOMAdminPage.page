@@ -1,0 +1,68 @@
+<apex:page showHeader="true" sidebar="true" controller="vlocity_cmt.XOMAdminPageController">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ng="http://angularjs.org" ng-app="xomadmin">
+        <head>
+            <base href="/"/>
+            <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.slds, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />
+            <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.XOMAdminCss)}" />
+            <script type="text/javascript" src="/support/console/31.0/integration.js"></script>
+            <script type="text/javascript" src="/soap/ajax/31.0/connection.js"></script>
+            <!-- Important ! Has to be loaded BEFORE vlocity_assets -->
+            <script type="text/javascript" src="{!URLFOR($Resource.JsForce)}" ></script>
+            <script type="text/javascript" src="{!URLFOR($Resource.vlocity_assets, '/javascripts/vlocity.js')}"></script>
+            <script type="text/javascript" src="{!URLFOR($Resource.SldsAngular)}"></script>
+            <script type="text/javascript" src="{!URLFOR($Resource.XOMAdmin)}"></script>
+            <script type="text/javascript" src="{!URLFOR($Resource.AngularRoute)}"></script>
+            <script type="text/javascript" src="{!URLFOR($Resource.JSZip)}" />
+        </head>
+        <body _ng-controller="XOMAdminController">
+            <div class="via-slds">
+                <div class="slds-page-header slds-theme--shade" role="banner">
+                    <div class="slds-media slds-media--center">
+                        <div class="slds-media__figure">
+                            <svg aria-hidden="true" class="slds-icon">
+                                <use xlink:href="{{SLDSICON.SETTINGS}}"></use>
+                            </svg>
+                        </div>
+                        <div class="slds-media__body">
+                            <p class="slds-page-header__title slds-truncate slds-align-middle" title="Vlocity XOM Admin">Vlocity XOM Administration</p>
+                            <p class="slds-text-body--small page-header__info">Upgrade and maintenance tasks for Vlocity XOM</p>
+                        </div>
+                    </div>
+                </div>
+                <ng-view></ng-view>
+            </div>
+            <script type="text/javascript">
+                'use strict';
+                window.j$ = jQuery.noConflict();
+                window.$ = jQuery.noConflict();
+
+                //Define remote actions.
+                var remoteActions = {
+                    calcScopeForSyncDelta: {action: "{!$RemoteAction.XOMAdminPageController.calcScopeForSyncDelta}", config: {timeout: 120000}},
+                    populateSyncDelta: {action: "{!$RemoteAction.XOMAdminPageController.populateSyncDelta}", config: {timeout: 120000}},
+                    ensureGlobalKeys: {action: "{!$RemoteAction.XOMAdminPageController.ensureGlobalKeys}", config: {timeout: 120000}},
+                    cleanupSyncDelta: {action: "{!$RemoteAction.XOMAdminPageController.cleanupSyncDelta}", config: {timeout: 120000}},
+                    createDataRaptorBundlesForBackSync: {action: "{!$RemoteAction.XOMAdminPageController.createDataRaptorBundlesForBackSync}", config: {timeout: 120000}}
+                };
+
+                angular.module('xomadmin').constant('config', {
+                    isThorEnabled: '{!isThorEnabled}',
+                    accessToken: '{!$API.Session_Id}',
+                    syncCatalogPage: '{!$Page.XOMSyncDeltaPage}',
+                    namespacePrefix: '{!namespacePrefix}'
+                });
+
+                //Define ICONs
+                var SLDSICON = {
+                    'SETTINGS': '{!URLFOR($Resource.slds, "/assets/icons/utility-sprite/svg/symbols.svg#settings")}',
+                    'RIGHT_ARROW': '{!URLFOR($Resource.slds, "/assets/icons/utility-sprite/svg/symbols.svg#right")}',
+                    'SEARCH': '{!URLFOR($Resource.slds, "/assets/icons/utility-sprite/svg/symbols.svg#search")}',
+                    'EDIT': '{!URLFOR($Resource.slds, "/assets/icons/utility-sprite/svg/symbols.svg#edit")}',
+                    'ADD': '{!URLFOR($Resource.slds, "/assets/icons/utility-sprite/svg/symbols.svg#add")}',
+                    'DELETE': '{!URLFOR($Resource.slds, "/assets/icons/utility-sprite/svg/symbols.svg#delete")}',
+                    'CLOSE': '{!URLFOR($Resource.slds, "/assets/icons/utility-sprite/svg/symbols.svg#close")}'
+                };
+            </script>
+        </body>
+    </html>
+</apex:page>

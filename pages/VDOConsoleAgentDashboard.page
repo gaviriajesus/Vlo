@@ -1,0 +1,11 @@
+<apex:page >
+    <style>
+        .container{
+            width:1500px;
+            margin:auto;
+        }
+    </style>
+    <div class="container">
+        <wave:dashboard developerName="Contact_Agent_Daily_Report" showTitle="false" height="1060px" openLinksInNewWindow="true"/> 
+    </div>
+</apex:page>

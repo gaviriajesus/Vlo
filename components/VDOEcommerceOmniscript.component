@@ -1,0 +1,31 @@
+<apex:component controller="vlocity_cmt.VFPageControllerBase">
+    <head>
+        <link href="/apex/VDODemoCSS" rel="stylesheet" type="text/css"></link>
+        <style>
+            html {
+                background: #F8F8F8 !important;
+                padding-top:15px;
+            }
+            div#VlocityBP{
+                background: #F8F8F8 !important;
+            }
+        </style>
+    </head>
+    <div class="vlocity" ng-app="OmniScriptContact">
+        <div class="setup">
+            <vlocity_cmt:BusinessProcessComponent standardController="{!stdController}"
+                                      strOmniScriptType="B2C Mobile"
+                                      strOmniScriptSubType="Order"
+                                      strOmniScriptLang="English"   
+                                      />   
+            <vlocity_cmt:BusinessProcessHelperComponent />
+            <vlocity_cmt:JSONTreeHTMLTemplateComponent />
+            <c:VDOOmniscriptCartTemplates />
+            <c:VDOOmniscriptSelectableTemplates />
+            <script type="text/javascript">
+                var modules = ['vlocity-business-process'];
+                var myModule = angular.module('OmniScriptContact', modules);
+            </script> 
+        </div>
+    </div>
+</apex:component>

@@ -1,0 +1,17 @@
+<apex:page showHeader="false" standardStylesheets="false">
+    <script src="/resource/VDOInternalResources/js/signature_pad.min.js" type="text/javascript"></script>
+    <style>
+        html, body{
+            width:588px;
+            height:300px;
+            overflow:hidden;
+            padding:0px;
+            margin:0px;
+        }
+    </style>
+    <canvas width="588px" height="300px"></canvas>
+    <script>
+        var canvas = document.querySelector("canvas");
+        var signaturePad = new SignaturePad(canvas);
+    </script>
+</apex:page>

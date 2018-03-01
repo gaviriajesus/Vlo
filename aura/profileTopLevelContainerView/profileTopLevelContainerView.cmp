@@ -1,0 +1,26 @@
+<aura:component access="GLOBAL" implements="force:recordTab,force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName,forceCommunity:availableForAllPageTypes"
+                                            controller="vlocity_cmt.ProfileClientAttributeController">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+  	<aura:handler event="vlocity_cmt:profileNavigationEvent" action="{!c.handleNavigationEvent}"/>
+    <aura:attribute name="record" type="Object"/> <!-- record from Lightning Extension -->
+    <aura:attribute name="recordId" type="String"/> <!-- recordId from Lightning Experience -->
+    <aura:attribute name="sObjectName" type="String"/> <!-- object name from Lightning Experience -->
+    <aura:attribute name="entityId" type="String" access='global'/> <!-- objectId from VF OR one of the above ways of using Lightning -->
+    <aura:attribute name="isLanguageRTL" type="Boolean"/>
+    <!-- detect which subtypes should be shown in profiler -->
+    <aura:attribute name="applicableSubTypes" type="String[]" access="global" default="Profile Attribute"/>
+    <aura:attribute name="ignoreApplicableTypes" type="Boolean" access="global" default="false" />
+    <aura:attribute name="renderUsingColorCodes" type="Boolean" access="global" default="false"/>
+    
+     <div class="contentContainer">
+        <div aura:id="wrapper" class="group slider" data-is-rtl="{!v.isLanguageRTL}" dir="{! (v.isLanguageRTL ? 'rtl' : 'ltr') }">
+            <div id="itemOne" class="content">
+                <vlocity_cmt:profileAllAttributeCategoriesView entityId="{!v.entityId}" applicableSubTypes="{!v.applicableSubTypes}" renderUsingColorCodes="{!v.renderUsingColorCodes}" ignoreApplicableTypes="{!v.ignoreApplicableTypes}"/>
+            </div>
+            <div id="itemTwo" class="content">
+                <vlocity_cmt:profileAttributeCategoryEdit />
+            </div>
+        </div> 
+    </div>	
+    
+</aura:component>

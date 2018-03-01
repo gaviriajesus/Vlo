@@ -1,0 +1,7 @@
+<messaging:emailTemplate subject="{!$Organization.Name} - Your Order Details" recipientType="Contact" relatedToType="Order">
+    <messaging:htmlEmailBody >
+        <c:VDOEmailOrderTable OrderId="{!relatedTo}"/>
+    </messaging:htmlEmailBody>
+    <messaging:plainTextEmailBody >
+    </messaging:plainTextEmailBody>
+</messaging:emailTemplate>

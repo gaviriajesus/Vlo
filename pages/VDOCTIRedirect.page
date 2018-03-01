@@ -1,0 +1,37 @@
+<apex:page standardController="Account" showHeader="false">
+    <apex:includeScript value="/support/console/31.0/integration.js"/>
+    <apex:stylesheet value="{!URLFOR($Resource.vlocity_icons, '/css/vlocity-icons.css')}"/>
+    <script type="text/javascript">
+        var primaryTabId;
+        
+        window.onload = function() {
+            if('{!$CurrentPage.parameters.id}' != ''){        
+                openPrimaryTabs();
+            }else{
+                openVerificationTabs();
+            }
+        };
+
+        var openPrimaryTab = function openPrimaryTab(result) {
+            primaryTabId = result.id;
+            sforce.console.openPrimaryTab(null , '/{!$CurrentPage.parameters.id}', true, 'Verified Caller', openSuccess);
+        };
+        
+        var openVerificationTab = function openPrimaryTab(result) {
+            primaryTabId = result.id;
+            sforce.console.openPrimaryTab(primaryTabId , '/apex/VDOOmniscript#/OmniScriptType/VDO/OmniScriptSubType/Change Address/OmniScriptLang/English/ContextId//PrefillDataRaptorBundle//false/true', true, 'Caller Verification');
+        };
+        
+        var openSuccess = function openSuccess(result) {
+            sforce.console.closeTab(primaryTabId);
+        };
+        
+        function openVerificationTabs() { 
+            sforce.console.getEnclosingPrimaryTabId(openVerificationTab);
+        }
+        
+        function openPrimaryTabs() { 
+            sforce.console.getEnclosingPrimaryTabId(openPrimaryTab);
+        }
+    </script>  
+</apex:page>

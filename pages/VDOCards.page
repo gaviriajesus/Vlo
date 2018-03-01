@@ -1,0 +1,60 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false">
+<html xmlns:ng="http://angularjs.org" ng-app="myApp" class="ng-cloak"  style="height:100%">
+    <head>
+    <link rel="stylesheet" href="/apex/VDODemoCSS" type="text/css" />
+    <link rel="stylesheet" href="{!URLFOR($Resource.vlocity_icons, '/css/vlocity-icons.css')}"/>
+    <link rel="stylesheet" href="{!URLFOR($Resource.vlocity_cmt__vlocity_assets, '/css/vlocity.css')}"/>
+    <style type="text/css">
+        
+        html, body {
+            margin: 0px !important;
+            padding: 0px !important;
+            background: #f2f2f2;
+        }
+    </style>
+    <apex:includeScript value="/support/console/34.0/integration.js"/>
+    
+    <script type="text/javascript">
+        var myApp = angular.module('myApp',['forceng','consoleCards']);
+    
+        myApp.controller('myCtrl', ['$scope','force', function($scope, force) {
+            $scope.init = function () {
+                if(sforce.console.isInConsole()) {
+                    console.info('inside console');
+                } else {
+                    console.info('outside console');
+                }
+    
+                var listener = function (result) {
+                    console.log('Message received from event: ' + result.message);
+                };
+                //Add a listener for the 'SampleEvent' event type
+                sforce.console.addEventListener('SampleEvent', listener);
+            };
+    
+            $scope.init();
+    
+            $scope.openTab = function() {
+                sforce.console.setSidebarVisible(false);
+            };
+    
+        }]);
+    </script>
+    
+    </head>
+        <body>
+
+            <!-- Component loads the vloc-layout and cards - defaults to Grid if no layout parameter is present -->
+            <!-- <c:CardLayoutComponent layout="Grid" controllers="myCtrl" modules="myApp"/> -->
+
+            <vlocity_cmt:CardLayoutComponent layout="{!$CurrentPage.parameters.layout}" modules="myApp"/>
+
+
+            <script type="text/javascript">
+                var myApp = angular.module('myApp',['forceng','consoleCards']);
+            </script>
+
+        </body>
+</html>
+
+</apex:page>

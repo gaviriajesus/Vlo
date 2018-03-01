@@ -1,0 +1,12 @@
+<apex:page showHeader="false">
+    <head>
+        <apex:stylesheet value="{!LEFT($Site.CurrentSiteUrl, LEN($Site.CurrentSiteUrl)-1)}/apex/VDODemoCSS"/>
+        <apex:stylesheet value="{!URLFOR($Resource.vlocity_icons, '/css/vlocity-icons.css')}"/>
+        <style>
+            .vlocity .action-container [class^="icon-"]:before, .vlocity .action-container [class*=" icon-"]:before, .vlocity .action-container .action-item:hover span.action-label{
+                color:{!$Setup.VDO_Settings__c.Colour1__c} !important;
+            }
+        </style>
+    </head> 
+    <vlocity_cmt:ActionComponent objType="Demo Link" style="Vertical"/>
+</apex:page>

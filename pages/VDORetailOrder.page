@@ -1,0 +1,2 @@
+<apex:page standardController="Account" extensions="VDODemoController" action="{!newRetailOrder}" showHeader="false">
+</apex:page>

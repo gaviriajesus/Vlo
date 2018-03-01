@@ -1,0 +1,36 @@
+<apex:page controller="VDODemoController" showHeader="false">
+
+    <apex:includeScript value="/resource/VDOInternalResources/js/jquery.js"/>
+    <apex:includeScript value="/resource/VDOInternalResources/js/canvasResize.js"/>
+    <apex:includeScript value="/resource/VDOInternalResources/js/binaryajax.js"/>
+    <apex:includeScript value="/resource/VDOInternalResources/js/exif.js"/>
+    <apex:stylesheet value="{!LEFT($Site.CurrentSiteUrl, LEN($Site.CurrentSiteUrl)-1)}/apex/VDODemoCSS"/>
+
+    <div class="fileUpload">
+        <span>Upload Profile Picture</span>
+        <input name="photo" type="file" class="upload"/>
+    </div>
+        
+    <script>
+        $('input[name=photo]').change(function(e){
+            $('.fileUpload span').html('Loading'); 
+            var file = e.target.files[0];
+            canvasResize(file, {
+                width: 500,
+                height: 0,
+                crop: false,
+                quality: 80,
+                callback: function(data, width, height) {
+                    Visualforce.remoting.Manager.invokeAction(
+                        '{!$RemoteAction.VDODemoController.uploadAttachment}', data, 
+                        function(result, event){
+                            $('.fileUpload span').removeClass('animateFileUpload');
+                            $('.fileUpload span').html('Complete'); 
+                        }, 
+                        {escape: true}
+                    );
+                }
+            });
+        });
+    </script>
+</apex:page>

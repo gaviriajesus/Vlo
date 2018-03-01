@@ -1,0 +1,32 @@
+<apex:page showHeader="false" standardStylesheets="false">
+    <apex:outputPanel rendered="{!$CurrentPage.parameters.TopicName == 'mobile'}">
+        <div class="topicimage" style="background-image:url('/resource/vdoomniscriptresources/images/topics/Mobile.png');"/>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!$CurrentPage.parameters.TopicName == 'internet'}">
+        <div class="topicimage" style="background-image:url('/resource/vdoomniscriptresources/images/topics/Internet.png');"/>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!$CurrentPage.parameters.TopicName == 'tv'}">
+        <div class="topicimage" style="background-image:url('/resource/vdoomniscriptresources/images/topics/TV.png');"/>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!$CurrentPage.parameters.TopicName == 'landline'}">
+        <div class="topicimage" style="background-image:url('/resource/vdoomniscriptresources/images/topics/Landline.png');"/>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!CONTAINS($CurrentPage.parameters.TopicName, 'network-coverage')}">
+        <div class="topicimage" style="background-image:url('/resource/vdoomniscriptresources/images/topics/Network.png');"/>
+    </apex:outputPanel>
+        <apex:outputPanel rendered="{!CONTAINS($CurrentPage.parameters.TopicName, 'device-support')}">
+        <div class="topicimage" style="background-image:url('/resource/vdoomniscriptresources/images/topics/Device.png');"/>
+    </apex:outputPanel>
+    <style>
+        html, body{
+            width:100%;
+            height:100%;
+        }
+        .topicimage{
+            width:100%;
+            height:100%;
+            background-size:cover;
+            background-position:center;
+        }
+    </style>
+</apex:page>

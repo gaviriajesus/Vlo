@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Contract Version</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Contract Versions</value>
+    </caseValues>
+    <fields>
+        <label><!-- Contract --></label>
+        <name>ContractId__c</name>
+        <relationshipLabel><!-- Contract Versions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Has Document Signature Pending --></label>
+        <name>HasDocumentSignaturePending__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>
